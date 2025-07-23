@@ -6,7 +6,7 @@ Sitio para practicar técnicas de respiración guiada con animaciones y temporiz
 
 ## Cómo usar
 
-- Abre el sitio [aquí](https://balmacefa.github.io/respiracion_conciente/)
+- Abre el sitio [aquí](https://balmacefa.github.io/en_el_silencio_del_ser/)
 - Elige una técnica en el carrusel.
 - Presiona **Iniciar** para comenzar.
 - Sigue la animación y temporizador.
