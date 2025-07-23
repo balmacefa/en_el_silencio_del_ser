@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Meditaciones Guiadas - Colección Personal</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      body {
+        font-family: "Quicksand", sans-serif;
+        background-color: #f9f6f1;
+        color: #333;
+        margin: 0;
+        padding: 2rem;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        text-align: center;
+      }
+
+      header h1 {
+        font-weight: 600;
+        font-size: 2.5rem;
+        color: #3a4d39;
+        margin-bottom: 0.5rem;
+      }
+
+      header p {
+        font-size: 1.2rem;
+        color: #666;
+        margin-bottom: 3rem;
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .video-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+      }
+
+      .video-card {
+        background-color: #ffffff;
+        border: 1px solid #d0cfc7;
+        border-radius: 16px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        overflow: hidden; /* Para que el iframe no se salga de los bordes redondeados */
+        display: flex;
+        flex-direction: column;
+      }
+
+      .video-embed {
+        position: relative;
+        width: 100%;
+        padding-top: 56.25%; /* Proporción 16:9 para el video */
+      }
+
+      .video-embed iframe {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border: none;
+      }
+
+      .video-info {
+        padding: 1.5rem;
+        text-align: left;
+      }
+
+      .video-info h2 {
+        font-size: 1.3rem;
+        font-weight: 600;
+        color: #4f5f45;
+        margin-top: 0;
+        margin-bottom: 0.5rem;
+      }
+
+      .video-info p {
+        font-size: 1rem;
+        color: #777;
+        line-height: 1.5;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>Meditaciones Guiadas</h1>
+        <p>
+          Una colección personal de meditaciones de YouTube que me han
+          acompañado en el camino. Cada una ofrece una puerta hacia la calma y
+          el autoconocimiento.
+        </p>
+      </header>
+
+      <main class="video-grid">
+        <div class="video-card">
+          <div class="video-embed">
+            <iframe
+              src="https://www.youtube.com/embed/VIDEO_ID_1"
+              title="YouTube video player"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen
+            ></iframe>
+          </div>
+          <div class="video-info">
+            <h2>Meditación para la Calma Interior</h2>
+            <p>
+              Una guía suave para encontrar un espacio de paz en medio del caos
+              diario. Ideal para principiantes.
+            </p>
+          </div>
+        </div>
+
+        <div class="video-card">
+          <div class="video-embed">
+            <iframe
+              src="https://www.youtube.com/embed/VIDEO_ID_2"
+              title="YouTube video player"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen
+            ></iframe>
+          </div>
+          <div class="video-info">
+            <h2>Escaneo Corporal para Dormir</h2>
+            <p>
+              Relaja cada parte de tu cuerpo y prepárate para un sueño profundo
+              y reparador.
+            </p>
+          </div>
+        </div>
+
+        <div class="video-card">
+          <div class="video-embed">
+            <iframe
+              src="https://www.youtube.com/embed/VIDEO_ID_3"
+              title="YouTube video player"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen
+            ></iframe>
+          </div>
+          <div class="video-info">
+            <h2>Atención Plena en 10 Minutos</h2>
+            <p>
+              Una práctica corta para anclarte en el presente y reducir la
+              ansiedad.
+            </p>
+          </div>
+        </div>
+
+        <div class="video-card">
+          <div class="video-embed">
+            <iframe
+              src="https://www.youtube.com/embed/VIDEO_ID_4"
+              title="YouTube video player"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen
+            ></iframe>
+          </div>
+          <div class="video-info">
+            <h2>Visualización para la Abundancia</h2>
+            <p>
+              Conecta con la energía de la gratitud y la prosperidad a través de
+              esta meditación guiada.
+            </p>
+          </div>
+        </div>
+      </main>
+    </div>
+  </body>
+</html>

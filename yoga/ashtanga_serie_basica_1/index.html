@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ashtanga Yoga - Primera Serie</title>
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      /* --- ESTILOS ADAPTADOS --- */
+
+      body {
+        font-family: "Quicksand", sans-serif;
+        background-color: #f9f6f1; /* Fondo beige suave */
+        color: #333; /* Texto gris oscuro */
+        margin: 0;
+        padding: 2rem;
+        text-align: center;
+      }
+
+      .container {
+        max-width: 600px;
+        margin: 0 auto;
+      }
+
+      h1 {
+        font-weight: 600;
+        font-size: 2.5rem;
+        color: #3a4d39; /* Verde oscuro principal */
+        margin-bottom: 2.5rem;
+      }
+
+      /* Estilo para los contenedores de información */
+      .card {
+        border: 1px solid #d0cfc7;
+        border-radius: 16px;
+        padding: 2rem;
+        background-color: #ffffff;
+        color: #3a4d39;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        margin-top: 2rem;
+      }
+
+      label {
+        display: block;
+        margin-bottom: 1.5rem;
+        font-size: 1rem;
+        color: #666;
+      }
+
+      input[type="text"] {
+        font-family: "Quicksand", sans-serif;
+        border: 1px solid #d0cfc7;
+        border-radius: 10px;
+        padding: 0.6rem 1rem;
+        font-size: 1rem;
+        width: 120px;
+        text-align: center;
+        margin-top: 0.5rem;
+        background-color: #fff;
+      }
+
+      input[type="text"]:focus {
+        outline: none;
+        border-color: #a3c1ad;
+      }
+
+      button {
+        background-color: #a3c1ad; /* Verde salvia de acento */
+        color: #fff;
+        border: none;
+        padding: 0.8rem 2rem;
+        border-radius: 10px;
+        font-weight: 600;
+        font-size: 1.1rem;
+        cursor: pointer;
+        transition: background-color 0.2s ease;
+      }
+
+      button:hover {
+        background-color: #91af99; /* Tono más oscuro al pasar el cursor */
+      }
+
+      /* --- NUEVOS ESTILOS PARA NAVEGACIÓN --- */
+      .navigation-controls {
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+        margin-top: 1.5rem;
+      }
+
+      .navigation-controls button {
+        background-color: #4f5f45; /* Color verde más oscuro */
+      }
+
+      .navigation-controls button:hover {
+        background-color: #3a4d39;
+      }
+      /* ------------------------------------ */
+
+      #asana-sanskrit {
+        font-size: 1.8rem;
+        font-weight: 600;
+        color: #4f5f45;
+        margin-bottom: 0.25rem;
+      }
+
+      #asana-popular {
+        font-size: 1.1rem;
+        color: #666;
+        margin-bottom: 1.5rem;
+      }
+
+      #asana-img,
+      #next-asana-img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 12px; /* Bordes redondeados para la imagen */
+        margin-bottom: 1.5rem;
+      }
+
+      #asana-description {
+        font-size: 1rem;
+        color: #666;
+        line-height: 1.6;
+      }
+
+      #next-asana h3 {
+        font-size: 1.2rem;
+        font-weight: 600;
+        color: #4f5f45;
+      }
+
+      #next-asana-name {
+        font-size: 1rem;
+        color: #777;
+        margin-top: 0.5rem;
+      }
+
+      /* Ocultar la imagen "siguiente" si no hay src */
+      img[src=""] {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Ashtanga Yoga - Primera Serie</h1>
+      <p>
+        Fuente Original - imágenes y secuencias fueron obtenidas del sitio web
+        <a
+          href="https://www.keenonyoga.com/ashtanga-yoga-primary-series/"
+          target="_blank"
+          >Keen on Yoga</a
+        >
+      </p>
+
+      <div>
+        <label>
+          Duración por Asana (mm:ss)
+          <input type="text" id="asana-time" value="00:30" />
+        </label>
+        <label>
+          Transición (mm:ss)
+          <input type="text" id="transition-time" value="00:05" />
+        </label>
+        <button onclick="startSequence()">Iniciar Práctica</button>
+      </div>
+
+      <div class="navigation-controls">
+        <button onclick="goToPrevAsana()">❮ Anterior</button>
+        <button onclick="goToNextAsana()">Siguiente ❯</button>
+      </div>
+      <div id="asana-display" class="card">
+        <h2 id="asana-sanskrit">---</h2>
+        <h3 id="asana-popular">---</h3>
+        <img id="asana-img" src="" alt="Imagen de la postura actual" />
+        <p id="asana-description">---</p>
+      </div>
+
+      <div id="next-asana" class="card">
+        <h3>Siguiente Asana</h3>
+        <h4 id="next-asana-name">---</h4>
+        <img id="next-asana-img" src="" alt="Imagen de la siguiente postura" />
+      </div>
+    </div>
+
+    <script src="./ashtanga_sequence.js"></script>
+
+    <script>
+      const sequence = ashtangaSequence;
+      let currentIndex = 0;
+      let sequenceInterval;
+
+      // --- FUNCIONES LÓGICAS (MODIFICADAS Y NUEVAS) ---
+
+      function mmssToSeconds(str) {
+        const [mm, ss] = str.split(":").map(Number);
+        return mm * 60 + ss;
+      }
+
+      function startSequence() {
+        clearInterval(sequenceInterval);
+        sequence.forEach((asana) => delete asana._leftDone);
+        currentIndex = 0;
+        const asanaTime = mmssToSeconds(
+          document.getElementById("asana-time").value
+        );
+        const transitionTime = mmssToSeconds(
+          document.getElementById("transition-time").value
+        );
+        runSequence(asanaTime, transitionTime);
+      }
+
+      function updateUI() {
+        if (currentIndex < sequence.length) {
+          updateAsanaDisplay(sequence[currentIndex]);
+          updateNextAsanaDisplay();
+        }
+      }
+
+      function goToNextAsana() {
+        clearInterval(sequenceInterval); // Detener secuencia automática
+        const currentAsana = sequence[currentIndex];
+
+        // Si la asana actual tiene lados y el izquierdo no está hecho, pasamos al derecho
+        if (currentAsana.sides && !currentAsana._leftDone) {
+          currentAsana._leftDone = true;
+        } else {
+          // Si no, avanzamos al siguiente índice si no estamos al final
+          if (currentIndex < sequence.length - 1) {
+            currentIndex++;
+          }
+        }
+        updateUI();
+      }
+
+      function goToPrevAsana() {
+        clearInterval(sequenceInterval); // Detener secuencia automática
+        const currentAsana = sequence[currentIndex];
+
+        // Si la asana actual tiene lados y el izquierdo ya está hecho, volvemos al izquierdo
+        if (currentAsana.sides && currentAsana._leftDone) {
+          delete currentAsana._leftDone; // O currentAsana._leftDone = false;
+        } else {
+          // Si no, retrocedemos al índice anterior si no estamos en el inicio
+          if (currentIndex > 0) {
+            currentIndex--;
+            const prevAsana = sequence[currentIndex];
+            // Si la asana a la que retrocedimos tiene lados, la mostramos por el lado derecho
+            if (prevAsana.sides) {
+              prevAsana._leftDone = true;
+            }
+          }
+        }
+        updateUI();
+      }
+
+      function updateAsanaDisplay(asana) {
+        const side = asana.sides
+          ? asana._leftDone
+            ? " (lado derecho)"
+            : " (lado izquierdo)"
+          : "";
+
+        document.getElementById("asana-sanskrit").innerText = asana.sanskrit;
+        document.getElementById("asana-popular").innerText =
+          asana.popular + side;
+        document.getElementById("asana-img").src = asana.image || "";
+        document.getElementById("asana-description").innerText =
+          asana.description || "";
+      }
+
+      function updateNextAsanaDisplay() {
+        let nextAsana;
+        const currentAsana = sequence[currentIndex];
+
+        if (currentAsana.sides && !currentAsana._leftDone) {
+          nextAsana = currentAsana; // La siguiente es el otro lado de la misma asana
+        } else {
+          nextAsana = sequence[currentIndex + 1]; // La siguiente es la del próximo índice
+        }
+
+        if (nextAsana) {
+          const side =
+            nextAsana.sides && !currentAsana._leftDone
+              ? " (lado derecho)"
+              : nextAsana.sides
+              ? " (lado izquierdo)"
+              : "";
+          document.getElementById("next-asana-name").innerText =
+            nextAsana.sanskrit + side;
+          document.getElementById("next-asana-img").src = nextAsana.image || "";
+        } else {
+          document.getElementById("next-asana-name").innerText = "Fin";
+          document.getElementById("next-asana-img").src = "";
+        }
+      }
+
+      function runSequence(asanaDur, transitionDur) {
+        if (currentIndex >= sequence.length) {
+          alert("Secuencia completada 🙏");
+          document.getElementById("asana-sanskrit").innerText = "Namasté";
+          document.getElementById("asana-popular").innerText =
+            "Práctica finalizada";
+          document.getElementById("asana-img").src = "";
+          document.getElementById("asana-description").innerText = "";
+          document.getElementById("next-asana-name").innerText = "---";
+          document.getElementById("next-asana-img").src = "";
+          return;
+        }
+
+        const currentAsana = sequence[currentIndex];
+        updateUI();
+        playTone();
+
+        const duration = asanaDur * 1000;
+        const transition = transitionDur * 1000;
+
+        sequenceInterval = setTimeout(() => {
+          if (currentAsana.sides && !currentAsana._leftDone) {
+            currentAsana._leftDone = true;
+            setTimeout(() => runSequence(asanaDur, transitionDur), transition);
+          } else {
+            currentIndex++;
+            setTimeout(() => runSequence(asanaDur, transitionDur), transition);
+          }
+        }, duration);
+      }
+
+      function playTone() {
+        const ctx = new (window.AudioContext || window.webkitAudioContext)();
+        if (ctx.state === "suspended") {
+          ctx.resume();
+        }
+        const oscillator = ctx.createOscillator();
+        const gainNode = ctx.createGain();
+        oscillator.connect(gainNode);
+        gainNode.connect(ctx.destination);
+        oscillator.type = "sine";
+        oscillator.frequency.setValueAtTime(660, ctx.currentTime);
+        gainNode.gain.setValueAtTime(0.1, ctx.currentTime);
+        gainNode.gain.exponentialRampToValueAtTime(
+          0.00001,
+          ctx.currentTime + 1
+        );
+        oscillator.start();
+        oscillator.stop(ctx.currentTime + 1);
+      }
+
+      // --- Cargar la primera asana al iniciar la página ---
+      window.addEventListener("DOMContentLoaded", () => {
+        updateUI();
+      });
+    </script>
+  </body>
+</html>
