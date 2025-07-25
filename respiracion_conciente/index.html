@@ -223,7 +223,7 @@
           🔈 Sonido: Activado
         </button>
         <button id="toggleVoiceBtn" class="btn btn-secondary mt-2">
-          🗣️ Voz: Desactivada
+          🗣️ Voz: Activada
         </button>
       </div>
     </div>
@@ -232,7 +232,7 @@
     <script>
       let soundEnabled = true;
 
-      let voiceEnabled = false;
+      let voiceEnabled = true;
 
       const voiceAudios = {
         Inhalar: new Audio("./audios/Inhalar.mp3"),
@@ -249,6 +249,9 @@
             currentVoiceAudio.pause();
             currentVoiceAudio.currentTime = 0;
           }
+
+          currentVoiceAudio = voiceAudios[phase];
+          if (!currentVoiceAudio) return;
 
           currentVoiceAudio.play();
         }
