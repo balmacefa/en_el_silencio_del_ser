@@ -209,7 +209,7 @@
       </div>
 
       <!-- Zona de respiración -->
-      <div id="session">
+      <div id="session" style="display: none">
         <div id="techniqueInfo" class="d-none">
           <h3 id="techniqueTitle" class="mb-1"></h3>
           <p id="techniqueDescription" class="mb-2 text-muted"></p>
@@ -218,11 +218,12 @@
         <div id="breathCircle"></div>
         <div class="phase-label" id="phaseLabel">Selecciona una técnica</div>
         <div id="timeLeft" class="mb-3"></div>
-        <button id="stopBtn" class="btn btn-danger mt-3" style="display: none">
-          Detener
-        </button>
+        <button id="stopBtn" class="btn btn-danger mt-3">Detener</button>
         <button id="toggleSoundBtn" class="btn btn-secondary mt-2">
           🔈 Sonido: Activado
+        </button>
+        <button id="toggleVoiceBtn" class="btn btn-secondary mt-2">
+          🗣️ Voz: Desactivada
         </button>
       </div>
     </div>
@@ -230,6 +231,28 @@
     <script src="https://cdn.jsdelivr.net/npm/tone@14.8.49/build/Tone.min.js"></script>
     <script>
       let soundEnabled = true;
+
+      let voiceEnabled = false;
+
+      const voiceAudios = {
+        Inhalar: new Audio("./audios/Inhalar.mp3"),
+        Retener: new Audio("./audios/Retener.mp3"),
+        Exhalar: new Audio("./audios/Exhalar.mp3"),
+        Vacío: new Audio("./audios/Vacio.mp3"),
+      };
+
+      let currentVoiceAudio = null;
+
+      function playVoiceAudio(phase) {
+        if (voiceEnabled) {
+          if (currentVoiceAudio) {
+            currentVoiceAudio.pause();
+            currentVoiceAudio.currentTime = 0;
+          }
+
+          currentVoiceAudio.play();
+        }
+      }
 
       const reverb = new Tone.Reverb({
         decay: 3,
@@ -275,33 +298,38 @@
         );
       });
 
+      $("#toggleVoiceBtn").on("click", () => {
+        voiceEnabled = !voiceEnabled;
+        $("#toggleVoiceBtn").text(
+          `🗣️ Voz: ${voiceEnabled ? "Activada" : "Desactivada"}`
+        );
+      });
       function playSound(phase, durationInSeconds) {
-        if (!soundEnabled || !melodies[phase]) return;
+        if (soundEnabled && melodies[phase]) {
+          Tone.start();
+          const now = Tone.now();
 
-        const monotoneNotes = {
-          Inhalar: "C4",
-          Retener: "D4",
-          Exhalar: "E4",
-          Vacío: "F4",
-        };
-
-        Tone.start(); // asegura que el contexto de audio esté listo
-        const now = Tone.now();
-
-        if (durationInSeconds <= 2) {
-          // Tono monótono: nota fija, duración = duración fase
-          synth.triggerAttackRelease(
-            monotoneNotes[phase] || "C4",
-            durationInSeconds / 2,
-            now
-          );
-        } else {
-          // Melodía normal
-          melodies[phase].forEach((item, i) => {
-            const time = now + i * 0.6; // más espacio entre notas para efecto zen
-            synth.triggerAttackRelease(item.note, item.dur, time);
-          });
+          if (durationInSeconds <= 2) {
+            const monotoneNotes = {
+              Inhalar: "C4",
+              Retener: "D4",
+              Exhalar: "E4",
+              Vacío: "F4",
+            };
+            synth.triggerAttackRelease(
+              monotoneNotes[phase] || "C4",
+              durationInSeconds / 2,
+              now
+            );
+          } else {
+            melodies[phase].forEach((item, i) => {
+              const time = now + i * 0.6;
+              synth.triggerAttackRelease(item.note, item.dur, time);
+            });
+          }
         }
+
+        playVoiceAudio(phase);
       }
 
       const styles = {
@@ -411,7 +439,7 @@
       }
 
       function startBreathing(styleKey) {
-        $("#stopBtn").show();
+        $("#session").show();
 
         if (!styles[styleKey]) return;
         clearInterval(interval);
@@ -456,7 +484,7 @@
           backgroundColor: "#a3c1ad",
         });
         $("#carouselContainer").show();
-        $("#stopBtn").hide();
+        $("#session").hide();
       });
     </script>
 
