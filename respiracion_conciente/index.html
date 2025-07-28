@@ -158,11 +158,6 @@
           font-size: 1.3rem;
         }
       }
-      #pranayamas {
-        background-color: #f2f0ed;
-        padding: 3rem 1rem;
-        border-radius: 16px;
-      }
     </style>
   </head>
   <body>
@@ -259,7 +254,16 @@
       </section>
 
       <!-- Zona de respiración -->
-      <div id="session" style="display: none">
+      <div
+        id="session"
+        style="
+        display: none;
+          margin: 8rem auto;
+          border: 7px solid #6e8aa1;
+          padding: 12px;
+          border-radius: 21px;
+        "
+      >
         <div id="techniqueInfo" class="d-none">
           <h3 id="techniqueTitle" class="mb-1"></h3>
           <p id="techniqueDescription" class="mb-2 text-muted"></p>
@@ -286,7 +290,7 @@
       </div>
 
       <!-- This is a divition line -->
-      <footer class="mt-5">
+      <footer style="margin-top: 64px">
         <p class="text-muted">Hecho con ❤️</p>
       </footer>
 
@@ -590,7 +594,7 @@
         $("#techniqueTitle").text(currentStyle.title);
         $("#techniqueDescription").text(currentStyle.desc);
         $("#techniqueInfo").removeClass("d-none");
-        $("#carouselContainer").hide();
+        // $("#carouselContainer").hide();
 
         timerInterval = setInterval(() => {
           totalSeconds++;
