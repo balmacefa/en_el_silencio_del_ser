@@ -158,6 +158,11 @@
           font-size: 1.3rem;
         }
       }
+      #pranayamas {
+        background-color: #f2f0ed;
+        padding: 3rem 1rem;
+        border-radius: 16px;
+      }
     </style>
   </head>
   <body>
@@ -215,7 +220,7 @@
       <section id="pranayamas" class="mt-5">
         <h2 class="text-center mb-4">🧘‍♂️ Pranayamas Tradicionales</h2>
         <div class="row g-4 justify-content-center">
-          <div class="col-sm-6 col-lg-4">
+          <div class="col-sm-12 col-lg-6">
             <div class="technique-card h-100">
               <h3>Nadi Shodhana</h3>
               <p>
@@ -237,7 +242,7 @@
               </button>
             </div>
           </div>
-          <div class="col-sm-6 col-lg-4">
+          <div class="col-sm-12 col-lg-6">
             <div class="technique-card h-100">
               <h3>Bhramari</h3>
               <p>
@@ -248,7 +253,7 @@
               </button>
             </div>
           </div>
-          <div class="col-sm-6 col-lg-4">
+          <div class="col-sm-12 col-lg-6">
             <div class="technique-card h-100">
               <h3>Kapalabhati</h3>
               <p>
@@ -422,6 +427,25 @@
           phases: ["Inhalar", "Retener", "Exhalar", "Vacío"],
           title: "4-4-2-2",
           desc: "Una técnica equilibrada para relajar la mente manteniendo un ciclo suave. (4s Inhalar, 4s Retener, 2s Exhalar, 2s Vacío)",
+        },
+
+        nadi: {
+          times: [4, 0, 4, 0],
+          phases: ["Inhalar", "", "Exhalar", ""],
+          title: "Nadi Shodhana",
+          desc: "Respiración alterna por fosas nasales. Calma y equilibra la energía.",
+        },
+        bhramari: {
+          times: [4, 0, 6, 0],
+          phases: ["Inhalar", "", "Exhalar", ""],
+          title: "Bhramari",
+          desc: "Zumbido durante la exhalación para calmar la mente. (4s Inhalar, 6s Exhalar)",
+        },
+        kapalabhati: {
+          times: [1, 0, 1, 0],
+          phases: ["Inhalar", "", "Exhalar", ""],
+          title: "Kapalabhati",
+          desc: "Respiraciones rápidas para activar y limpiar. (1s Inhalar, 1s Exhalar repetidos)",
         },
       };
 
