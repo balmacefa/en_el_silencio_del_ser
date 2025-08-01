@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Escape Room Prototype</title>
+    <style>
+      body {
+        margin: 0;
+        background-color: #1a1a1a;
+        font-family: Arial, sans-serif;
+        overflow: hidden;
+      }
+      canvas {
+        display: block;
+        margin: 0 auto;
+      }
+      #status {
+        position: absolute;
+        top: 20px;
+        left: 20px;
+        color: white;
+        font-size: 20px;
+        background: rgba(0, 0, 0, 0.5);
+        padding: 8px 12px;
+        border-radius: 6px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="status">Cargando...</div>
+
+    <script src="https://pixijs.download/release/pixi.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@pixi/filter-glow/dist/pixi-filter-glow.min.js"></script>
+
+    <script>
+      const app = new PIXI.Application({
+        width: 1024,
+        height: 768,
+        backgroundColor: 0x1a1a1a,
+        antialias: true,
+      });
+      document.body.appendChild(app.view);
+
+      const status = document.getElementById("status");
+
+      const assets = {
+        room: "assets/room_bg.png",
+        key: "assets/key.png",
+        doorClosed: "assets/door_closed.png",
+        doorOpen: "assets/door_open.png",
+        fxOpen: "assets/open_fx.png",
+      };
+
+      const state = {
+        hasKey: false,
+        isDoorOpen: false,
+      };
+
+      const loader = PIXI.Loader.shared;
+      Object.values(assets).forEach((path) => loader.add(path));
+      loader.load(setup);
+
+      function setup() {
+        const glow = new PIXI.filters.GlowFilter({
+          distance: 15,
+          outerStrength: 2,
+          innerStrength: 0.5,
+          color: 0xffff00,
+        });
+
+        // Room background
+        const room = new PIXI.Sprite(loader.resources[assets.room].texture);
+        app.stage.addChild(room);
+
+        // Key
+        const key = new PIXI.Sprite(loader.resources[assets.key].texture);
+        key.anchor.set(0.5);
+        key.position.set(220, 520);
+        key.scale.set(0.5);
+        key.filters = [glow];
+        key.interactive = true;
+        key.buttonMode = true;
+        key.on("pointerdown", () => {
+          if (!state.hasKey) {
+            state.hasKey = true;
+            key.visible = false;
+            updateStatus("🔑 Has recogido la llave.");
+          }
+        });
+        app.stage.addChild(key);
+
+        // Door
+        const door = new PIXI.Sprite(
+          loader.resources[assets.doorClosed].texture
+        );
+        door.anchor.set(0.5);
+        door.position.set(780, 380);
+        door.scale.set(1.2);
+        door.interactive = true;
+        door.buttonMode = true;
+        door.on("pointerdown", () => {
+          if (state.isDoorOpen) {
+            updateStatus("🚪 La puerta ya está abierta.");
+          } else if (state.hasKey) {
+            openDoor();
+          } else {
+            updateStatus("🚪 Está cerrada con llave.");
+          }
+        });
+        app.stage.addChild(door);
+
+        // FX
+        const fx = new PIXI.Sprite(loader.resources[assets.fxOpen].texture);
+        fx.anchor.set(0.5);
+        fx.position.copyFrom(door);
+        fx.alpha = 0;
+        app.stage.addChild(fx);
+
+        function openDoor() {
+          state.isDoorOpen = true;
+          door.texture = loader.resources[assets.doorOpen].texture;
+          fx.alpha = 1;
+          setTimeout(() => (fx.alpha = 0), 600);
+          updateStatus("🚪 Abriste la puerta. ¡Escapaste!");
+        }
+
+        function updateStatus(text) {
+          status.textContent = text;
+        }
+
+        updateStatus("🕵️ Explora la habitación.");
+      }
+    </script>
+  </body>
+</html>
