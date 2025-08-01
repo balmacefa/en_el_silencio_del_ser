@@ -1,636 +1,493 @@
 <!DOCTYPE html>
 <html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Respiración Consciente</title>
 
-    <!-- Bootstrap y jQuery -->
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-    />
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Respiración Consciente</title>
 
-    <!-- Fuente femenina moderna -->
-    <link
-      href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&display=swap"
-      rel="stylesheet"
-    />
+  <!-- Bootstrap y jQuery -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 
-    <style>
-      body {
-        font-family: "Quicksand", sans-serif;
-        background-color: #f9f6f1;
-        color: #333;
-        transition: background-color 1s ease;
-        font-size: 1.1rem;
+  <!-- Fuente femenina moderna -->
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&display=swap" rel="stylesheet" />
+
+  <style>
+    body {
+      font-family: "Quicksand", sans-serif;
+      background-color: #f9f6f1;
+      color: #333;
+      transition: background-color 1s ease;
+      font-size: 1.1rem;
+    }
+
+    h1 {
+      font-weight: 600;
+      font-size: 2.5rem;
+      color: #3a4d39;
+      margin-bottom: 2.5rem;
+    }
+
+    h2 {
+      font-size: 1.6rem;
+    }
+
+    h3 {
+      font-size: 1.4rem;
+      font-weight: 600;
+    }
+
+    .carousel-item {
+      padding: 1rem;
+    }
+
+    .technique-card {
+      border: 1px solid #d0cfc7;
+      border-radius: 16px;
+      padding: 2rem;
+      background-color: #ffffff;
+      color: #3a4d39;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    }
+
+    .technique-card h2 {
+      font-size: 1.5rem;
+      margin-bottom: 0.8rem;
+      color: #4f5f45;
+    }
+
+    .technique-card p {
+      font-size: 1.1rem;
+      margin-bottom: 1.2rem;
+      color: #666;
+    }
+
+    .btn-style {
+      background-color: #a3c1ad;
+      color: #fff;
+      border: none;
+      padding: 0.6rem 1.5rem;
+      border-radius: 10px;
+      font-weight: 600;
+      font-size: 1.1rem;
+    }
+
+    .btn-style:hover {
+      background-color: #91af99;
+    }
+
+    #stopBtn {
+      margin-top: 1rem;
+      background-color: #e0e0e0;
+      border: none;
+      color: #333;
+      font-weight: 600;
+      border-radius: 8px;
+      padding: 0.5rem 1.2rem;
+    }
+
+    #stopBtn:hover {
+      background-color: #ccc;
+    }
+
+    .carousel-control-prev-icon,
+    .carousel-control-next-icon {
+      background-color: #a3c1ad;
+      border-radius: 50%;
+      padding: 1rem;
+    }
+
+    #breathCircle {
+      padding: 2rem;
+      margin: 2.5rem auto;
+      width: 190px;
+      height: 190px;
+      border-radius: 50%;
+      background-color: #a3c1ad;
+      /* transition: transform 1s ease-in-out, background-color 1s; */
+    }
+
+    .phase-label {
+      font-size: 1.6rem;
+      margin-top: 1.5rem;
+      color: #ffffff;
+    }
+
+    #timeLeft,
+    #sessionTimer {
+      color: #ffffff;
+      font-size: 3rem;
+      margin-top: 0.3rem;
+    }
+
+    #sessionTimer {
+      color: #a3c1ad;
+    }
+
+    #techniqueInfo {
+      margin-top: 2rem;
+      margin-bottom: 1.5rem;
+    }
+
+    @keyframes pulse {
+
+      0%,
+      100% {
+        transform: scale(1.5);
       }
 
+      50% {
+        transform: scale(1.55);
+      }
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
       h1 {
-        font-weight: 600;
-        font-size: 2.5rem;
-        color: #3a4d39;
-        margin-bottom: 2.5rem;
-      }
-
-      h2 {
-        font-size: 1.6rem;
-      }
-
-      h3 {
-        font-size: 1.4rem;
-        font-weight: 600;
-      }
-
-      .carousel-item {
-        padding: 1rem;
+        font-size: 1.8rem;
       }
 
       .technique-card {
-        border: 1px solid #d0cfc7;
-        border-radius: 16px;
-        padding: 2rem;
-        background-color: #ffffff;
-        color: #3a4d39;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-      }
-
-      .technique-card h2 {
-        font-size: 1.5rem;
-        margin-bottom: 0.8rem;
-        color: #4f5f45;
-      }
-
-      .technique-card p {
-        font-size: 1.1rem;
-        margin-bottom: 1.2rem;
-        color: #666;
-      }
-
-      .btn-style {
-        background-color: #a3c1ad;
-        color: #fff;
-        border: none;
-        padding: 0.6rem 1.5rem;
-        border-radius: 10px;
-        font-weight: 600;
-        font-size: 1.1rem;
-      }
-
-      .btn-style:hover {
-        background-color: #91af99;
-      }
-
-      #stopBtn {
-        margin-top: 1rem;
-        background-color: #e0e0e0;
-        border: none;
-        color: #333;
-        font-weight: 600;
-        border-radius: 8px;
-        padding: 0.5rem 1.2rem;
-      }
-
-      #stopBtn:hover {
-        background-color: #ccc;
-      }
-
-      .carousel-control-prev-icon,
-      .carousel-control-next-icon {
-        background-color: #a3c1ad;
-        border-radius: 50%;
-        padding: 1rem;
-      }
-
-      #breathCircle {
-        padding: 2rem;
-        margin: 2.5rem auto;
-        width: 190px;
-        height: 190px;
-        border-radius: 50%;
-        background-color: #a3c1ad;
-        /* transition: transform 1s ease-in-out, background-color 1s; */
+        padding: 1.2rem;
       }
 
       .phase-label {
-        font-size: 1.6rem;
-        margin-top: 1.5rem;
-        color: #ffffff;
+        font-size: 1.3rem;
       }
+    }
+  </style>
+</head>
 
-      #timeLeft,
-      #sessionTimer {
-        color: #ffffff;
-        font-size: 3rem;
-        margin-top: 0.3rem;
-      }
-      #sessionTimer {
-        color: #a3c1ad;
-      }
+<body>
+  <div class="container text-center py-4">
+    <nav>
+      <!-- Home -->
+      <a href="/">🏠 Inicio</a>
+    </nav>
+    <h1>Prácticas de Respiración Consciente (Youtube)</h1>
 
-      #techniqueInfo {
-        margin-top: 2rem;
-        margin-bottom: 1.5rem;
-      }
+    <h1 class="mt-5">Videos de Respiración</h1>
 
-      @keyframes pulse {
-        0%,
-        100% {
-          transform: scale(1.5);
+    <h2 class="mb-4">Nadi Shodhana Pranayama (10 min)</h2>
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/9-4IGq-28TU?si=LUFlLxEqgVD22DxF"
+      title="YouTube video player" frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+      referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+    <h2 class="mb-4">How to do Kapalbhati</h2>
+
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/52TOhE94fEg?si=qN0Pk1z09owXk2IE"
+      title="YouTube video player" frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+      referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+    <h2 class="mb-4">
+      How to do Kapalbhati Pranayama, Benefit & Precautions
+    </h2>
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/WOw55qnKBSo?si=wVsrGEbAQNOjPeqL"
+      title="YouTube video player" frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+      referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+    <h2 class="mb-4">Bhramari Pranayama</h2>
+
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/Zqbrw5FtdKg?si=AKdpM6C2WZ0o_q-t"
+      title="YouTube video player" frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+      referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+    <!-- This is a divition line -->
+    <footer style="margin-top: 64px">
+      <p class="text-muted">Hecho con ❤️</p>
+    </footer>
+  </div>
+
+
+
+  <script src="https://cdn.jsdelivr.net/npm/tone@14.8.49/build/Tone.min.js"></script>
+  <script>
+    let soundEnabled = true;
+
+    let voiceEnabled = true;
+
+    const voiceAudios = {
+      Inhalar: new Audio("./audios/Inhalar.mp3"),
+      Retener: new Audio("./audios/Retener.mp3"),
+      Exhalar: new Audio("./audios/Exhalar.mp3"),
+      Vacío: new Audio("./audios/Vacio.mp3"),
+    };
+
+    let currentVoiceAudio = null;
+
+    function playVoiceAudio(phase) {
+      if (voiceEnabled) {
+        if (currentVoiceAudio) {
+          currentVoiceAudio.pause();
+          currentVoiceAudio.currentTime = 0;
         }
-        50% {
-          transform: scale(1.55);
+
+        currentVoiceAudio = voiceAudios[phase];
+        if (!currentVoiceAudio) return;
+
+        currentVoiceAudio.play();
+      }
+    }
+
+    const reverb = new Tone.Reverb({
+      decay: 3,
+      preDelay: 0.5,
+    }).toDestination();
+    const delay = new Tone.FeedbackDelay("8n", 0.4).connect(reverb);
+
+    const synth = new Tone.Synth({
+      oscillator: {
+        type: "sine",
+      },
+      envelope: {
+        attack: 0.5,
+        decay: 0.2,
+        sustain: 0.3,
+        release: 1,
+      },
+    }).connect(delay);
+    const melodies = {
+      Inhalar: [
+        { note: "A3", dur: "8n" },
+        { note: "C4", dur: "8n" },
+        { note: "D4", dur: "4n" },
+        { note: "E4", dur: "4n" },
+      ],
+      Retener: [{ note: "E4", dur: "1n." }],
+      Exhalar: [
+        { note: "E4", dur: "4n" },
+        { note: "D4", dur: "8n" },
+        { note: "C4", dur: "8n" },
+        { note: "A3", dur: "2n" },
+      ],
+      Vacío: [
+        { note: "F3", dur: "1n" },
+        { note: "A2", dur: "1n" },
+      ],
+    };
+
+    $("#toggleSoundBtn").on("click", () => {
+      soundEnabled = !soundEnabled;
+      $("#toggleSoundBtn").text(
+        `🔈 Sonido: ${soundEnabled ? "Activado" : "Desactivado"}`
+      );
+    });
+
+    $("#toggleVoiceBtn").on("click", () => {
+      voiceEnabled = !voiceEnabled;
+      $("#toggleVoiceBtn").text(
+        `🗣️ Voz: ${voiceEnabled ? "Activada" : "Desactivada"}`
+      );
+    });
+    function playSound(phase, durationInSeconds) {
+      if (soundEnabled && melodies[phase]) {
+        Tone.start();
+        const now = Tone.now();
+
+        if (durationInSeconds <= 2) {
+          const monotoneNotes = {
+            Inhalar: "C4",
+            Retener: "D4",
+            Exhalar: "E4",
+            Vacío: "F4",
+          };
+          synth.triggerAttackRelease(
+            monotoneNotes[phase] || "C4",
+            durationInSeconds / 2,
+            now
+          );
+        } else {
+          melodies[phase].forEach((item, i) => {
+            const time = now + i * 0.6;
+            synth.triggerAttackRelease(item.note, item.dur, time);
+          });
         }
       }
 
-      /* Responsive */
-      @media (max-width: 768px) {
-        h1 {
-          font-size: 1.8rem;
-        }
+      playVoiceAudio(phase);
+    }
 
-        .technique-card {
-          padding: 1.2rem;
-        }
+    const styles = {
+      box: {
+        times: [4, 4, 4, 4],
+        phases: ["Inhalar", "Retener", "Exhalar", "Vacío"],
+        title: "Box Breathing",
+        desc: "Una técnica usada por Navy SEALs para controlar el estrés y calmar la mente. (4s Inhalar, 4s Retener, 4s Exhalar, 4s Vacío)",
+      },
+      478: {
+        times: [4, 7, 8, 0],
+        phases: ["Inhalar", "Retener", "Exhalar", ""],
+        title: "4-7-8",
+        desc: "Técnica relajante para ayudar a conciliar el sueño y reducir la ansiedad. (4s Inhalar, 7s Retener, 8s Exhalar)",
+      },
+      wimhof: {
+        times: [2, 0, 2, 0],
+        phases: ["Inhalar", "", "Exhalar", ""],
+        title: "Wim Hof",
+        desc: "Respiración rápida y controlada para aumentar energía y resistencia. (2s Inhalar, 2s Exhalar)",
+      },
+      4422: {
+        times: [4, 4, 2, 2],
+        phases: ["Inhalar", "Retener", "Exhalar", "Vacío"],
+        title: "4-4-2-2",
+        desc: "Una técnica equilibrada para relajar la mente manteniendo un ciclo suave. (4s Inhalar, 4s Retener, 2s Exhalar, 2s Vacío)",
+      },
 
-        .phase-label {
-          font-size: 1.3rem;
-        }
-      }
-    </style>
-  </head>
-  <body>
-    <div class="container text-center py-4">
-      <nav>
-        <!-- Home -->
-        <a href="/">🏠 Inicio</a>
-      </nav>
-      <h1>Prácticas de Respiración Consciente</h1>
+      nadi: {
+        times: [4, 0, 4, 0],
+        phases: ["Inhalar", "", "Exhalar", ""],
+        title: "Nadi Shodhana",
+        desc: "Respiración alterna por fosas nasales. Calma y equilibra la energía.",
+      },
+      bhramari: {
+        times: [4, 0, 6, 0],
+        phases: ["Inhalar", "", "Exhalar", ""],
+        title: "Bhramari",
+        desc: "Zumbido durante la exhalación para calmar la mente. (4s Inhalar, 6s Exhalar)",
+      },
+      kapalabhati: {
+        times: [1, 0, 1, 0],
+        phases: ["Inhalar", "", "Exhalar", ""],
+        title: "Kapalabhati",
+        desc: "Respiraciones rápidas para activar y limpiar. (1s Inhalar, 1s Exhalar repetidos)",
+      },
+    };
 
-      <!-- Carrusel SIEMPRE visible al inicio -->
-      <!-- Cuadrícula de técnicas -->
-      <div id="carouselContainer" class="mb-5">
-        <div class="row g-4 justify-content-center">
-          <div class="col-sm-6 col-lg-4">
-            <div class="technique-card h-100">
-              <h2>Box Breathing</h2>
-              <p>4s Inhalar, 4s Retener, 4s Exhalar, 4s Vacío</p>
-              <button class="btn btn-style start-btn" data-style="box">
-                Iniciar
-              </button>
-            </div>
-          </div>
-          <div class="col-sm-6 col-lg-4">
-            <div class="technique-card h-100">
-              <h2>4-7-8</h2>
-              <p>4s Inhalar, 7s Retener, 8s Exhalar</p>
-              <button class="btn btn-style start-btn" data-style="478">
-                Iniciar
-              </button>
-            </div>
-          </div>
-          <div class="col-sm-6 col-lg-4">
-            <div class="technique-card h-100">
-              <h2>Wim Hof</h2>
-              <p>2s Inhalar, 2s Exhalar</p>
-              <button class="btn btn-style start-btn" data-style="wimhof">
-                Iniciar
-              </button>
-            </div>
-          </div>
-          <div class="col-sm-6 col-lg-4">
-            <div class="technique-card h-100">
-              <h2>4-4-2-2</h2>
-              <p>4s Inhalar, 4s Retener, 2s Exhalar, 2s Vacío</p>
-              <button class="btn btn-style start-btn" data-style="4422">
-                Iniciar
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
+    let interval;
+    let timerInterval;
+    let phaseIndex = 0;
+    let currentStyle = null;
+    let totalSeconds = 0;
 
-      <!-- Sección de Pranayamas -->
-      <section id="pranayamas" class="mt-5">
-        <h2 class="text-center mb-4">🧘‍♂️ Pranayamas Tradicionales</h2>
-        <div class="row g-4 justify-content-center">
-          <div class="col-sm-12 col-lg-6">
-            <div class="technique-card h-100">
-              <h3>Nadi Shodhana</h3>
-              <p>
-                Respiración alterna por las fosas nasales. Calma el sistema
-                nervioso y equilibra los hemisferios cerebrales.
-              </p>
-              <button class="btn btn-style start-btn" data-style="nadi">
-                Iniciar
-              </button>
-            </div>
-          </div>
-          <div class="col-sm-12 col-lg-6">
-            <div class="technique-card h-100">
-              <h3>Bhramari</h3>
-              <p>
-                Respiración con zumbido. Relaja el cerebro y reduce la ansiedad.
-              </p>
-              <button class="btn btn-style start-btn" data-style="bhramari">
-                Iniciar
-              </button>
-            </div>
-          </div>
-          <div class="col-sm-12 col-lg-6">
-            <div class="technique-card h-100">
-              <h3>Kapalabhati</h3>
-              <p>
-                Respiración activa de limpieza. Energiza el cuerpo y clarifica
-                la mente.
-              </p>
-              <button class="btn btn-style start-btn" data-style="kapalabhati">
-                Iniciar
-              </button>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- Zona de respiración -->
-      <div
-        id="session"
-        style="
-        display: none;
-          margin: 8rem auto;
-          border: 7px solid #6e8aa1;
-          padding: 12px;
-          border-radius: 21px;
-        "
-      >
-        <div id="techniqueInfo" class="d-none">
-          <h3 id="techniqueTitle" class="mb-1"></h3>
-          <p id="techniqueDescription" class="mb-2 text-muted"></p>
-          <div id="sessionTimer">Tiempo total: 0s</div>
-        </div>
-
-        <div class="position-relative text-center">
-          <div id="breathCircle" class="mx-auto"></div>
-          <div
-            class="position-absolute top-50 start-50 translate-middle text-white fw-bold"
-          >
-            <div id="timeLeft" class="mb-3"></div>
-            <div class="phase-label" id="phaseLabel"></div>
-          </div>
-        </div>
-
-        <button id="stopBtn" class="btn btn-danger mt-3">Detener</button>
-        <button id="toggleSoundBtn" class="btn btn-secondary mt-2">
-          🔈 Sonido: Activado
-        </button>
-        <button id="toggleVoiceBtn" class="btn btn-secondary mt-2">
-          🗣️ Voz: Activada
-        </button>
-      </div>
-
-      <!-- This is a divition line -->
-      <footer style="margin-top: 64px">
-        <p class="text-muted">Hecho con ❤️</p>
-      </footer>
-
-      <h1 class="mt-5">Videos de Respiración</h1>
-
-      <h2 class="mb-4">Nadi Shodhana Pranayama (10 min)</h2>
-      <iframe
-        width="560"
-        height="315"
-        src="https://www.youtube.com/embed/9-4IGq-28TU?si=LUFlLxEqgVD22DxF"
-        title="YouTube video player"
-        frameborder="0"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-        referrerpolicy="strict-origin-when-cross-origin"
-        allowfullscreen
-      ></iframe>
-
-      <h2 class="mb-4">How to do Kapalbhati</h2>
-
-      <iframe
-        width="560"
-        height="315"
-        src="https://www.youtube.com/embed/52TOhE94fEg?si=qN0Pk1z09owXk2IE"
-        title="YouTube video player"
-        frameborder="0"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-        referrerpolicy="strict-origin-when-cross-origin"
-        allowfullscreen
-      ></iframe>
-
-      <h2 class="mb-4">
-        How to do Kapalbhati Pranayama, Benefit & Precautions
-      </h2>
-      <iframe
-        width="560"
-        height="315"
-        src="https://www.youtube.com/embed/WOw55qnKBSo?si=wVsrGEbAQNOjPeqL"
-        title="YouTube video player"
-        frameborder="0"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-        referrerpolicy="strict-origin-when-cross-origin"
-        allowfullscreen
-      ></iframe>
-
-      <h2 class="mb-4">Bhramari Pranayama</h2>
-
-      <iframe
-        width="560"
-        height="315"
-        src="https://www.youtube.com/embed/Zqbrw5FtdKg?si=AKdpM6C2WZ0o_q-t"
-        title="YouTube video player"
-        frameborder="0"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-        referrerpolicy="strict-origin-when-cross-origin"
-        allowfullscreen
-      ></iframe>
-    </div>
-
-    <script src="https://cdn.jsdelivr.net/npm/tone@14.8.49/build/Tone.min.js"></script>
-    <script>
-      let soundEnabled = true;
-
-      let voiceEnabled = true;
-
-      const voiceAudios = {
-        Inhalar: new Audio("./audios/Inhalar.mp3"),
-        Retener: new Audio("./audios/Retener.mp3"),
-        Exhalar: new Audio("./audios/Exhalar.mp3"),
-        Vacío: new Audio("./audios/Vacio.mp3"),
+    function updateBackground(phase) {
+      const colors = {
+        Inhalar: "#eaf3ea",
+        Retener: "#f7f3e9",
+        Exhalar: "#f4ebe8",
+        Vacío: "#fdfdfb",
       };
+      $("body").css("background-color", colors[phase] || "#f9f6f1");
+    }
 
-      let currentVoiceAudio = null;
+    function animateCircle(phase, durationInSeconds) {
+      const $circle = $("#breathCircle");
 
-      function playVoiceAudio(phase) {
-        if (voiceEnabled) {
-          if (currentVoiceAudio) {
-            currentVoiceAudio.pause();
-            currentVoiceAudio.currentTime = 0;
-          }
+      // Reset animación previa
+      $circle.css("animation", "none");
+      $circle[0].offsetHeight;
 
-          currentVoiceAudio = voiceAudios[phase];
-          if (!currentVoiceAudio) return;
+      $circle.css(
+        "transition",
+        `transform ${durationInSeconds}s ease-in-out, background-color ${durationInSeconds}s`
+      );
 
-          currentVoiceAudio.play();
-        }
-      }
-
-      const reverb = new Tone.Reverb({
-        decay: 3,
-        preDelay: 0.5,
-      }).toDestination();
-      const delay = new Tone.FeedbackDelay("8n", 0.4).connect(reverb);
-
-      const synth = new Tone.Synth({
-        oscillator: {
-          type: "sine",
-        },
-        envelope: {
-          attack: 0.5,
-          decay: 0.2,
-          sustain: 0.3,
-          release: 1,
-        },
-      }).connect(delay);
-      const melodies = {
-        Inhalar: [
-          { note: "A3", dur: "8n" },
-          { note: "C4", dur: "8n" },
-          { note: "D4", dur: "4n" },
-          { note: "E4", dur: "4n" },
-        ],
-        Retener: [{ note: "E4", dur: "1n." }],
-        Exhalar: [
-          { note: "E4", dur: "4n" },
-          { note: "D4", dur: "8n" },
-          { note: "C4", dur: "8n" },
-          { note: "A3", dur: "2n" },
-        ],
-        Vacío: [
-          { note: "F3", dur: "1n" },
-          { note: "A2", dur: "1n" },
-        ],
-      };
-
-      $("#toggleSoundBtn").on("click", () => {
-        soundEnabled = !soundEnabled;
-        $("#toggleSoundBtn").text(
-          `🔈 Sonido: ${soundEnabled ? "Activado" : "Desactivado"}`
-        );
-      });
-
-      $("#toggleVoiceBtn").on("click", () => {
-        voiceEnabled = !voiceEnabled;
-        $("#toggleVoiceBtn").text(
-          `🗣️ Voz: ${voiceEnabled ? "Activada" : "Desactivada"}`
-        );
-      });
-      function playSound(phase, durationInSeconds) {
-        if (soundEnabled && melodies[phase]) {
-          Tone.start();
-          const now = Tone.now();
-
-          if (durationInSeconds <= 2) {
-            const monotoneNotes = {
-              Inhalar: "C4",
-              Retener: "D4",
-              Exhalar: "E4",
-              Vacío: "F4",
-            };
-            synth.triggerAttackRelease(
-              monotoneNotes[phase] || "C4",
-              durationInSeconds / 2,
-              now
-            );
-          } else {
-            melodies[phase].forEach((item, i) => {
-              const time = now + i * 0.6;
-              synth.triggerAttackRelease(item.note, item.dur, time);
-            });
-          }
-        }
-
-        playVoiceAudio(phase);
-      }
-
-      const styles = {
-        box: {
-          times: [4, 4, 4, 4],
-          phases: ["Inhalar", "Retener", "Exhalar", "Vacío"],
-          title: "Box Breathing",
-          desc: "Una técnica usada por Navy SEALs para controlar el estrés y calmar la mente. (4s Inhalar, 4s Retener, 4s Exhalar, 4s Vacío)",
-        },
-        478: {
-          times: [4, 7, 8, 0],
-          phases: ["Inhalar", "Retener", "Exhalar", ""],
-          title: "4-7-8",
-          desc: "Técnica relajante para ayudar a conciliar el sueño y reducir la ansiedad. (4s Inhalar, 7s Retener, 8s Exhalar)",
-        },
-        wimhof: {
-          times: [2, 0, 2, 0],
-          phases: ["Inhalar", "", "Exhalar", ""],
-          title: "Wim Hof",
-          desc: "Respiración rápida y controlada para aumentar energía y resistencia. (2s Inhalar, 2s Exhalar)",
-        },
-        4422: {
-          times: [4, 4, 2, 2],
-          phases: ["Inhalar", "Retener", "Exhalar", "Vacío"],
-          title: "4-4-2-2",
-          desc: "Una técnica equilibrada para relajar la mente manteniendo un ciclo suave. (4s Inhalar, 4s Retener, 2s Exhalar, 2s Vacío)",
-        },
-
-        nadi: {
-          times: [4, 0, 4, 0],
-          phases: ["Inhalar", "", "Exhalar", ""],
-          title: "Nadi Shodhana",
-          desc: "Respiración alterna por fosas nasales. Calma y equilibra la energía.",
-        },
-        bhramari: {
-          times: [4, 0, 6, 0],
-          phases: ["Inhalar", "", "Exhalar", ""],
-          title: "Bhramari",
-          desc: "Zumbido durante la exhalación para calmar la mente. (4s Inhalar, 6s Exhalar)",
-        },
-        kapalabhati: {
-          times: [1, 0, 1, 0],
-          phases: ["Inhalar", "", "Exhalar", ""],
-          title: "Kapalabhati",
-          desc: "Respiraciones rápidas para activar y limpiar. (1s Inhalar, 1s Exhalar repetidos)",
-        },
-      };
-
-      let interval;
-      let timerInterval;
-      let phaseIndex = 0;
-      let currentStyle = null;
-      let totalSeconds = 0;
-
-      function updateBackground(phase) {
-        const colors = {
-          Inhalar: "#eaf3ea",
-          Retener: "#f7f3e9",
-          Exhalar: "#f4ebe8",
-          Vacío: "#fdfdfb",
-        };
-        $("body").css("background-color", colors[phase] || "#f9f6f1");
-      }
-
-      function animateCircle(phase, durationInSeconds) {
-        const $circle = $("#breathCircle");
-
-        // Reset animación previa
-        $circle.css("animation", "none");
-        $circle[0].offsetHeight;
-
-        $circle.css(
-          "transition",
-          `transform ${durationInSeconds}s ease-in-out, background-color ${durationInSeconds}s`
-        );
-
-        if (phase === "Inhalar") {
-          $circle.css({
-            transform: "scale(1.5)",
-            backgroundColor: "#a3c1ad",
-          });
-        } else if (phase === "Exhalar") {
-          $circle.css({
-            transform: "scale(1)",
-            backgroundColor: "#b3a397",
-          });
-        } else if (phase === "Retener") {
-          // Mantener el transform previo, solo aplicar animación de pulso
-          $circle.css({
-            backgroundColor: "#c9cbbf",
-            animation: `pulse ${durationInSeconds}s ease-in-out`,
-          });
-        } else if (phase === "Vacío") {
-          $circle.css({
-            transform: "scale(1.1)",
-            backgroundColor: "#f0eae1",
-          });
-        }
-      }
-      function nextPhase() {
-        const time = currentStyle.times[phaseIndex];
-        const phase = currentStyle.phases[phaseIndex];
-
-        playSound(phase, time);
-
-        if (time === 0) {
-          phaseIndex = (phaseIndex + 1) % currentStyle.times.length;
-          return nextPhase();
-        }
-
-        $("#phaseLabel").text(phase);
-        $("#timeLeft").text(`${time}s`);
-        updateBackground(phase);
-        animateCircle(phase, time); // <-- ahora le pasamos el tiempo real
-
-        let t = time;
-        interval = setInterval(() => {
-          t--;
-          $("#timeLeft").text(`${t}s`);
-          if (t <= 0) {
-            clearInterval(interval);
-            phaseIndex = (phaseIndex + 1) % currentStyle.times.length;
-            nextPhase();
-          }
-        }, 1000);
-      }
-
-      function startBreathing(styleKey) {
-        $("#session").show();
-
-        if (!styles[styleKey]) return;
-        clearInterval(interval);
-        clearInterval(timerInterval);
-        currentStyle = styles[styleKey];
-        phaseIndex = 0;
-        totalSeconds = 0;
-
-        $("#techniqueTitle").text(currentStyle.title);
-        $("#techniqueDescription").text(currentStyle.desc);
-        $("#techniqueInfo").removeClass("d-none");
-        // $("#carouselContainer").hide();
-
-        timerInterval = setInterval(() => {
-          totalSeconds++;
-          const minutes = Math.floor(totalSeconds / 60);
-          const seconds = totalSeconds % 60;
-          const formattedTime = `${minutes
-            .toString()
-            .padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`;
-          $("#sessionTimer").text(`Tiempo total: ${formattedTime}`);
-        }, 1000);
-
-        nextPhase();
-      }
-
-      $(".start-btn").on("click", function () {
-        const style = $(this).data("style");
-        startBreathing(style);
-      });
-
-      $("#stopBtn").on("click", () => {
-        clearInterval(interval);
-        clearInterval(timerInterval);
-        $("#phaseLabel").text("Selecciona una técnica");
-        $("#timeLeft").text("");
-        $("#techniqueInfo").addClass("d-none");
-        $("#sessionTimer").text("Tiempo total: 0s");
-        $("body").css("background-color", "#f9f6f1");
-        $("#breathCircle").css({
-          transform: "scale(1)",
+      if (phase === "Inhalar") {
+        $circle.css({
+          transform: "scale(1.5)",
           backgroundColor: "#a3c1ad",
         });
-        $("#carouselContainer").show();
-        $("#session").hide();
-      });
-    </script>
+      } else if (phase === "Exhalar") {
+        $circle.css({
+          transform: "scale(1)",
+          backgroundColor: "#b3a397",
+        });
+      } else if (phase === "Retener") {
+        // Mantener el transform previo, solo aplicar animación de pulso
+        $circle.css({
+          backgroundColor: "#c9cbbf",
+          animation: `pulse ${durationInSeconds}s ease-in-out`,
+        });
+      } else if (phase === "Vacío") {
+        $circle.css({
+          transform: "scale(1.1)",
+          backgroundColor: "#f0eae1",
+        });
+      }
+    }
+    function nextPhase() {
+      const time = currentStyle.times[phaseIndex];
+      const phase = currentStyle.phases[phaseIndex];
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-  </body>
+      playSound(phase, time);
+
+      if (time === 0) {
+        phaseIndex = (phaseIndex + 1) % currentStyle.times.length;
+        return nextPhase();
+      }
+
+      $("#phaseLabel").text(phase);
+      $("#timeLeft").text(`${time}s`);
+      updateBackground(phase);
+      animateCircle(phase, time); // <-- ahora le pasamos el tiempo real
+
+      let t = time;
+      interval = setInterval(() => {
+        t--;
+        $("#timeLeft").text(`${t}s`);
+        if (t <= 0) {
+          clearInterval(interval);
+          phaseIndex = (phaseIndex + 1) % currentStyle.times.length;
+          nextPhase();
+        }
+      }, 1000);
+    }
+
+    function startBreathing(styleKey) {
+      $("#session").show();
+
+      if (!styles[styleKey]) return;
+      clearInterval(interval);
+      clearInterval(timerInterval);
+      currentStyle = styles[styleKey];
+      phaseIndex = 0;
+      totalSeconds = 0;
+
+      $("#techniqueTitle").text(currentStyle.title);
+      $("#techniqueDescription").text(currentStyle.desc);
+      $("#techniqueInfo").removeClass("d-none");
+      // $("#carouselContainer").hide();
+
+      timerInterval = setInterval(() => {
+        totalSeconds++;
+        const minutes = Math.floor(totalSeconds / 60);
+        const seconds = totalSeconds % 60;
+        const formattedTime = `${minutes
+          .toString()
+          .padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`;
+        $("#sessionTimer").text(`Tiempo total: ${formattedTime}`);
+      }, 1000);
+
+      nextPhase();
+    }
+
+    $(".start-btn").on("click", function () {
+      const style = $(this).data("style");
+      startBreathing(style);
+    });
+
+    $("#stopBtn").on("click", () => {
+      clearInterval(interval);
+      clearInterval(timerInterval);
+      $("#phaseLabel").text("Selecciona una técnica");
+      $("#timeLeft").text("");
+      $("#techniqueInfo").addClass("d-none");
+      $("#sessionTimer").text("Tiempo total: 0s");
+      $("body").css("background-color", "#f9f6f1");
+      $("#breathCircle").css({
+        transform: "scale(1)",
+        backgroundColor: "#a3c1ad",
+      });
+      $("#carouselContainer").show();
+      $("#session").hide();
+    });
+  </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
 </html>
