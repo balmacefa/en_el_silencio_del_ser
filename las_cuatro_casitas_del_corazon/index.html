@@ -1,114 +1,219 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <title>Casita Metta - Carta a Damián</title>
-  <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
-  <style>
-    body {
-      background-color: #1e1a17;
-      color: #f8f0e3;
-      font-family: 'Georgia', serif;
-      line-height: 1.6;
-      padding: 40px;
-      max-width: 800px;
-      margin: auto;
-    }
-    .section { display: none; margin-bottom: 30px; }
-    .choice-btn, .object-btn {
-      display: inline-block;
-      margin: 10px 0;
-      padding: 10px 16px;
-      background-color: #3a2f26;
-      color: #fff2d9;
-      border: none;
-      cursor: pointer;
-      font-size: 16px;
-    }
-    .object-btn { background-color: #4e3c2e; }
-    .object-btn:hover, .choice-btn:hover { background-color: #6e5444; }
-    .fade { transition: all 0.6s ease-in-out; }
-  </style>
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Casita Metta - Carta a Damián</title>
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+    <style>
+      body {
+        background: url("assets/room.webp") no-repeat center center fixed;
+        background-size: cover;
+        font-family: "Georgia", serif;
+        color: #f8f0e3;
+        line-height: 1.6;
+        padding: 40px;
+        max-width: 800px;
+        margin: auto;
+        cursor: url("assets/pen_cursor.cur"), pointer;
+      }
+      .section {
+        background: rgba(30, 26, 23, 0.85);
+        padding: 20px 30px;
+        border-radius: 12px;
+        box-shadow: 0 0 12px rgba(255, 204, 102, 0.5);
+        margin-bottom: 30px;
+        display: none;
+        position: relative;
+      }
+      .choice-btn,
+      .object-btn {
+        background-color: #3a2f26;
+        border: none;
+        color: #fff2d9;
+        padding: 12px 20px;
+        font-size: 16px;
+        margin: 10px 10px 0 0;
+        border-radius: 6px;
+        box-shadow: 0 0 5px #ffcc66;
+        transition: all 0.3s ease;
+        cursor: pointer;
+        text-align: center;
+      }
+      .choice-btn:hover,
+      .object-btn:hover {
+        background-color: #6e5444;
+        box-shadow: 0 0 15px #ffd966;
+        transform: scale(1.05);
+      }
+      #intro img,
+      #objects img {
+        max-width: 100px;
+        border-radius: 12px;
+        box-shadow: 0 0 20px #ffcc66;
+        margin-bottom: 10px;
+        transition: transform 0.3s ease;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      #objects img:hover {
+        transform: scale(1.1);
+      }
+      #choice-content,
+      #object-result,
+      #closing,
+      #intro-text {
+        font-style: italic;
+        font-size: 18px;
+        text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6);
+        min-height: 100px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="intro" class="section">
+      <div id="intro-text"></div>
+      <div id="intro-buttons" style="display: none; margin-top: 20px">
+        <button class="choice-btn" data-choice="vulnerabilidad">
+          💜 Vulnerabilidad
+        </button>
+        <button class="choice-btn" data-choice="orgullo">
+          🖤 Orgullo silencioso
+        </button>
+      </div>
+    </div>
 
-  <div class="section" id="intro">
-    <p><strong>Damián,</strong></p>
-    <p>He pensado tantas veces en vos desde que te fuiste. Hay cosas que no dije. Algunas por miedo. Otras por orgullo.</p>
-    <p>Te escribo esta carta desde un lugar que no reconozco del todo. Una especie de casa en mi mente, o quizás en mi alma. Las paredes susurran lo que callé por años.</p>
-    <p>La noche que te fuiste, dejaste el café en la mesa. Frío. Sin azúcar. Como vos.</p>
-    <p>Quise correr detrás tuyo. Quise no hacerlo. Me quedé quieta. Siempre fui buena en quedarme quieta.</p>
-    <p>Vos buscabas pasión. Yo buscaba hogar.<br>Vos querías incendios. Yo apenas podía sostener una vela encendida.</p>
-    <p>Te vi apagarte y no supe qué hacer. Me culpé por no saber amar como vos esperabas.<br>Vos me amaste con urgencia. Yo te amé con miedo. Y ambos fallamos.</p>
-    <p>Pero… hoy estoy aquí. Y puedo elegir cómo recordar.</p>
-    <p><strong>— ¿Desde la vulnerabilidad, o desde el orgullo?</strong></p>
-    <button class="choice-btn" data-choice="vulnerabilidad">💜 Vulnerabilidad</button>
-    <button class="choice-btn" data-choice="orgullo">💔 Orgullo silencioso</button>
-  </div>
+    <div id="choice-content" class="section"></div>
 
-  <div class="section" id="choice-content"></div>
+    <div id="objects" class="section">
+      <p>Elisa mira la mesa. Tres objetos antiguos aparecen. Elige uno:</p>
+      <button class="object-btn" data-object="retrato">
+        <img src="assets/portrait.png" alt="Retrato roto" />
+        Retrato roto
+      </button>
+      <button class="object-btn" data-object="panuelo">
+        <img src="assets/scarf.png" alt="Pañuelo con perfume" />
+        Pañuelo con perfume
+      </button>
+      <button class="object-btn" data-object="vela">
+        <img src="assets/candle.png" alt="Vela encendida" />
+        Vela encendida
+      </button>
+    </div>
 
-  <div class="section" id="objects">
-    <p>Elisa mira la mesa. Tres objetos antiguos aparecen. Elige uno:</p>
-    <button class="object-btn" data-object="retrato">🖼 Retrato roto</button>
-    <button class="object-btn" data-object="panuelo">🪛 Pañuelo con perfume</button>
-    <button class="object-btn" data-object="vela">🕯 Vela encendida</button>
-  </div>
+    <div id="object-result" class="section"></div>
 
-  <div class="section" id="object-result"></div>
-  <div class="section" id="closing"></div>
+    <div id="closing" class="section"></div>
 
-  <script>
-    $(function() {
-      $('#intro').fadeIn();
+    <script>
+      $(function () {
+        $("#intro").fadeIn(() => {
+          const introText = `
+            <p><strong>Damián,</strong></p>
+            <p>He pensado tantas veces en vos desde que te fuiste. Hay cosas que no dije. Algunas por miedo. Otras por orgullo.</p>
+            <p>Te escribo esta carta desde un lugar que no reconozco del todo. Una especie de casa en mi mente, o quizás en mi alma. Las paredes susurran lo que callé por años.</p>
+            <p>La noche que te fuiste, dejaste el café en la mesa. Frío. Sin azúcar. Como vos.</p>
+            <p>Quise correr detrás tuyo. Quise no hacerlo. Me quedé quieta. Siempre fui buena en quedarme quieta.</p>
+            <p>Vos buscabas pasión. Yo buscaba hogar.<br>Vos querías incendios. Yo apenas podía sostener una vela encendida.</p>
+            <p>Te vi apagarte y no supe qué hacer. Me culpé por no saber amar como vos esperabas.<br>Vos me amaste con urgencia. Yo te amé con miedo. Y ambos fallamos.</p>
+            <p>Pero… hoy estoy aquí. Y puedo elegir cómo recordar.</p>
+            <p><strong>— ¿Desde la vulnerabilidad, o desde el orgullo?</strong></p>
+          `;
 
-      $('.choice-btn').click(function() {
-        const choice = $(this).data('choice');
-        let text = '';
-        if (choice === 'vulnerabilidad') {
-          text = `
-            <p>Te amé, Damián. Aunque nunca supe si vos me amaste igual.<br>
-            Tal vez sí, en tus propios términos. Tal vez solo sabías amar escapando.</p>
-            <p>Yo te amé con la torpeza de quien nunca aprendió a pedir cariño.<br>
-            Me dolió que te fueras, pero más me dolió no haber sido yo misma mientras estabas.</p>
-            <p>Hoy te perdono. Y me perdono también.<br>
-            Gracias por haberme amado como supiste.<br>
-            Y por irte cuando yo aún no sabía cómo quedarme.</p>`;
-        } else {
-          text = `
-            <p>No eras para mí. Y yo no era para vos. Lo acepté. Pero dolió más de lo que admití.</p>
-            <p>Me costó años entender que no todo lo que arde es amor.<br>
-            Te fuiste y dejaste el eco de una historia inconclusa.<br>
-            Me quedé con frases a medias, con cartas sin enviar, con besos que prometían más de lo que podían cumplir.</p>
-            <p>Pero también crecí. Me reconstruí.<br>
-            Y ahora, si me preguntan por vos, digo simplemente:<br>— "Fue alguien que pasó por mi vida."</p>
-            <p>Eso basta.</p>`;
-        }
-        $('#intro').fadeOut();
-        $('#choice-content').html(text).fadeIn();
-        $('#objects').delay(600).fadeIn();
+          new Typed("#intro-text", {
+            strings: [introText],
+            typeSpeed: 25,
+            contentType: "html",
+            showCursor: false,
+            onComplete: function () {
+              $("#intro-buttons").fadeIn();
+            },
+          });
+        });
+
+        $(".choice-btn").click(function () {
+          const choice = $(this).data("choice");
+          let text = "";
+          if (choice === "vulnerabilidad") {
+            text = `
+              Te amé, Damián. Aunque nunca supe si vos me amaste igual.<br>
+              Tal vez sí, en tus propios términos. Tal vez solo sabías amar escapando.<br><br>
+              Yo te amé con la torpeza de quien nunca aprendió a pedir cariño.<br>
+              Me dolió que te fueras, pero más me dolió no haber sido yo misma mientras estabas.<br><br>
+              Hoy te perdono. Y me perdono también.<br>
+              Gracias por haberme amado como supiste.<br>
+              Y por irte cuando yo aún no sabía cómo quedarme.
+            `;
+          } else {
+            text = `
+              No eras para mí. Y yo no era para vos. Lo acepté. Pero dolió más de lo que admití.<br><br>
+              Me costó años entender que no todo lo que arde es amor.<br>
+              Te fuiste y dejaste el eco de una historia inconclusa.<br>
+              Me quedé con frases a medias, con cartas sin enviar, con besos que prometían más de lo que podían cumplir.<br><br>
+              Pero también crecí. Me reconstruí.<br>
+              Y ahora, si me preguntan por vos, digo simplemente:<br>
+              — "Fue alguien que pasó por mi vida."<br><br>
+              Eso basta.
+            `;
+          }
+
+          $("#intro").fadeOut(() => {
+            $("#choice-content").fadeIn(() => {
+              new Typed("#choice-content", {
+                strings: [text],
+                typeSpeed: 25,
+                showCursor: false,
+                contentType: "html",
+                onComplete: function () {
+                  $("#objects").delay(600).fadeIn();
+                },
+              });
+            });
+          });
+        });
+
+        $(".object-btn").click(function () {
+          const obj = $(this).data("object");
+          let msg = "";
+          if (obj === "retrato") {
+            msg = '"Lo nuestro fue bello… y se rompió. Está bien."';
+          } else if (obj === "panuelo") {
+            msg = '"Aún hay ternura, y no me avergüenza sentirla."';
+          } else {
+            msg = '"No te guardo rencor. Solo deseo tu luz."';
+          }
+
+          $("#objects").fadeOut(() => {
+            $("#object-result").fadeIn(() => {
+              new Typed("#object-result", {
+                strings: [`<em>${msg}</em>`],
+                typeSpeed: 30,
+                showCursor: false,
+                contentType: "html",
+                onComplete: function () {
+                  setTimeout(() => {
+                    $("#closing").fadeIn(() => {
+                      new Typed("#closing", {
+                        strings: [
+                          `
+                          <p><strong>Gracias por haber existido, Damián.</strong><br>
+                          Hoy, te dejo ir con amor.</p>
+                          <p>— Elisa</p>
+                          `,
+                        ],
+                        typeSpeed: 40,
+                        showCursor: false,
+                        contentType: "html",
+                      });
+                    });
+                  }, 1000);
+                },
+              });
+            });
+          });
+        });
       });
-
-      $('.object-btn').click(function() {
-        const obj = $(this).data('object');
-        let msg = '';
-        if (obj === 'retrato') {
-          msg = '"Lo nuestro fue bello… y se rompió. Está bien."';
-        } else if (obj === 'panuelo') {
-          msg = '"Aún hay ternura, y no me avergüenza sentirla."';
-        } else {
-          msg = '"No te guardo rencor. Solo deseo tu luz."';
-        }
-        $('#objects').fadeOut();
-        $('#object-result').html(`<p><em>${msg}</em></p>`).fadeIn();
-        $('#closing').delay(800).html(`
-          <p><strong>Gracias por haber existido, Damián.</strong><br>
-          Hoy, te dejo ir con amor.</p>
-          <p>&mdash; Elisa</p>
-        `).fadeIn();
-      });
-    });
-  </script>
-
-</body>
+    </script>
+  </body>
 </html>
