@@ -6,6 +6,9 @@
     <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
     <style>
+      html {
+        scroll-behavior: smooth;
+      }
       body {
         background: url("assets/room.webp") no-repeat center center fixed;
         background-size: cover;
@@ -45,6 +48,13 @@
         background-color: #6e5444;
         box-shadow: 0 0 15px #ffd966;
         transform: scale(1.05);
+      }
+      .choice-btn:disabled,
+      .object-btn:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+        box-shadow: none;
+        transform: none;
       }
       #intro img,
       #objects img {
@@ -133,7 +143,11 @@
         });
 
         $(".choice-btn").click(function () {
-          const choice = $(this).data("choice");
+          const $this = $(this);
+          $this.prop("disabled", true).text("✔ Seleccionado");
+          $(".choice-btn").not($this).prop("disabled", true);
+
+          const choice = $this.data("choice");
           let text = "";
           if (choice === "vulnerabilidad") {
             text = `
@@ -158,23 +172,29 @@
             `;
           }
 
-          $("#intro").fadeOut(() => {
-            $("#choice-content").fadeIn(() => {
-              new Typed("#choice-content", {
-                strings: [text],
-                typeSpeed: 25,
-                showCursor: false,
-                contentType: "html",
-                onComplete: function () {
-                  $("#objects").delay(600).fadeIn();
-                },
-              });
+          $("#choice-content").fadeIn(() => {
+            new Typed("#choice-content", {
+              strings: [text],
+              typeSpeed: 25,
+              showCursor: false,
+              contentType: "html",
+              onComplete: function () {
+                $("#objects").fadeIn(() => {
+                  document
+                    .querySelector("#objects")
+                    .scrollIntoView({ behavior: "smooth" });
+                });
+              },
             });
           });
         });
 
         $(".object-btn").click(function () {
-          const obj = $(this).data("object");
+          const $this = $(this);
+          $this.prop("disabled", true).html("✔ Seleccionado");
+          $(".object-btn").not($this).prop("disabled", true);
+
+          const obj = $this.data("object");
           let msg = "";
           if (obj === "retrato") {
             msg = '"Lo nuestro fue bello… y se rompió. Está bien."';
@@ -184,32 +204,33 @@
             msg = '"No te guardo rencor. Solo deseo tu luz."';
           }
 
-          $("#objects").fadeOut(() => {
-            $("#object-result").fadeIn(() => {
-              new Typed("#object-result", {
-                strings: [`<em>${msg}</em>`],
-                typeSpeed: 30,
-                showCursor: false,
-                contentType: "html",
-                onComplete: function () {
-                  setTimeout(() => {
-                    $("#closing").fadeIn(() => {
-                      new Typed("#closing", {
-                        strings: [
-                          `
-                          <p><strong>Gracias por haber existido, Damián.</strong><br>
-                          Hoy, te dejo ir con amor.</p>
-                          <p>— Elisa</p>
-                          `,
-                        ],
-                        typeSpeed: 40,
-                        showCursor: false,
-                        contentType: "html",
-                      });
+          $("#object-result").fadeIn(() => {
+            new Typed("#object-result", {
+              strings: [`<em>${msg}</em>`],
+              typeSpeed: 30,
+              showCursor: false,
+              contentType: "html",
+              onComplete: function () {
+                setTimeout(() => {
+                  $("#closing").fadeIn(() => {
+                    document
+                      .querySelector("#closing")
+                      .scrollIntoView({ behavior: "smooth" });
+                    new Typed("#closing", {
+                      strings: [
+                        `
+                        <p><strong>Gracias por haber existido, Damián.</strong><br>
+                        Hoy, te dejo ir con amor.</p>
+                        <p>— Elisa</p>
+                        `,
+                      ],
+                      typeSpeed: 40,
+                      showCursor: false,
+                      contentType: "html",
                     });
-                  }, 1000);
-                },
-              });
+                  });
+                }, 1000);
+              },
             });
           });
         });
