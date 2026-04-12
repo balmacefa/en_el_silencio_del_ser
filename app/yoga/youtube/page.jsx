@@ -1,34 +1,18 @@
-<!DOCTYPE html>
-<html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Yoga Youtube - Colección Personal</title>
-
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="/global.css" />
-  </head>
-  <body>
-    <!--#include virtual="/nav.html" -->
-
-    <div class="container">
-      <main class="video-grid">
-        <div class="video-card">
-          <div class="video-embed">
+export default function YogaYoutube() {
+  return (
+    <>
+      <main className="video-grid">
+        <div className="video-card">
+          <div className="video-embed">
             <iframe
               src="https://www.youtube.com/embed/8y8fn7gjHxo"
               title="YouTube video player"
-              frameborder="0"
+              frameBorder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowfullscreen
+              allowFullScreen
             ></iframe>
           </div>
-          <div class="video-info">
+          <div className="video-info">
             <h2>
               Prácticas de Isha Upa Yoga (Spanish/Español): Aprende yoga en
               línea
@@ -44,17 +28,17 @@
           </div>
         </div>
 
-        <div class="video-card">
-          <div class="video-embed">
+        <div className="video-card">
+          <div className="video-embed">
             <iframe
               src="https://www.youtube.com/embed/TO5DAbT5R2s"
               title="YouTube video player"
-              frameborder="0"
+              frameBorder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowfullscreen
+              allowFullScreen
             ></iframe>
           </div>
-          <div class="video-info">
+          <div className="video-info">
             <h2>
               Hatha Yoga for Beginners level 1 | Hatha Yoga Video In English By
               Dr Varunveer | Varun Yoga
@@ -66,17 +50,17 @@
           </div>
         </div>
 
-        <div class="video-card">
-          <div class="video-embed">
+        <div className="video-card">
+          <div className="video-embed">
             <iframe
               src="https://www.youtube.com/embed/4H13ubfBQeM"
               title="YouTube video player"
-              frameborder="0"
+              frameBorder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowfullscreen
+              allowFullScreen
             ></iframe>
           </div>
-          <div class="video-info">
+          <div className="video-info">
             <h2>
               Hatha Yoga for Beginners level 2 | Hatha Yoga Video In English By
               Dr Varunveer | Varun Yoga
@@ -88,20 +72,18 @@
           </div>
         </div>
 
-        <div class="video-card">
-          <div class="video-embed">
+        <div className="video-card">
+          <div className="video-embed">
             <iframe
-              width="560"
-              height="315"
               src="https://www.youtube.com/embed/PojgMEUIy-4?si=-CDsbcfz1zVwIeqJ"
               title="YouTube video player"
-              frameborder="0"
+              frameBorder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              referrerpolicy="strict-origin-when-cross-origin"
-              allowfullscreen
+              referrerPolicy="strict-origin-when-cross-origin"
+              allowFullScreen
             ></iframe>
           </div>
-          <div class="video-info">
+          <div className="video-info">
             <h2>
               Hatha Yoga with David Procyshyn: A 30 Minute Class for Hips,
               Hamstrings and Lower Back
@@ -110,6 +92,6 @@
           </div>
         </div>
       </main>
-    </div>
-  </body>
-</html>
+    </>
+  );
+}
