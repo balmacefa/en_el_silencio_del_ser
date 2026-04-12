@@ -199,35 +199,35 @@ export default function RespiracionAutoGuiadas() {
       <Script src="https://code.jquery.com/jquery-3.7.1.min.js" strategy="afterInteractive" onLoad={() => window.initBreatheLogic?.()} />
       <Script src="https://cdn.jsdelivr.net/npm/tone@14.8.49/build/Tone.min.js" strategy="afterInteractive" onLoad={() => window.initBreatheLogic?.()} />
       
-      <div className="container" style={{ textAlign: 'center', padding: '2rem 1rem' }}>
+      <div className="max-w-7xl mx-auto px-4 py-8 text-center">
         <h1 style={{ marginBottom: '2rem' }}>Prácticas de Respiración Consciente Auto guiadas</h1>
 
         <div id="carouselContainer" style={{ marginBottom: '3rem' }}>
-          <div className="custom-technique-grid">
-            <div className="technique-card">
-              <h2>Box Breathing</h2>
-              <p>4s Inhalar, 4s Retener, 4s Exhalar, 4s Vacío</p>
-              <button className="btn btn-primary start-btn" data-style="box">Iniciar</button>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 justify-center">
+            <div className="bg-white/80 backdrop-blur-md border border-slate-100 rounded-2xl p-8 text-center shadow-[0_4px_20px_rgba(0,0,0,0.03)] transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_10px_30px_rgba(0,0,0,0.08)] hover:border-teal-100 flex flex-col justify-between h-full">
+              <h2 className="text-2xl text-[#2c3e50] mb-4">Box Breathing</h2>
+              <p className="text-[#555] mb-6 leading-relaxed">4s Inhalar, 4s Retener, 4s Exhalar, 4s Vacío</p>
+              <button className="inline-block px-5 py-2.5 rounded-md font-semibold cursor-pointer border-none transition-opacity hover:opacity-90 no-underline bg-[#3498db] text-white w-full start-btn" data-style="box">Iniciar</button>
             </div>
-            <div className="technique-card">
-              <h2>4-7-8</h2>
-              <p>4s Inhalar, 7s Retener, 8s Exhalar</p>
-              <button className="btn btn-primary start-btn" data-style="478">Iniciar</button>
+            <div className="bg-white/80 backdrop-blur-md border border-slate-100 rounded-2xl p-8 text-center shadow-[0_4px_20px_rgba(0,0,0,0.03)] transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_10px_30px_rgba(0,0,0,0.08)] hover:border-teal-100 flex flex-col justify-between h-full">
+              <h2 className="text-2xl text-[#2c3e50] mb-4">4-7-8</h2>
+              <p className="text-[#555] mb-6 leading-relaxed">4s Inhalar, 7s Retener, 8s Exhalar</p>
+              <button className="inline-block px-5 py-2.5 rounded-md font-semibold cursor-pointer border-none transition-opacity hover:opacity-90 no-underline bg-[#3498db] text-white w-full start-btn" data-style="478">Iniciar</button>
             </div>
-            <div className="technique-card">
-              <h2>Wim Hof</h2>
-              <p>2s Inhalar, 2s Exhalar</p>
-              <button className="btn btn-primary start-btn" data-style="wimhof">Iniciar</button>
+            <div className="bg-white/80 backdrop-blur-md border border-slate-100 rounded-2xl p-8 text-center shadow-[0_4px_20px_rgba(0,0,0,0.03)] transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_10px_30px_rgba(0,0,0,0.08)] hover:border-teal-100 flex flex-col justify-between h-full">
+              <h2 className="text-2xl text-[#2c3e50] mb-4">Wim Hof</h2>
+              <p className="text-[#555] mb-6 leading-relaxed">2s Inhalar, 2s Exhalar</p>
+              <button className="inline-block px-5 py-2.5 rounded-md font-semibold cursor-pointer border-none transition-opacity hover:opacity-90 no-underline bg-[#3498db] text-white w-full start-btn" data-style="wimhof">Iniciar</button>
             </div>
-            <div className="technique-card">
-              <h2>4-4-2-2</h2>
-              <p>4s Inhalar, 4s Retener, 2s Exhalar, 2s Vacío</p>
-              <button className="btn btn-primary start-btn" data-style="4422">Iniciar</button>
+            <div className="bg-white/80 backdrop-blur-md border border-slate-100 rounded-2xl p-8 text-center shadow-[0_4px_20px_rgba(0,0,0,0.03)] transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_10px_30px_rgba(0,0,0,0.08)] hover:border-teal-100 flex flex-col justify-between h-full">
+              <h2 className="text-2xl text-[#2c3e50] mb-4">4-4-2-2</h2>
+              <p className="text-[#555] mb-6 leading-relaxed">4s Inhalar, 4s Retener, 2s Exhalar, 2s Vacío</p>
+              <button className="inline-block px-5 py-2.5 rounded-md font-semibold cursor-pointer border-none transition-opacity hover:opacity-90 no-underline bg-[#3498db] text-white w-full start-btn" data-style="4422">Iniciar</button>
             </div>
           </div>
         </div>
 
-        <div id="session" style={{ display: 'none', margin: '4rem auto', border: '7px solid #6e8aa1', padding: '2rem', borderRadius: '21px', maxWidth: '500px', backgroundColor: 'white' }}>
+        <div id="session" style={{ display: 'none' }} className="mt-16 mx-auto border-[6px] border-indigo-50/80 bg-white/95 backdrop-blur-xl p-8 sm:p-12 rounded-[2rem] max-w-lg shadow-[0_10px_40px_rgba(0,0,0,0.06)] relative">
           <div id="techniqueInfo" style={{ display: 'none', marginBottom: '1.5rem' }}>
             <h3 id="techniqueTitle" style={{ marginBottom: '0.5rem', color: '#2c3e50' }}></h3>
             <p id="techniqueDescription" style={{ marginBottom: '1rem', color: '#666', fontSize: '0.95rem' }}></p>
@@ -243,9 +243,9 @@ export default function RespiracionAutoGuiadas() {
           </div>
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
-            <button id="stopBtn" className="btn btn-danger">Detener</button>
-            <button id="toggleSoundBtn" className="btn btn-secondary">🔈 Sonido: Activado</button>
-            <button id="toggleVoiceBtn" className="btn btn-secondary">🗣️ Voz: Activada</button>
+            <button id="stopBtn" className="inline-block px-5 py-2.5 rounded-md font-semibold cursor-pointer border-none transition-opacity hover:opacity-90 no-underline bg-[#e74c3c] text-white">Detener</button>
+            <button id="toggleSoundBtn" className="inline-block px-5 py-2.5 rounded-md font-semibold cursor-pointer border-none transition-opacity hover:opacity-90 no-underline bg-[#95a5a6] text-white">🔈 Sonido: Activado</button>
+            <button id="toggleVoiceBtn" className="inline-block px-5 py-2.5 rounded-md font-semibold cursor-pointer border-none transition-opacity hover:opacity-90 no-underline bg-[#95a5a6] text-white">🗣️ Voz: Activada</button>
           </div>
         </div>
 

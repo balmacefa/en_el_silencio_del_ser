@@ -1,76 +1,102 @@
 "use client";
 
+import { useState } from 'react';
 import Link from 'next/link';
 
 export default function Nav() {
+  const [isOpen, setIsOpen] = useState(false);
+  const [yogaOpen, setYogaOpen] = useState(false);
+  const [respOpen, setRespOpen] = useState(false);
+
   return (
-    <nav className="custom-navbar">
-      <div className="navbar-container">
-        <Link href="/" className="brand-link">
-          Inicio
-        </Link>
-        <ul className="nav-menu">
-          <li className="nav-item">
-            <span className="nav-link">🧘 Yoga ▾</span>
-            <ul className="dropdown-menu">
-              <li>
-                <Link href="/yoga/experiencia_personal" className="dropdown-item">
-                  Experiencia Personal
-                </Link>
-              </li>
-              <li>
-                <Link href="/yoga/ashtanga_serie_basica_1" className="dropdown-item">
-                  Ashtanga: Serie Básica
-                </Link>
-              </li>
-              <li>
-                <Link href="/yoga/youtube" className="dropdown-item">
-                  Recomendaciones Youtube
-                </Link>
-              </li>
-            </ul>
-          </li>
+    <nav className="fixed top-0 left-0 w-full z-50 bg-white/80 backdrop-blur-md border-b border-slate-200/50 shadow-sm transition-all">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex justify-between items-center h-16">
+          <Link href="/" className="text-2xl font-bold text-slate-800 tracking-tight flex-shrink-0" onClick={() => setIsOpen(false)}>
+            Inicio
+          </Link>
+          
+          <div className="flex md:hidden">
+            <button
+              onClick={() => setIsOpen(!isOpen)}
+              className="text-slate-600 hover:text-slate-900 focus:outline-none p-2"
+            >
+              <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                {isOpen ? (
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                ) : (
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                )}
+              </svg>
+            </button>
+          </div>
 
-          <li className="nav-item">
-            <span className="nav-link">🌬️ Respiración ▾</span>
-            <ul className="dropdown-menu">
-              <li>
-                <Link href="/respiracion_conciente" className="dropdown-item">
-                  Respiración Consciente
-                </Link>
-              </li>
-              <li>
-                <Link href="/respiracion_conciente_auto_guiadas" className="dropdown-item">
-                  Prácticas Auto Guiadas
-                </Link>
-              </li>
-            </ul>
-          </li>
+          <ul className="hidden md:flex gap-6 items-center">
+            <li className="relative group">
+              <button className="flex items-center gap-1 text-slate-600 font-medium hover:text-slate-900 py-4 transition-colors">
+                🧘 Yoga
+                <svg className="w-4 h-4 opacity-70 group-hover:rotate-180 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>
+              </button>
+              <ul className="absolute top-full left-0 hidden group-hover:flex flex-col bg-white rounded-xl shadow-xl shadow-slate-200/50 border border-slate-100 min-w-[240px] p-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                <li><Link href="/yoga/experiencia_personal" className="block px-4 py-2.5 text-slate-600 hover:bg-slate-50 hover:text-indigo-600 rounded-lg transition-colors">Experiencia Personal</Link></li>
+                <li><Link href="/yoga/ashtanga_serie_basica_1" className="block px-4 py-2.5 text-slate-600 hover:bg-slate-50 hover:text-indigo-600 rounded-lg transition-colors">Ashtanga: Serie Básica</Link></li>
+                <li><Link href="/yoga/youtube" className="block px-4 py-2.5 text-slate-600 hover:bg-slate-50 hover:text-indigo-600 rounded-lg transition-colors">Recomendaciones Youtube</Link></li>
+              </ul>
+            </li>
 
-          <li className="nav-item">
-            <Link href="/notas_pensamientos" className="nav-link">
-              ✍️ Notas y Pensamientos
-            </Link>
-          </li>
-          
-          <li className="nav-item">
-            <Link href="/las_cuatro_casitas_del_corazon" className="nav-link">
-              🌌 Las Cuatro Casitas
-            </Link>
-          </li>
-          
-          <li className="nav-item">
-            <Link href="/mantras_meditacion_guiada" className="nav-link">
-              🎧 Mantras
-            </Link>
-          </li>
-          
-          <li className="nav-item">
-            <Link href="/salud_mental" className="nav-link">
-              🧠 Salud Mental
-            </Link>
-          </li>
-        </ul>
+            <li className="relative group">
+              <button className="flex items-center gap-1 text-slate-600 font-medium hover:text-slate-900 py-4 transition-colors">
+                🌬️ Respiración
+                <svg className="w-4 h-4 opacity-70 group-hover:rotate-180 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>
+              </button>
+              <ul className="absolute top-full left-0 hidden group-hover:flex flex-col bg-white rounded-xl shadow-xl shadow-slate-200/50 border border-slate-100 min-w-[240px] p-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                <li><Link href="/respiracion_conciente" className="block px-4 py-2.5 text-slate-600 hover:bg-slate-50 hover:text-indigo-600 rounded-lg transition-colors">Respiración Consciente</Link></li>
+                <li><Link href="/respiracion_conciente_auto_guiadas" className="block px-4 py-2.5 text-slate-600 hover:bg-slate-50 hover:text-indigo-600 rounded-lg transition-colors">Prácticas Auto Guiadas</Link></li>
+              </ul>
+            </li>
+
+            <li><Link href="/notas_pensamientos" className="text-slate-600 font-medium hover:text-slate-900 transition-colors py-4">✍️ Notas</Link></li>
+            <li><Link href="/las_cuatro_casitas_del_corazon" className="text-slate-600 font-medium hover:text-slate-900 transition-colors py-4">🌌 4 Casitas</Link></li>
+            <li><Link href="/mantras_meditacion_guiada" className="text-slate-600 font-medium hover:text-slate-900 transition-colors py-4">🎧 Mantras</Link></li>
+            <li><Link href="/salud_mental" className="text-slate-600 font-medium hover:text-slate-900 transition-colors py-4">🧠 Salud Mental</Link></li>
+          </ul>
+        </div>
+      </div>
+
+      <div className={`md:hidden overflow-hidden transition-all duration-300 ease-in-out ${isOpen ? 'max-h-[500px] border-t border-slate-100 opacity-100' : 'max-h-0 opacity-0'}`}>
+        <div className="px-4 py-4 pr-6 space-y-1 bg-white/95 backdrop-blur-md shadow-inner flex flex-col">
+          <div className="mb-2">
+            <button onClick={() => setYogaOpen(!yogaOpen)} className="w-full flex justify-between items-center px-3 py-2 text-base font-medium text-slate-800 hover:bg-slate-50 rounded-lg">
+              <span>🧘 Yoga</span>
+              <svg className={`w-4 h-4 transition-transform ${yogaOpen ? 'rotate-180' : ''}`} fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>
+            </button>
+            {yogaOpen && (
+              <div className="pl-6 pt-1 space-y-1">
+                <Link href="/yoga/experiencia_personal" onClick={() => setIsOpen(false)} className="block px-3 py-2 text-sm text-slate-600 hover:text-indigo-600 hover:bg-slate-50 rounded-lg">Experiencia Personal</Link>
+                <Link href="/yoga/ashtanga_serie_basica_1" onClick={() => setIsOpen(false)} className="block px-3 py-2 text-sm text-slate-600 hover:text-indigo-600 hover:bg-slate-50 rounded-lg">Ashtanga: Serie Básica</Link>
+                <Link href="/yoga/youtube" onClick={() => setIsOpen(false)} className="block px-3 py-2 text-sm text-slate-600 hover:text-indigo-600 hover:bg-slate-50 rounded-lg">Recomendaciones Youtube</Link>
+              </div>
+            )}
+          </div>
+
+          <div className="mb-2">
+            <button onClick={() => setRespOpen(!respOpen)} className="w-full flex justify-between items-center px-3 py-2 text-base font-medium text-slate-800 hover:bg-slate-50 rounded-lg">
+              <span>🌬️ Respiración</span>
+              <svg className={`w-4 h-4 transition-transform ${respOpen ? 'rotate-180' : ''}`} fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>
+            </button>
+            {respOpen && (
+              <div className="pl-6 pt-1 space-y-1">
+                <Link href="/respiracion_conciente" onClick={() => setIsOpen(false)} className="block px-3 py-2 text-sm text-slate-600 hover:text-indigo-600 hover:bg-slate-50 rounded-lg">Respiración Consciente</Link>
+                <Link href="/respiracion_conciente_auto_guiadas" onClick={() => setIsOpen(false)} className="block px-3 py-2 text-sm text-slate-600 hover:text-indigo-600 hover:bg-slate-50 rounded-lg">Prácticas Auto Guiadas</Link>
+              </div>
+            )}
+          </div>
+
+          <Link href="/notas_pensamientos" onClick={() => setIsOpen(false)} className="block px-3 py-2 text-base font-medium text-slate-800 hover:bg-slate-50 rounded-lg">✍️ Notas y Pensamientos</Link>
+          <Link href="/las_cuatro_casitas_del_corazon" onClick={() => setIsOpen(false)} className="block px-3 py-2 text-base font-medium text-slate-800 hover:bg-slate-50 rounded-lg">🌌 Las Cuatro Casitas</Link>
+          <Link href="/mantras_meditacion_guiada" onClick={() => setIsOpen(false)} className="block px-3 py-2 text-base font-medium text-slate-800 hover:bg-slate-50 rounded-lg">🎧 Mantras</Link>
+          <Link href="/salud_mental" onClick={() => setIsOpen(false)} className="block px-3 py-2 text-base font-medium text-slate-800 hover:bg-slate-50 rounded-lg">🧠 Salud Mental</Link>
+        </div>
       </div>
     </nav>
   );

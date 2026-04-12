@@ -120,7 +120,7 @@ export default function AshtangaSerieBasica() {
   const nextAsana = getNextAsanaInfo();
 
   return (
-    <div className="container">
+    <div className="max-w-7xl mx-auto px-4 py-8">
       <h1>Ashtanga Yoga - Primera Serie</h1>
       <p>
         Fuente Original - imágenes y secuencias fueron obtenidas del sitio web{' '}

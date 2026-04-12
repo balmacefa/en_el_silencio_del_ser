@@ -1,6 +1,6 @@
 export default function MantrasMeditacionGuiada() {
   return (
-    <div className="container">
+    <div className="max-w-7xl mx-auto px-4 py-8 text-center">
       <header>
         <h1>Mantras y Meditaciones Guiadas</h1>
         <p>

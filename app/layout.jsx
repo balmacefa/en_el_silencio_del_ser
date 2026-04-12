@@ -17,16 +17,18 @@ export default function RootLayout({ children }) {
           rel="stylesheet"
         />
       </head>
-      <body>
+      <body className="font-['Quicksand'] bg-gradient-to-br from-slate-50 to-indigo-50/30 min-h-screen text-slate-800 pt-[70px] overflow-x-hidden">
         <Nav />
-        <div className="container" style={{ padding: '2rem' }}>
-          <header className="page-header">
-            <h1>En el silencio del ser</h1>
-            <p className="author">Hecho con ❤️ por Fabián Martín Balmaceda Rescia</p>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
+          <header className="text-center mb-8 md:mb-12 mt-6">
+            <h1 className="text-4xl md:text-5xl font-bold tracking-tight text-slate-900 drop-shadow-sm">En el silencio del ser</h1>
           </header>
-          <main>
+          <main className="w-full flex-grow">
             {children}
           </main>
+          <footer className="text-center mt-16 pt-8 border-t border-slate-200/60 pb-8 text-slate-500 font-medium">
+            Hecho con ❤️ por Fabián Martín Balmaceda Rescia
+          </footer>
         </div>
       </body>
     </html>

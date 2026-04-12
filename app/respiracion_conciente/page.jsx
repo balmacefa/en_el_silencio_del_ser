@@ -1,6 +1,6 @@
 export default function RespiracionConciente() {
   return (
-    <div className="container text-center py-4">
+    <div className="max-w-7xl mx-auto text-center py-4">
       <h1 className="mb-5">Prácticas de Respiración Consciente (Youtube)</h1>
       <h2>Videos de Respiración</h2>
 

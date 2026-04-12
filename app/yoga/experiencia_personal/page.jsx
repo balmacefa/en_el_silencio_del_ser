@@ -9,12 +9,15 @@ export default function YogaExperienciaPersonal() {
           lo espiritual.
         </p>
 
-        <div className="custom-container" style={{ maxWidth: '800px', margin: '0 auto', padding: '2rem', background: '#fff', borderRadius: '16px', boxShadow: '0 10px 25px rgba(0,0,0,0.05)' }}>
-          <h2 style={{ textAlign: 'center', marginBottom: '2rem', color: '#2c3e50' }}>
+        <div className="max-w-3xl mx-auto p-6 md:p-10 bg-white/80 backdrop-blur-md rounded-3xl shadow-[0_10px_40px_rgba(0,0,0,0.04)] border border-slate-100 relative mt-8">
+          <div className="absolute -top-6 left-1/2 -translate-x-1/2 bg-indigo-50 text-indigo-500 rounded-full p-4 shadow-sm">
+            <span className="text-3xl">🧘‍♂️</span>
+          </div>
+          <h2 className="text-center mb-8 mt-4 text-3xl font-bold text-slate-800">
             El Poder Transformador del Yoga
           </h2>
           <div style={{ lineHeight: '1.8', color: '#444' }}>
-            <p>
+            <p className="mb-6 leading-relaxed text-slate-600 text-lg">
               El yoga es un mecanismo profundo para mejorar la salud del
               cuerpo y equilibrar su energía. Es una metodología integral
               que fortalece músculos, desarrolla flexibilidad, mejora el
@@ -59,11 +62,10 @@ export default function YogaExperienciaPersonal() {
               de lo que somos.
             </p>
           </div>
-          <div style={{ textAlign: 'center', marginTop: '3rem' }}>
+          <div className="text-center mt-12">
             <a
               href="https://chatgpt.com/share/68871ea2-231c-8004-97ac-80655ac3fce5"
-              className="btn btn-primary"
-              style={{ display: 'inline-block', padding: '12px 24px', background: '#3498db', color: 'white', textDecoration: 'none', borderRadius: '8px', fontWeight: '600', transition: 'background 0.2s' }}
+              className="inline-block px-6 py-3 rounded-xl font-semibold cursor-pointer border-none transition-all hover:opacity-90 hover:-translate-y-1 hover:shadow-lg bg-indigo-600 text-white shadow-md shadow-indigo-200"
             >
               Visita la conversación original con Chat GPT
             </a>
