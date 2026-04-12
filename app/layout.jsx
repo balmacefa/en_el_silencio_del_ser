@@ -3,7 +3,31 @@ import Nav from './components/Nav';
 
 export const metadata = {
   title: 'En el silencio del ser',
-  description: 'Hecho con ❤️ por Fabián Martín Balmaceda Rescia',
+  description: 'Un espacio digital para respiración consciente, secuencias de yoga, y reflexiones. Hecho con ❤️ por Fabián Martín Balmaceda Rescia',
+  keywords: ['yoga', 'meditación', 'respiración consciente', 'bienestar', 'paz interior'],
+  authors: [{ name: 'Fabián Martín Balmaceda Rescia' }],
+  openGraph: {
+    title: 'En el silencio del ser',
+    description: 'Un espacio digital para respiración consciente, secuencias de yoga, y reflexiones.',
+    url: 'https://zen.balmacefa.com',
+    siteName: 'En el silencio del ser',
+    locale: 'es_AR',
+    type: 'website',
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
+  icons: {
+    icon: '/icon.svg',
+  },
 };
 
 export default function RootLayout({ children }) {
