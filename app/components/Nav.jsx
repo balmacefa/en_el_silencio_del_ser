@@ -7,6 +7,7 @@ export default function Nav() {
   const [isOpen, setIsOpen] = useState(false);
   const [yogaOpen, setYogaOpen] = useState(false);
   const [respOpen, setRespOpen] = useState(false);
+  const [reflexOpen, setReflexOpen] = useState(false);
 
   return (
     <nav className="fixed top-0 left-0 w-full z-50 bg-white/80 backdrop-blur-md border-b border-slate-200/50 shadow-sm transition-all">
@@ -55,15 +56,25 @@ export default function Nav() {
               </ul>
             </li>
 
-            <li><Link href="/notas_pensamientos" className="text-slate-600 font-medium hover:text-slate-900 transition-colors py-4">✍️ Notas</Link></li>
-            <li><Link href="/las_cuatro_casitas_del_corazon" className="text-slate-600 font-medium hover:text-slate-900 transition-colors py-4">🌌 4 Casitas</Link></li>
+            <li className="relative group">
+              <button className="flex items-center gap-1 text-slate-600 font-medium hover:text-slate-900 py-4 transition-colors">
+                ✨ Reflexiones
+                <svg className="w-4 h-4 opacity-70 group-hover:rotate-180 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>
+              </button>
+              <ul className="absolute top-full left-0 hidden group-hover:flex flex-col bg-white rounded-xl shadow-xl shadow-slate-200/50 border border-slate-100 min-w-[240px] p-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                <li><Link href="/reflexiones" className="block px-4 py-2.5 text-slate-600 hover:bg-slate-50 hover:text-rose-600 rounded-lg font-bold transition-colors">Ver Todo</Link></li>
+                <li><Link href="/reflexiones/notas_pensamientos" className="block px-4 py-2.5 text-slate-600 hover:bg-slate-50 hover:text-rose-600 rounded-lg transition-colors">Notas y Pensamientos</Link></li>
+                <li><Link href="/reflexiones/el_silencio_de_un_adios" className="block px-4 py-2.5 text-slate-600 hover:bg-slate-50 hover:text-rose-600 rounded-lg transition-colors">El Silencio de un Adiós</Link></li>
+              </ul>
+            </li>
+
             <li><Link href="/mantras_meditacion_guiada" className="text-slate-600 font-medium hover:text-slate-900 transition-colors py-4">🎧 Mantras</Link></li>
             <li><Link href="/salud_mental" className="text-slate-600 font-medium hover:text-slate-900 transition-colors py-4">🧠 Salud Mental</Link></li>
           </ul>
         </div>
       </div>
 
-      <div className={`md:hidden overflow-hidden transition-all duration-300 ease-in-out ${isOpen ? 'max-h-[500px] border-t border-slate-100 opacity-100' : 'max-h-0 opacity-0'}`}>
+      <div className={`md:hidden overflow-hidden transition-all duration-300 ease-in-out ${isOpen ? 'max-h-[600px] border-t border-slate-100 opacity-100' : 'max-h-0 opacity-0'}`}>
         <div className="px-4 py-4 pr-6 space-y-1 bg-white/95 backdrop-blur-md shadow-inner flex flex-col">
           <div className="mb-2">
             <button onClick={() => setYogaOpen(!yogaOpen)} className="w-full flex justify-between items-center px-3 py-2 text-base font-medium text-slate-800 hover:bg-slate-50 rounded-lg">
@@ -92,8 +103,20 @@ export default function Nav() {
             )}
           </div>
 
-          <Link href="/notas_pensamientos" onClick={() => setIsOpen(false)} className="block px-3 py-2 text-base font-medium text-slate-800 hover:bg-slate-50 rounded-lg">✍️ Notas y Pensamientos</Link>
-          <Link href="/las_cuatro_casitas_del_corazon" onClick={() => setIsOpen(false)} className="block px-3 py-2 text-base font-medium text-slate-800 hover:bg-slate-50 rounded-lg">🌌 Las Cuatro Casitas</Link>
+          <div className="mb-2">
+            <button onClick={() => setReflexOpen(!reflexOpen)} className="w-full flex justify-between items-center px-3 py-2 text-base font-medium text-slate-800 hover:bg-slate-50 rounded-lg">
+              <span>✨ Reflexiones</span>
+              <svg className={`w-4 h-4 transition-transform ${reflexOpen ? 'rotate-180' : ''}`} fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>
+            </button>
+            {reflexOpen && (
+              <div className="pl-6 pt-1 space-y-1">
+                <Link href="/reflexiones" onClick={() => setIsOpen(false)} className="block px-3 py-2 text-sm text-slate-600 hover:text-rose-600 hover:bg-slate-50 rounded-lg font-bold">Ver Todo</Link>
+                <Link href="/reflexiones/notas_pensamientos" onClick={() => setIsOpen(false)} className="block px-3 py-2 text-sm text-slate-600 hover:text-rose-600 hover:bg-slate-50 rounded-lg">Notas y Pensamientos</Link>
+                <Link href="/reflexiones/el_silencio_de_un_adios" onClick={() => setIsOpen(false)} className="block px-3 py-2 text-sm text-slate-600 hover:text-rose-600 hover:bg-slate-50 rounded-lg">El Silencio de un Adiós</Link>
+              </div>
+            )}
+          </div>
+
           <Link href="/mantras_meditacion_guiada" onClick={() => setIsOpen(false)} className="block px-3 py-2 text-base font-medium text-slate-800 hover:bg-slate-50 rounded-lg">🎧 Mantras</Link>
           <Link href="/salud_mental" onClick={() => setIsOpen(false)} className="block px-3 py-2 text-base font-medium text-slate-800 hover:bg-slate-50 rounded-lg">🧠 Salud Mental</Link>
         </div>
@@ -101,3 +124,4 @@ export default function Nav() {
     </nav>
   );
 }
+

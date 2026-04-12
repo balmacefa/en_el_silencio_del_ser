@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 
-export default function LasCuatroCasitas() {
+export default function ElSilencioDeUnAdios() {
   const [step, setStep] = useState('intro'); // intro, choice, objects, result
   const [choiceText, setChoiceText] = useState('');
   const [resultText, setResultText] = useState('');

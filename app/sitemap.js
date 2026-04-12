@@ -20,7 +20,19 @@ export default function sitemap() {
       priority: 0.8,
     },
     {
-      url: `${baseUrl}/notas_pensamientos`,
+      url: `${baseUrl}/reflexiones`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: 0.8,
+    },
+    {
+      url: `${baseUrl}/reflexiones/notas_pensamientos`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: 0.8,
+    },
+    {
+      url: `${baseUrl}/reflexiones/el_silencio_de_un_adios`,
       lastModified: new Date(),
       changeFrequency: 'monthly',
       priority: 0.8,
