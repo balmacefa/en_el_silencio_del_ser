@@ -63,7 +63,7 @@ export default function Nav() {
               </button>
               <ul className="absolute top-full left-0 hidden group-hover:flex flex-col bg-white rounded-xl shadow-xl shadow-slate-200/50 border border-slate-100 min-w-[240px] p-2 opacity-0 group-hover:opacity-100 transition-opacity">
                 <li><Link href="/reflexiones" className="block px-4 py-2.5 text-slate-600 hover:bg-slate-50 hover:text-rose-600 rounded-lg font-bold transition-colors">Ver Todo</Link></li>
-                <li><Link href="/reflexiones/notas_pensamientos" className="block px-4 py-2.5 text-slate-600 hover:bg-slate-50 hover:text-rose-600 rounded-lg transition-colors">Notas y Pensamientos</Link></li>
+                <li><Link href="/reflexiones/cuatro_sendas_al_silencio" className="block px-4 py-2.5 text-slate-600 hover:bg-slate-50 hover:text-rose-600 rounded-lg transition-colors">4 Sendas al Silencio</Link></li>
                 <li><Link href="/reflexiones/el_silencio_de_un_adios" className="block px-4 py-2.5 text-slate-600 hover:bg-slate-50 hover:text-rose-600 rounded-lg transition-colors">El Silencio de un Adiós</Link></li>
               </ul>
             </li>
@@ -111,7 +111,7 @@ export default function Nav() {
             {reflexOpen && (
               <div className="pl-6 pt-1 space-y-1">
                 <Link href="/reflexiones" onClick={() => setIsOpen(false)} className="block px-3 py-2 text-sm text-slate-600 hover:text-rose-600 hover:bg-slate-50 rounded-lg font-bold">Ver Todo</Link>
-                <Link href="/reflexiones/notas_pensamientos" onClick={() => setIsOpen(false)} className="block px-3 py-2 text-sm text-slate-600 hover:text-rose-600 hover:bg-slate-50 rounded-lg">Notas y Pensamientos</Link>
+                <Link href="/reflexiones/cuatro_sendas_al_silencio" onClick={() => setIsOpen(false)} className="block px-3 py-2 text-sm text-slate-600 hover:text-rose-600 hover:bg-slate-50 rounded-lg">4 Sendas al Silencio</Link>
                 <Link href="/reflexiones/el_silencio_de_un_adios" onClick={() => setIsOpen(false)} className="block px-3 py-2 text-sm text-slate-600 hover:text-rose-600 hover:bg-slate-50 rounded-lg">El Silencio de un Adiós</Link>
               </div>
             )}

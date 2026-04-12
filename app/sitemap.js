@@ -26,7 +26,7 @@ export default function sitemap() {
       priority: 0.8,
     },
     {
-      url: `${baseUrl}/reflexiones/notas_pensamientos`,
+      url: `${baseUrl}/reflexiones/cuatro_sendas_al_silencio`,
       lastModified: new Date(),
       changeFrequency: 'monthly',
       priority: 0.8,

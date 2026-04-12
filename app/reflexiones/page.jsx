@@ -3,9 +3,9 @@ import Link from 'next/link';
 export default function ReflexionesPage() {
   const reflexiones = [
     {
-      title: "Notas y Pensamientos",
-      description: "Explora reflexiones personales sobre el autodescubrimiento y el crecimiento interior.",
-      href: "/reflexiones/notas_pensamientos",
+      title: "4 Sendas hacia el Silencio",
+      description: "Explora las cuatro moradas divinas (Metta, Karuna, Mudita y Upekkha) para cultivar una paz profunda.",
+      href: "/reflexiones/cuatro_sendas_al_silencio",
       icon: "✍️",
       color: "rose"
     },
