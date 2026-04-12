@@ -12,159 +12,12 @@
 
   <!-- Fuente femenina moderna -->
   <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&display=swap" rel="stylesheet" />
-
-  <style>
-    body {
-      font-family: "Quicksand", sans-serif;
-      background-color: #f9f6f1;
-      color: #333;
-      transition: background-color 1s ease;
-      font-size: 1.1rem;
-    }
-
-    h1 {
-      font-weight: 600;
-      font-size: 2.5rem;
-      color: #3a4d39;
-      margin-bottom: 2.5rem;
-    }
-
-    h2 {
-      font-size: 1.6rem;
-    }
-
-    h3 {
-      font-size: 1.4rem;
-      font-weight: 600;
-    }
-
-    .carousel-item {
-      padding: 1rem;
-    }
-
-    .technique-card {
-      border: 1px solid #d0cfc7;
-      border-radius: 16px;
-      padding: 2rem;
-      background-color: #ffffff;
-      color: #3a4d39;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-    }
-
-    .technique-card h2 {
-      font-size: 1.5rem;
-      margin-bottom: 0.8rem;
-      color: #4f5f45;
-    }
-
-    .technique-card p {
-      font-size: 1.1rem;
-      margin-bottom: 1.2rem;
-      color: #666;
-    }
-
-    .btn-style {
-      background-color: #a3c1ad;
-      color: #fff;
-      border: none;
-      padding: 0.6rem 1.5rem;
-      border-radius: 10px;
-      font-weight: 600;
-      font-size: 1.1rem;
-    }
-
-    .btn-style:hover {
-      background-color: #91af99;
-    }
-
-    #stopBtn {
-      margin-top: 1rem;
-      background-color: #e0e0e0;
-      border: none;
-      color: #333;
-      font-weight: 600;
-      border-radius: 8px;
-      padding: 0.5rem 1.2rem;
-    }
-
-    #stopBtn:hover {
-      background-color: #ccc;
-    }
-
-    .carousel-control-prev-icon,
-    .carousel-control-next-icon {
-      background-color: #a3c1ad;
-      border-radius: 50%;
-      padding: 1rem;
-    }
-
-    #breathCircle {
-      padding: 2rem;
-      margin: 2.5rem auto;
-      width: 190px;
-      height: 190px;
-      border-radius: 50%;
-      background-color: #a3c1ad;
-      /* transition: transform 1s ease-in-out, background-color 1s; */
-    }
-
-    .phase-label {
-      font-size: 1.6rem;
-      margin-top: 1.5rem;
-      color: #ffffff;
-    }
-
-    #timeLeft,
-    #sessionTimer {
-      color: #ffffff;
-      font-size: 3rem;
-      margin-top: 0.3rem;
-    }
-
-    #sessionTimer {
-      color: #a3c1ad;
-    }
-
-    #techniqueInfo {
-      margin-top: 2rem;
-      margin-bottom: 1.5rem;
-    }
-
-    @keyframes pulse {
-
-      0%,
-      100% {
-        transform: scale(1.5);
-      }
-
-      50% {
-        transform: scale(1.55);
-      }
-    }
-
-    /* Responsive */
-    @media (max-width: 768px) {
-      h1 {
-        font-size: 1.8rem;
-      }
-
-      .technique-card {
-        padding: 1.2rem;
-      }
-
-      .phase-label {
-        font-size: 1.3rem;
-      }
-    }
-  </style>
+    <link rel="stylesheet" href="/global.css" />
 </head>
 
 <body>
   <div class="container text-center py-4">
-    <nav>
-      <!-- Home -->
-      <a href="https://balmacefa.github.io/en_el_silencio_del_ser/">🏠 Inicio</a>
-    </nav>
+    <!--#include virtual="/nav.html" -->
     <h1>Prácticas de Respiración Consciente (Youtube)</h1>
 
     <h1 class="mt-5">Videos de Respiración</h1>
@@ -238,10 +91,10 @@
     let voiceEnabled = true;
 
     const voiceAudios = {
-      Inhalar: new Audio("./audios/Inhalar.mp3"),
-      Retener: new Audio("./audios/Retener.mp3"),
-      Exhalar: new Audio("./audios/Exhalar.mp3"),
-      Vacío: new Audio("./audios/Vacio.mp3"),
+      Inhalar: new Audio("../respiracion_conciente_auto_guiadas/audios/Inhalar.mp3"),
+      Retener: new Audio("../respiracion_conciente_auto_guiadas/audios/Retener.mp3"),
+      Exhalar: new Audio("../respiracion_conciente_auto_guiadas/audios/Exhalar.mp3"),
+      Vacío: new Audio("../respiracion_conciente_auto_guiadas/audios/Vacio.mp3"),
     };
 
     let currentVoiceAudio = null;
