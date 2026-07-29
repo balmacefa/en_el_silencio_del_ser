@@ -25,32 +25,3 @@ h1, h2, h3 {
   mix-blend-mode: multiply;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
-
-@keyframes glowPulse {
-  0%, 100% { box-shadow: 0 0 0 0 var(--glow-color, rgba(99, 102, 241, 0.35)); }
-  50% { box-shadow: 0 0 0 10px rgba(99, 102, 241, 0); }
-}
-
-.animate-glow-pulse {
-  animation: glowPulse 3s ease-in-out infinite;
-}
-
-@keyframes textShine {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
-
-.animate-text-shine {
-  background-size: 200% auto;
-  animation: textShine 6s ease-in-out infinite;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .animate-glow-pulse,
-  .animate-text-shine,
-  .bg-anim,
-  .ramas-anim {
-    animation: none !important;
-  }
-}
