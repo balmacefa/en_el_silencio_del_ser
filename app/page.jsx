@@ -53,6 +53,12 @@ export default function Home() {
               <h3 className="text-xl font-bold text-slate-800 mb-3 group-hover:text-indigo-600 transition-colors">Recomendaciones YouTube</h3>
               <p className="text-slate-500 text-sm leading-relaxed flex-grow">Selección de los mejores canales y videos para practicar yoga desde casa.</p>
             </Link>
+
+            <Link href="/asanas" className="group rounded-2xl bg-white/70 backdrop-blur-sm p-8 shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-slate-100 transition-all duration-300 hover:shadow-[0_10px_30px_rgba(0,0,0,0.08)] hover:-translate-y-2 hover:border-indigo-200 flex flex-col h-full">
+              <div className="bg-indigo-50 text-indigo-600 w-14 h-14 rounded-2xl flex items-center justify-center text-2xl mb-6 group-hover:scale-110 group-hover:bg-indigo-100 transition-all duration-300">🐾</div>
+              <h3 className="text-xl font-bold text-slate-800 mb-3 group-hover:text-indigo-600 transition-colors">Catálogo de Asanas</h3>
+              <p className="text-slate-500 text-sm leading-relaxed flex-grow">Posturas inspiradas en animales, naturaleza y geometría, con guía ilustrada de entrada, mantenimiento y salida.</p>
+            </Link>
           </div>
         </section>
 
