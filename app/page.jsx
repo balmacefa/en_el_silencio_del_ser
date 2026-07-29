@@ -1,12 +1,14 @@
 import Link from 'next/link';
 import SectionDivider from './components/SectionDivider';
+import DynamicBackground from './components/DynamicBackground';
 
 export default function Home() {
   return (
     <div className="flex flex-col items-center justify-center py-12 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto space-y-24">
-      
+      <DynamicBackground ambient />
+
       {/* Hero Section */}
-      <section className="text-center space-y-6 pt-10">
+      <section data-ambient-color="#6366f1" className="text-center space-y-6 pt-10">
         <div className="inline-block mb-4 px-4 py-1.5 rounded-full bg-indigo-50 border border-indigo-100">
           <span className="text-indigo-600 text-sm font-semibold tracking-wide uppercase">Bienvenido</span>
         </div>
@@ -27,7 +29,7 @@ export default function Home() {
 
       <div id="explorar" className="w-full space-y-20">
         {/* Yoga Section */}
-        <section className="space-y-8">
+        <section data-ambient-color="#6366f1" className="space-y-8">
           <div className="text-center sm:text-left border-b border-slate-100 pb-4">
             <h2 className="text-3xl font-bold text-slate-800 flex items-center justify-center sm:justify-start gap-3">
               <span className="text-4xl">🧘</span> Prácticas de Yoga
@@ -63,7 +65,7 @@ export default function Home() {
         </section>
 
         {/* Respiración Section */}
-        <section className="space-y-8">
+        <section data-ambient-color="#14b8a6" className="space-y-8">
           <div className="text-center sm:text-left border-b border-slate-100 pb-4">
             <h2 className="text-3xl font-bold text-slate-800 flex items-center justify-center sm:justify-start gap-3">
               <span className="text-4xl">🌬️</span> Respiración Consciente
@@ -87,7 +89,7 @@ export default function Home() {
         </section>
 
         {/* Reflexiones Section */}
-        <section className="space-y-8">
+        <section data-ambient-color="#f43f5e" className="space-y-8">
           <div className="text-center sm:text-left border-b border-slate-100 pb-4">
             <h2 className="text-3xl font-bold text-slate-800 flex items-center justify-center sm:justify-start gap-3">
               <span className="text-4xl">🌌</span> Bienestar y Reflexiones
