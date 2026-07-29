@@ -18,6 +18,13 @@ export default function ReflexionesPage() {
       color: "rose"
     },
     {
+      title: "El Umbral de los Sentidos",
+      description: "Una narración sobre percibir y sentir, la intuición, la purificación de los sentidos y el paradigma más allá de lo lógico.",
+      href: "/reflexiones/el_umbral_de_los_sentidos",
+      icon: "🔮",
+      color: "rose"
+    },
+    {
       title: "Poesía del Ser (Próximamente)",
       description: "Palabras que brotan del silencio para acariciar el alma.",
       href: "#",

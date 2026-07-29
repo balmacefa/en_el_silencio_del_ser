@@ -68,6 +68,7 @@ export default function Nav() {
                 <li><Link href="/reflexiones" className="block px-4 py-2.5 text-slate-600 hover:bg-slate-50 hover:text-rose-600 rounded-lg font-bold transition-colors">Ver Todo</Link></li>
                 <li><Link href="/reflexiones/cuatro_sendas_al_silencio" className="block px-4 py-2.5 text-slate-600 hover:bg-slate-50 hover:text-rose-600 rounded-lg transition-colors">4 Sendas al Silencio</Link></li>
                 <li><Link href="/reflexiones/el_silencio_de_un_adios" className="block px-4 py-2.5 text-slate-600 hover:bg-slate-50 hover:text-rose-600 rounded-lg transition-colors">El Silencio de un Adiós</Link></li>
+                <li><Link href="/reflexiones/el_umbral_de_los_sentidos" className="block px-4 py-2.5 text-slate-600 hover:bg-slate-50 hover:text-rose-600 rounded-lg transition-colors">El Umbral de los Sentidos</Link></li>
               </ul>
             </li>
 
@@ -119,6 +120,7 @@ export default function Nav() {
                 <Link href="/reflexiones" onClick={() => setIsOpen(false)} className="block px-3 py-2 text-sm text-slate-600 hover:text-rose-600 hover:bg-slate-50 rounded-lg font-bold">Ver Todo</Link>
                 <Link href="/reflexiones/cuatro_sendas_al_silencio" onClick={() => setIsOpen(false)} className="block px-3 py-2 text-sm text-slate-600 hover:text-rose-600 hover:bg-slate-50 rounded-lg">4 Sendas al Silencio</Link>
                 <Link href="/reflexiones/el_silencio_de_un_adios" onClick={() => setIsOpen(false)} className="block px-3 py-2 text-sm text-slate-600 hover:text-rose-600 hover:bg-slate-50 rounded-lg">El Silencio de un Adiós</Link>
+                <Link href="/reflexiones/el_umbral_de_los_sentidos" onClick={() => setIsOpen(false)} className="block px-3 py-2 text-sm text-slate-600 hover:text-rose-600 hover:bg-slate-50 rounded-lg">El Umbral de los Sentidos</Link>
               </div>
             )}
           </div>
