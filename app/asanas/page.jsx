@@ -30,7 +30,7 @@ function CategoryTag({ id }) {
 
 function AsanaCard({ asana }) {
   const [step, setStep] = useState('mantenimiento');
-  const figure = asana.figures[step];
+  const hasPhoto = Boolean(asana.image);
 
   return (
     <div className="rounded-3xl bg-white/75 backdrop-blur-md border border-slate-100 shadow-[0_10px_30px_rgba(0,0,0,0.05)] p-6 sm:p-7 flex flex-col h-full transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_16px_40px_rgba(0,0,0,0.08)]">
@@ -51,8 +51,17 @@ function AsanaCard({ asana }) {
       </div>
 
       <div className="rounded-2xl bg-slate-50/80 border border-slate-100 p-4 mb-5">
-        <div className="w-28 h-28 mx-auto">
-          <PoseFigure {...figure} className="w-full h-full" />
+        <div className="relative w-full h-48 flex items-center justify-center">
+          {hasPhoto ? (
+            <img src={asana.image} alt={asana.sanskrit} className="max-w-full max-h-48 object-contain mx-auto" />
+          ) : (
+            <div className="w-28 h-28">
+              <PoseFigure {...asana.figure} className="w-full h-full" />
+            </div>
+          )}
+          <span className="absolute top-0 right-0 text-[10px] font-semibold uppercase tracking-wide text-slate-400 bg-white/80 border border-slate-200 rounded-full px-2 py-0.5">
+            {hasPhoto ? 'Fotografía' : 'Ilustración'}
+          </span>
         </div>
         <div className="flex justify-center gap-2 mt-3">
           {STEP_LABELS.map((s) => (
@@ -166,8 +175,10 @@ export default function AsanasCatalogoPage() {
 
       <p className="text-center text-slate-400 text-xs mt-16 max-w-2xl mx-auto leading-relaxed">
         Contenido elaborado a partir de fuentes de referencia como Yoga Journal, Yoga Basics, Inside Yoga, MyYogaTeacher, Tummee y Wikipedia
-        sobre la etimología, alineación y simbolismo de cada asana. Las ilustraciones son diagramas geométricos originales, no fotografías.
-        Practica dentro de tu rango de movimiento y consulta a un instructor certificado ante cualquier lesión o condición médica.
+        sobre la etimología, alineación y simbolismo de cada asana. Las fotografías, cuando están disponibles, provienen del mismo set usado
+        en la serie de Ashtanga de este sitio (crédito original a Keen on Yoga); las posturas marcadas como "Ilustración" muestran en su lugar
+        un diagrama geométrico original. Practica dentro de tu rango de movimiento y consulta a un instructor certificado ante cualquier lesión
+        o condición médica.
       </p>
     </div>
   );
