@@ -1,8 +1,11 @@
+import SectionDivider from '../../components/SectionDivider';
+
 export default function YogaExperienciaPersonal() {
   return (
     <>
       <header style={{ marginBottom: '2rem' }}>
-        <h1>Yoga</h1>
+        <h1 className="text-4xl sm:text-5xl font-bold text-center text-transparent bg-clip-text bg-gradient-to-r from-slate-800 to-indigo-600 tracking-tight">Yoga</h1>
+        <SectionDivider className="my-5" />
         <p style={{ textAlign: 'center', color: '#555', marginBottom: '2rem' }}>
           Una colección personal de videos de Yoga de YouTube que me han
           acompañado en el camino. Cada una ofrece una puerta hacia lo místico y

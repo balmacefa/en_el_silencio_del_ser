@@ -1,6 +1,18 @@
+import SectionDivider from '../../components/SectionDivider';
+
 export default function YogaYoutube() {
   return (
     <>
+      <div className="text-center space-y-4 mb-4">
+        <h1 className="text-4xl sm:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-slate-800 to-indigo-600 tracking-tight">
+          Recomendaciones de YouTube
+        </h1>
+        <SectionDivider />
+        <p className="text-lg text-slate-500 max-w-2xl mx-auto leading-relaxed">
+          Una selección de clases guiadas para practicar yoga desde casa, a tu propio ritmo.
+        </p>
+      </div>
+
       <main className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-8">
         <div className="bg-white/80 backdrop-blur-md border border-slate-100 rounded-2xl overflow-hidden shadow-[0_4px_20px_rgba(0,0,0,0.03)] transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_10px_30px_rgba(0,0,0,0.08)] hover:border-indigo-100 flex flex-col">
           <div className="aspect-video w-full">

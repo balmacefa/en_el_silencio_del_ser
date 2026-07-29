@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import SectionDivider from './components/SectionDivider';
 
 export default function Home() {
   return (
@@ -15,6 +16,7 @@ export default function Home() {
         <p className="text-lg sm:text-xl text-slate-500 font-medium max-w-2xl mx-auto leading-relaxed">
           Explora prácticas de yoga, meditaciones guiadas y herramientas de respiración consciente diseñadas para transformar tu bienestar físico y mental.
         </p>
+        <SectionDivider />
         <div className="pt-4">
           <a href="#explorar" className="inline-flex items-center justify-center px-8 py-3 text-base font-medium text-white bg-indigo-600 rounded-xl shadow-lg shadow-indigo-200 hover:bg-indigo-700 hover:shadow-indigo-300 transition-all duration-300 hover:-translate-y-1">
             Explorar Prácticas

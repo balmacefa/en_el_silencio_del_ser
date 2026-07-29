@@ -1,1 +1,27 @@
 @import "tailwindcss";
+
+h1, h2, h3 {
+  font-family: var(--font-playfair), Georgia, 'Times New Roman', serif;
+  letter-spacing: 0.01em;
+}
+
+.site-bg {
+  background-color: #fbfaf8;
+  background-image:
+    radial-gradient(1100px 620px at 8% -8%, rgba(165, 148, 249, 0.22), transparent 60%),
+    radial-gradient(950px 680px at 108% 8%, rgba(255, 173, 194, 0.2), transparent 55%),
+    radial-gradient(900px 900px at 50% 115%, rgba(94, 197, 180, 0.16), transparent 60%);
+  background-attachment: fixed;
+  position: relative;
+}
+
+.site-bg::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0.035;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
