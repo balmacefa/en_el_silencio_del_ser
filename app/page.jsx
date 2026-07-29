@@ -108,6 +108,18 @@ export default function Home() {
               <p className="text-slate-500 text-xs leading-relaxed flex-grow">Explora las dimensiones esenciales de nuestro bienestar interior general a través del soltar.</p>
             </Link>
 
+            <Link href="/reflexiones/el_umbral_de_los_sentidos" className="group rounded-2xl bg-white/70 backdrop-blur-sm p-6 shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-slate-100 transition-all duration-300 hover:shadow-[0_10px_30px_rgba(0,0,0,0.08)] hover:-translate-y-2 hover:border-rose-200 flex flex-col h-full">
+              <div className="bg-rose-50 text-rose-600 w-12 h-12 rounded-xl flex items-center justify-center text-xl mb-4 group-hover:scale-110 group-hover:bg-rose-100 transition-all duration-300">🔮</div>
+              <h3 className="text-lg font-bold text-slate-800 mb-2 group-hover:text-rose-600 transition-colors">El Umbral de los Sentidos</h3>
+              <p className="text-slate-500 text-xs leading-relaxed flex-grow">Percibir y sentir, la intuición, la purificación de los sentidos y el paradigma más allá de lo lógico.</p>
+            </Link>
+
+            <Link href="/reflexiones/estados_de_conciencia" className="group rounded-2xl bg-white/70 backdrop-blur-sm p-6 shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-slate-100 transition-all duration-300 hover:shadow-[0_10px_30px_rgba(0,0,0,0.08)] hover:-translate-y-2 hover:border-rose-200 flex flex-col h-full">
+              <div className="bg-rose-50 text-rose-600 w-12 h-12 rounded-xl flex items-center justify-center text-xl mb-4 group-hover:scale-110 group-hover:bg-rose-100 transition-all duration-300">🌌</div>
+              <h3 className="text-lg font-bold text-slate-800 mb-2 group-hover:text-rose-600 transition-colors">Estados de Conciencia</h3>
+              <p className="text-slate-500 text-xs leading-relaxed flex-grow">Vigilia, hipnagogia, sueño vívido, sueño lúcido y viaje astral, con referencias científicas.</p>
+            </Link>
+
             <Link href="/mantras_meditacion_guiada" className="group rounded-2xl bg-white/70 backdrop-blur-sm p-6 shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-slate-100 transition-all duration-300 hover:shadow-[0_10px_30px_rgba(0,0,0,0.08)] hover:-translate-y-2 hover:border-rose-200 flex flex-col h-full">
               <div className="bg-rose-50 text-rose-600 w-12 h-12 rounded-xl flex items-center justify-center text-xl mb-4 group-hover:scale-110 group-hover:bg-rose-100 transition-all duration-300">🎶</div>
               <h3 className="text-lg font-bold text-slate-800 mb-2 group-hover:text-rose-600 transition-colors">Mantras</h3>
