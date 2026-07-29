@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from 'react';
 import { ashtangaSequence } from './ashtangaSequence';
+import SectionDivider from '../../components/SectionDivider';
 
 export default function AshtangaSerieBasica() {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -120,66 +121,84 @@ export default function AshtangaSerieBasica() {
   const nextAsana = getNextAsanaInfo();
 
   return (
-    <div className="max-w-7xl mx-auto px-4 py-8">
-      <h1>Ashtanga Yoga - Primera Serie</h1>
-      <p>
-        Fuente Original - imágenes y secuencias fueron obtenidas del sitio web{' '}
-        <a href="https://www.keenonyoga.com/ashtanga-yoga-primary-series/" target="_blank" rel="noreferrer">
-          Keen on Yoga
-        </a>
-      </p>
+    <div className="max-w-4xl mx-auto px-4 py-8">
+      <div className="text-center space-y-4 mb-12">
+        <h1 className="text-4xl sm:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-slate-800 to-indigo-600 tracking-tight">
+          Ashtanga Yoga — Primera Serie
+        </h1>
+        <SectionDivider />
+        <p className="text-slate-500 text-sm">
+          Fuente original — imágenes y secuencias obtenidas del sitio web{' '}
+          <a href="https://www.keenonyoga.com/ashtanga-yoga-primary-series/" target="_blank" rel="noreferrer" className="text-indigo-600 hover:underline">
+            Keen on Yoga
+          </a>
+        </p>
+      </div>
 
-      <div style={{ marginBottom: '2rem', display: 'flex', gap: '1rem', flexWrap: 'wrap', alignItems: 'center' }}>
-        <label>
-          Duración por Asana (mm:ss) 
-          <input type="text" value={asanaTimeStr} onChange={e => setAsanaTimeStr(e.target.value)} style={{ marginLeft: '10px', padding: '5px' }} />
+      <div className="rounded-2xl bg-white/70 backdrop-blur-md border border-slate-100 shadow-[0_4px_20px_rgba(0,0,0,0.03)] p-6 mb-8 flex flex-wrap gap-6 items-end justify-center">
+        <label className="text-sm text-slate-600 font-medium">
+          Duración por Asana (mm:ss)
+          <input
+            type="text"
+            value={asanaTimeStr}
+            onChange={e => setAsanaTimeStr(e.target.value)}
+            className="block mt-1 px-3 py-2 rounded-lg border border-slate-200 text-slate-800 w-28 text-center focus:outline-none focus:ring-2 focus:ring-indigo-200"
+          />
         </label>
-        <label>
-          Transición (mm:ss) 
-          <input type="text" value={transitionTimeStr} onChange={e => setTransitionTimeStr(e.target.value)} style={{ marginLeft: '10px', padding: '5px' }} />
+        <label className="text-sm text-slate-600 font-medium">
+          Transición (mm:ss)
+          <input
+            type="text"
+            value={transitionTimeStr}
+            onChange={e => setTransitionTimeStr(e.target.value)}
+            className="block mt-1 px-3 py-2 rounded-lg border border-slate-200 text-slate-800 w-28 text-center focus:outline-none focus:ring-2 focus:ring-indigo-200"
+          />
         </label>
-        <button onClick={() => { setIsRunning(false); startSequence(); }} style={{ padding: '8px 16px', background: '#333', color: '#fff', border: 'none', borderRadius: '4px', cursor: 'pointer' }}>
+        <button
+          onClick={() => { setIsRunning(false); startSequence(); }}
+          className="px-6 py-2.5 rounded-xl font-semibold text-white bg-indigo-600 shadow-md shadow-indigo-200 transition-all hover:bg-indigo-700 hover:-translate-y-0.5"
+        >
           Iniciar Práctica
         </button>
       </div>
 
-      <div style={{ display: 'flex', gap: '1rem', marginBottom: '2rem' }}>
-        <button onClick={goToPrevAsana} style={{ padding: '8px 16px', background: '#e0e0e0', border: 'none', borderRadius: '4px', cursor: 'pointer' }}>
+      <div className="flex gap-4 mb-8 justify-center">
+        <button onClick={goToPrevAsana} className="px-5 py-2.5 rounded-xl font-medium bg-slate-100 text-slate-700 hover:bg-slate-200 transition-colors">
           ❮ Anterior
         </button>
-        <button onClick={goToNextAsana} style={{ padding: '8px 16px', background: '#e0e0e0', border: 'none', borderRadius: '4px', cursor: 'pointer' }}>
+        <button onClick={goToNextAsana} className="px-5 py-2.5 rounded-xl font-medium bg-slate-100 text-slate-700 hover:bg-slate-200 transition-colors">
           Siguiente ❯
         </button>
       </div>
 
       {currentAsana ? (
-        <div style={{ border: '1px solid #ddd', padding: '2rem', borderRadius: '8px', marginBottom: '2rem', textAlign: 'center', background: '#fff' }}>
-          <h2>{currentAsana.sanskrit}</h2>
-          <h3 style={{ color: '#555', marginBottom: '1rem' }}>
+        <div className="rounded-[2rem] bg-white/80 backdrop-blur-md border border-slate-100 shadow-[0_10px_40px_rgba(0,0,0,0.05)] p-8 sm:p-10 mb-8 text-center">
+          <h2 className="text-2xl sm:text-3xl font-bold text-slate-800">{currentAsana.sanskrit}</h2>
+          <h3 className="text-slate-500 mb-6 mt-1">
             {currentAsana.popular}
             {currentAsana.sides ? (leftDone ? " (lado derecho)" : " (lado izquierdo)") : ""}
           </h3>
-          <img src={currentAsana.image} alt={currentAsana.sanskrit} style={{ maxWidth: '100%', maxHeight: '400px', objectFit: 'contain' }} />
-          <p style={{ marginTop: '1rem' }}>{currentAsana.description}</p>
+          <img src={currentAsana.image} alt={currentAsana.sanskrit} className="max-w-full max-h-96 object-contain mx-auto" />
+          <p className="mt-6 text-slate-600 leading-relaxed max-w-2xl mx-auto">{currentAsana.description}</p>
         </div>
       ) : (
-        <div style={{ border: '1px solid #ddd', padding: '2rem', borderRadius: '8px', marginBottom: '2rem', textAlign: 'center', background: '#fff' }}>
-          <h2>Práctica Finalizada</h2>
-          <p>Namasté</p>
+        <div className="rounded-[2rem] bg-white/80 backdrop-blur-md border border-slate-100 shadow-[0_10px_40px_rgba(0,0,0,0.05)] p-10 mb-8 text-center">
+          <h2 className="text-2xl font-bold text-slate-800">Práctica Finalizada</h2>
+          <p className="text-slate-500 mt-2">Namasté 🙏</p>
         </div>
       )}
 
-      <div style={{ border: '1px solid #ddd', padding: '1.5rem', borderRadius: '8px', textAlign: 'center', background: '#f9f9f9' }}>
-        <h3>Siguiente Asana</h3>
+      <div className="rounded-2xl bg-white/60 backdrop-blur-md border border-slate-100 p-6 text-center">
+        <h3 className="text-lg font-semibold text-slate-700 uppercase tracking-wide text-sm">Siguiente Asana</h3>
         {nextAsana ? (
           <>
-            <h4 style={{ margin: '1rem 0', color: '#555' }}>
+            <h4 className="my-3 text-slate-600 font-medium">
               {nextAsana.sanskrit}{nextAsana.sideDesc}
             </h4>
-            {nextAsana.image && <img src={nextAsana.image} alt="Siguiente posture" style={{ maxWidth: '200px' }} />}
+            {nextAsana.image && <img src={nextAsana.image} alt="Siguiente postura" className="max-w-[200px] mx-auto opacity-80" />}
           </>
         ) : (
-          <h4 style={{ margin: '1rem 0', color: '#555' }}>Fin</h4>
+          <h4 className="my-3 text-slate-500">Fin</h4>
         )}
       </div>
     </div>

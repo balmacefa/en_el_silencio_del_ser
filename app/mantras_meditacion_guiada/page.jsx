@@ -1,93 +1,80 @@
+import SectionDivider from '../components/SectionDivider';
+
+const videos = [
+  {
+    src: 'https://www.youtube.com/embed/sygQyrUdK_s',
+    title: 'Become Dangerously Seductive - Tantric Sexuality Music',
+    description: 'Reveal your primal magnetism and become a social magnet with sacred tantric vibrations. La magnetismo social y tu capacidad de atraer a otras personas está ligada al flujo de tu energía sexual.',
+  },
+  {
+    src: 'https://www.youtube.com/embed/ojnygUNDHx8',
+    title: 'Super Human Sensitive Powers',
+    description: 'Escuchar con fe de que obtendrás poder sobrehumano de sensibilidad. Esta meditación te ayudará a desarrollar tus habilidades psíquicas y a abrir tu mente a nuevas posibilidades.',
+  },
+  {
+    src: 'https://www.youtube.com/embed/ps43KwRm6pQ',
+    title: 'Cuerpo poderoso',
+    description: 'Mejor cuerpo, mejor salud, mejor vida.',
+  },
+  {
+    src: 'https://www.youtube.com/embed/6VKi0StcOxI',
+    title: 'Limpieza de corazón, con agua de luz',
+    description: 'Love and appreciation for the erotic energy that flows through us. Esta meditación te ayuda a conectar con tu sensualidad y abrazar tus deseos internos.',
+  },
+  {
+    src: 'https://www.youtube.com/embed/yv9E_uhl43k',
+    title: 'Trance Chamánico',
+    description: 'Sincroniza los hemisferios cerebrales, crea una experiencia trascendental y te conecta con tu universo interno.',
+  },
+  {
+    src: 'https://www.youtube.com/embed/pMv-yrd_iyM',
+    title: 'Samadhi por silencio respiratorio',
+    description: 'Eliminar la respiración del consciente y subconsciente, para alcanzar una muerte del ego.',
+  },
+  {
+    src: 'https://www.youtube.com/embed/djkLm3WpUOE',
+    title: 'Chant of the Mystics: Divine Gregorian Chant "Kyrie eleison"',
+    description: 'Esta mística melodía gregoriana ofrece un vistazo a lo que puede encontrarse en el núcleo de la espiritualidad occidental. "Kyrie eleison" significa "Señor, ten piedad".',
+  },
+];
+
 export default function MantrasMeditacionGuiada() {
   return (
-    <div className="max-w-7xl mx-auto px-4 py-8 text-center">
-      <header>
-        <h1>Mantras y Meditaciones Guiadas</h1>
-        <p>
-          Una colección personal de mantras y meditaciones de YouTube que me han
-          acompañado en el camino. Cada una ofrece una puerta hacia la calma y
-          el autoconocimiento.
+    <div className="max-w-7xl mx-auto px-4 py-8">
+      <div className="text-center space-y-4 mb-16">
+        <h1 className="text-4xl sm:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-slate-800 to-indigo-600 tracking-tight">
+          Mantras y Meditaciones Guiadas
+        </h1>
+        <SectionDivider />
+        <p className="text-lg text-slate-500 max-w-2xl mx-auto leading-relaxed">
+          Una colección personal de mantras y meditaciones que me han acompañado en el camino. Cada una ofrece una puerta hacia la calma y el autoconocimiento.
         </p>
-      </header>
+      </div>
 
-      <main style={{ display: 'grid', gap: '2rem', marginTop: '2rem' }}>
-        {/** Video 1 */}
-        <div style={{ display: 'flex', gap: '2rem', flexWrap: 'wrap' }}>
-          <div style={{ flex: '1 1 300px' }}>
-            <iframe width="100%" height="315" src="https://www.youtube.com/embed/sygQyrUdK_s" title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {videos.map((video, index) => (
+          <div
+            key={index}
+            className="bg-white/80 backdrop-blur-md border border-slate-100 rounded-2xl overflow-hidden shadow-[0_4px_20px_rgba(0,0,0,0.03)] transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_10px_30px_rgba(0,0,0,0.08)] hover:border-indigo-100 flex flex-col"
+          >
+            <div className="aspect-video w-full">
+              <iframe
+                width="100%"
+                height="100%"
+                src={video.src}
+                title={video.title}
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+              ></iframe>
+            </div>
+            <div className="p-6 flex flex-col flex-grow">
+              <h2 className="text-lg font-semibold text-slate-800 mb-2">{video.title}</h2>
+              <p className="text-slate-500 leading-relaxed text-sm flex-grow">{video.description}</p>
+            </div>
           </div>
-          <div style={{ flex: '1 1 300px' }}>
-            <h2>Become Dangerously Seductive - Tantric Sexuality Music | Irresistible Magnetism for Men and Women</h2>
-            <p>Reveal your primal magnetism and become a social magnet with sacred tantric vibrations. The social magnetism and your general ability to attract other people is tightly linked to your sexual energy flow.</p>
-          </div>
-        </div>
-
-        {/** Video 2 */}
-        <div style={{ display: 'flex', gap: '2rem', flexWrap: 'wrap' }}>
-          <div style={{ flex: '1 1 300px' }}>
-            <iframe width="100%" height="315" src="https://www.youtube.com/embed/ojnygUNDHx8" title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
-          </div>
-          <div style={{ flex: '1 1 300px' }}>
-            <h2>SUPER HUMAN SENSITIVE POWERS</h2>
-            <p>Escuchar con fe de que obtendras poder sobrehumano de sensibilidad. Esta meditación te ayudará a desarrollar tus habilidades psíquicas y a abrir tu mente a nuevas posibilidades.</p>
-          </div>
-        </div>
-
-        {/** Video 3 */}
-        <div style={{ display: 'flex', gap: '2rem', flexWrap: 'wrap' }}>
-          <div style={{ flex: '1 1 300px' }}>
-            <iframe width="100%" height="315" src="https://www.youtube.com/embed/ps43KwRm6pQ" title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
-          </div>
-          <div style={{ flex: '1 1 300px' }}>
-            <h2>Cuerpo poderoso</h2>
-            <p>Mejor cuerpo, mejor salud, mejor vida.</p>
-          </div>
-        </div>
-
-        {/** Video 4 */}
-        <div style={{ display: 'flex', gap: '2rem', flexWrap: 'wrap' }}>
-          <div style={{ flex: '1 1 300px' }}>
-            <iframe width="100%" height="315" src="https://www.youtube.com/embed/6VKi0StcOxI" title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
-          </div>
-          <div style={{ flex: '1 1 300px' }}>
-            <h2>Limpieza de corazón, con agua de luz</h2>
-            <p>Love and appreciation for the erotic energy that flows through us. This meditation helps you connect with your sensuality and embrace your inner desires.</p>
-          </div>
-        </div>
-
-        {/** Video 5 */}
-        <div style={{ display: 'flex', gap: '2rem', flexWrap: 'wrap' }}>
-          <div style={{ flex: '1 1 300px' }}>
-            <iframe width="100%" height="315" src="https://www.youtube.com/embed/yv9E_uhl43k" title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
-          </div>
-          <div style={{ flex: '1 1 300px' }}>
-            <h2>TRANCE CHAMÁNICO</h2>
-            <p>Sincroniza los hemisferios cerebrales, crea una experiencia trascendental y te conecta con tu universo interno.</p>
-          </div>
-        </div>
-
-        {/** Video 6 */}
-        <div style={{ display: 'flex', gap: '2rem', flexWrap: 'wrap' }}>
-          <div style={{ flex: '1 1 300px' }}>
-            <iframe width="100%" height="315" src="https://www.youtube.com/embed/pMv-yrd_iyM" title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
-          </div>
-          <div style={{ flex: '1 1 300px' }}>
-            <h2>Samadhi por silencio respiratorio</h2>
-            <p>Eliminar la respiracion del conciente y subconciente, para alcanzar una muerte ego.</p>
-          </div>
-        </div>
-
-        {/** Video 7 */}
-        <div style={{ display: 'flex', gap: '2rem', flexWrap: 'wrap' }}>
-          <div style={{ flex: '1 1 300px' }}>
-            <iframe width="100%" height="315" src="https://www.youtube.com/embed/djkLm3WpUOE" title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
-          </div>
-          <div style={{ flex: '1 1 300px' }}>
-            <h2>Chant of the Mystics: Divine Gregorian Chant "Kyrie eleison (orbis factor)" - 2 Hours</h2>
-            <p>This mystical gregorian melody gives a glimpse of what can be found in the core of western spirituality. It is sung in the traditional roman-catholic liturgy, specifically found in the 11th mass music collection, called "orbis factor". "Kyrie eleison" is greek and translates to "God, have mercy". This is my personal heartfelt version of the chant.</p>
-          </div>
-        </div>
-      </main>
+        ))}
+      </div>
     </div>
   );
 }

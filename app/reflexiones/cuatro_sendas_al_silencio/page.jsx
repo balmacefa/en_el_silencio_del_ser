@@ -1,3 +1,5 @@
+import SectionDivider from '../../components/SectionDivider';
+
 export default function CuatroSendasAlSilencio() {
   return (
     <>
@@ -6,7 +8,8 @@ export default function CuatroSendasAlSilencio() {
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
       />
       <div className="max-w-7xl mx-auto px-4 py-8 md:py-12">
-        <h1 className="text-3xl lg:text-4xl font-bold text-center mb-10 text-slate-800 drop-shadow-sm">4 Sendas hacia el Silencio del Corazón</h1>
+        <h1 className="text-3xl lg:text-4xl font-bold text-center mb-4 text-slate-800 drop-shadow-sm">4 Sendas hacia el Silencio del Corazón</h1>
+        <SectionDivider tone="rose" className="mb-10" />
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           <div className="p-8 border border-slate-100 rounded-2xl bg-white/80 backdrop-blur-md shadow-[0_4px_20px_rgba(0,0,0,0.03)] transition-all duration-300 hover:shadow-[0_10px_30px_rgba(0,0,0,0.08)] hover:-translate-y-1 hover:border-pink-200 text-left flex flex-col h-full">

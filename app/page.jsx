@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import SectionDivider from './components/SectionDivider';
 
 export default function Home() {
   return (
@@ -15,6 +16,7 @@ export default function Home() {
         <p className="text-lg sm:text-xl text-slate-500 font-medium max-w-2xl mx-auto leading-relaxed">
           Explora prácticas de yoga, meditaciones guiadas y herramientas de respiración consciente diseñadas para transformar tu bienestar físico y mental.
         </p>
+        <SectionDivider />
         <div className="pt-4">
           <a href="#explorar" className="inline-flex items-center justify-center px-8 py-3 text-base font-medium text-white bg-indigo-600 rounded-xl shadow-lg shadow-indigo-200 hover:bg-indigo-700 hover:shadow-indigo-300 transition-all duration-300 hover:-translate-y-1">
             Explorar Prácticas
@@ -110,6 +112,12 @@ export default function Home() {
               <div className="bg-rose-50 text-rose-600 w-12 h-12 rounded-xl flex items-center justify-center text-xl mb-4 group-hover:scale-110 group-hover:bg-rose-100 transition-all duration-300">🧠</div>
               <h3 className="text-lg font-bold text-slate-800 mb-2 group-hover:text-rose-600 transition-colors">Salud Mental</h3>
               <p className="text-slate-500 text-xs leading-relaxed flex-grow">Herramientas psicológicas y autocuidado emocional para una vida plena.</p>
+            </Link>
+
+            <Link href="/luna" className="group rounded-2xl bg-white/70 backdrop-blur-sm p-6 shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-slate-100 transition-all duration-300 hover:shadow-[0_10px_30px_rgba(0,0,0,0.08)] hover:-translate-y-2 hover:border-rose-200 flex flex-col h-full">
+              <div className="bg-rose-50 text-rose-600 w-12 h-12 rounded-xl flex items-center justify-center text-xl mb-4 group-hover:scale-110 group-hover:bg-rose-100 transition-all duration-300">🌙</div>
+              <h3 className="text-lg font-bold text-slate-800 mb-2 group-hover:text-rose-600 transition-colors">Estado de la Luna</h3>
+              <p className="text-slate-500 text-xs leading-relaxed flex-grow">Consulta la fase lunar actual y su iluminación para acompañar tu práctica.</p>
             </Link>
           </div>
         </section>

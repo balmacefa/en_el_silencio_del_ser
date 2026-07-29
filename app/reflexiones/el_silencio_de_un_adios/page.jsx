@@ -1,6 +1,10 @@
 "use client";
 
 import { useState } from 'react';
+import { Cormorant_Garamond } from 'next/font/google';
+import SectionDivider from '../../components/SectionDivider';
+
+const cormorant = Cormorant_Garamond({ subsets: ['latin'], weight: ['400', '500', '600'], style: ['normal', 'italic'] });
 
 export default function ElSilencioDeUnAdios() {
   const [step, setStep] = useState('intro'); // intro, choice, objects, result
@@ -46,71 +50,80 @@ Eso basta.`);
   };
 
   return (
-    <div className="container" style={{ maxWidth: '800px', margin: '0 auto', padding: '2rem 1rem', fontFamily: 'serif', lineHeight: '1.8' }}>
-      
-      <div style={{ marginBottom: '2rem' }}>
-        <p><strong>Damián,</strong></p>
-        <p>He pensado tantas veces en vos desde que te fuiste. Hay cosas que no dije. Algunas por miedo. Otras por orgullo.</p>
-        <p>Te escribo esta carta desde un lugar que no reconozco del todo. Una especie de casa en mi mente, o quizás en mi alma. Las paredes susurran lo que callé por años.</p>
-        <p>La noche que te fuiste, dejaste el café en la mesa. Frío. Sin azúcar. Como vos.</p>
-        <p>Quise correr detrás tuyo. Quise no hacerlo. Me quedé quieta. Siempre fui buena en quedarme quieta.</p>
-        <p>Vos buscabas pasión. Yo buscaba hogar.<br/>Vos querías incendios. Yo apenas podía sostener una vela encendida.</p>
-        <p>Te vi apagarte y no supe qué hacer. Me culpé por no saber amar como vos esperabas.<br/>Vos me amaste con urgencia. Yo te amé con miedo. Y ambos fallamos.</p>
-        <p>Pero… hoy estoy aquí. Y puedo elegir cómo recordar.</p>
-        <p><strong>— ¿Desde la vulnerabilidad, o desde el orgullo?</strong></p>
+    <div className={`max-w-2xl mx-auto px-4 py-8 ${cormorant.className}`}>
+      <div className="rounded-[2rem] bg-gradient-to-b from-amber-50/70 via-white/80 to-rose-50/50 backdrop-blur-md border border-amber-100/80 shadow-[0_10px_40px_rgba(0,0,0,0.06)] p-8 sm:p-12">
+        <p className="text-sm uppercase tracking-[0.3em] text-rose-400 text-center mb-8">Una carta que nunca se envió</p>
+
+        <div className="space-y-4 text-lg text-slate-700 leading-relaxed italic">
+          <p className="not-italic font-semibold text-slate-800">Damián,</p>
+          <p>He pensado tantas veces en vos desde que te fuiste. Hay cosas que no dije. Algunas por miedo. Otras por orgullo.</p>
+          <p>Te escribo esta carta desde un lugar que no reconozco del todo. Una especie de casa en mi mente, o quizás en mi alma. Las paredes susurran lo que callé por años.</p>
+          <p>La noche que te fuiste, dejaste el café en la mesa. Frío. Sin azúcar. Como vos.</p>
+          <p>Quise correr detrás tuyo. Quise no hacerlo. Me quedé quieta. Siempre fui buena en quedarme quieta.</p>
+          <p>Vos buscabas pasión. Yo buscaba hogar.<br />Vos querías incendios. Yo apenas podía sostener una vela encendida.</p>
+          <p>Te vi apagarte y no supe qué hacer. Me culpé por no saber amar como vos esperabas.<br />Vos me amaste con urgencia. Yo te amé con miedo. Y ambos fallamos.</p>
+          <p>Pero… hoy estoy aquí. Y puedo elegir cómo recordar.</p>
+          <p className="not-italic font-semibold text-slate-800 text-center pt-2">¿Desde la vulnerabilidad, o desde el orgullo?</p>
+        </div>
+
+        {step === 'intro' && (
+          <div className="flex justify-center gap-4 mt-10 flex-wrap">
+            <button
+              onClick={() => handleChoice('vulnerabilidad')}
+              className="px-6 py-3 rounded-full font-medium not-italic border border-purple-200 bg-purple-50 text-purple-700 shadow-sm transition-all hover:-translate-y-1 hover:shadow-md hover:bg-purple-100"
+            >
+              💜 Vulnerabilidad
+            </button>
+            <button
+              onClick={() => handleChoice('orgullo')}
+              className="px-6 py-3 rounded-full font-medium not-italic border border-slate-300 bg-slate-100 text-slate-700 shadow-sm transition-all hover:-translate-y-1 hover:shadow-md hover:bg-slate-200"
+            >
+              🖤 Orgullo silencioso
+            </button>
+          </div>
+        )}
+
+        {(step === 'objects' || step === 'result') && (
+          <>
+            <SectionDivider tone="rose" className="my-10" />
+            <div className="rounded-2xl bg-white/70 border border-amber-100/70 p-8 whitespace-pre-wrap text-slate-700 leading-relaxed italic text-lg">
+              {choiceText}
+            </div>
+          </>
+        )}
+
+        {(step === 'objects' || step === 'result') && (
+          <div className="mt-10">
+            <p className="text-center not-italic text-slate-600 mb-6">Elisa mira la mesa. Tres objetos antiguos aparecen. Elige uno:</p>
+            {step === 'objects' ? (
+              <div className="flex justify-center gap-8 flex-wrap">
+                <button onClick={() => handleObject('retrato')} className="group flex flex-col items-center gap-3 not-italic">
+                  <img src="/assets/portrait.png" alt="Retrato roto" className="w-20 h-20 rounded-full object-cover shadow-md transition-transform group-hover:scale-110" />
+                  <span className="text-sm text-slate-600">Retrato roto</span>
+                </button>
+                <button onClick={() => handleObject('panuelo')} className="group flex flex-col items-center gap-3 not-italic">
+                  <img src="/assets/scarf.png" alt="Pañuelo con perfume" className="w-20 h-20 rounded-full object-cover shadow-md transition-transform group-hover:scale-110" />
+                  <span className="text-sm text-slate-600">Pañuelo con perfume</span>
+                </button>
+                <button onClick={() => handleObject('vela')} className="group flex flex-col items-center gap-3 not-italic">
+                  <img src="/assets/candle.png" alt="Vela encendida" className="w-20 h-20 rounded-full object-cover shadow-md transition-transform group-hover:scale-110" />
+                  <span className="text-sm text-slate-600">Vela encendida</span>
+                </button>
+              </div>
+            ) : (
+              <div className="mt-8 text-center text-2xl italic text-rose-700">{resultText}</div>
+            )}
+          </div>
+        )}
+
+        {step === 'result' && (
+          <div className="mt-10 pt-8 border-t border-amber-100 text-center">
+            <p className="not-italic font-semibold text-slate-800">Gracias por haber existido, Damián.</p>
+            <p className="italic text-slate-600 mt-1">Hoy, te dejo ir con amor.</p>
+            <p className="mt-3 text-slate-500">— Elisa</p>
+          </div>
+        )}
       </div>
-
-      {step === 'intro' && (
-        <div style={{ display: 'flex', gap: '1rem', marginTop: '2rem', flexWrap: 'wrap' }}>
-          <button onClick={() => handleChoice('vulnerabilidad')} style={{ padding: '10px 20px', border: '1px solid #ce93d8', background: '#f3e5f5', borderRadius: '4px', cursor: 'pointer' }}>
-            💜 Vulnerabilidad
-          </button>
-          <button onClick={() => handleChoice('orgullo')} style={{ padding: '10px 20px', border: '1px solid #757575', background: '#e0e0e0', borderRadius: '4px', cursor: 'pointer' }}>
-            🖤 Orgullo silencioso
-          </button>
-        </div>
-      )}
-
-      {(step === 'objects' || step === 'result') && (
-        <div style={{ marginTop: '3rem', padding: '2rem', background: '#f5f5f5', borderRadius: '8px', whiteSpace: 'pre-wrap' }}>
-          {choiceText}
-        </div>
-      )}
-
-      {(step === 'objects' || step === 'result') && (
-        <div style={{ marginTop: '3rem' }}>
-          <p>Elisa mira la mesa. Tres objetos antiguos aparecen. Elige uno:</p>
-          {step === 'objects' ? (
-            <div style={{ display: 'flex', gap: '1rem', marginTop: '1rem', flexWrap: 'wrap' }}>
-              <button onClick={() => handleObject('retrato')} style={{ border: 'none', background: 'transparent', cursor: 'pointer', textAlign: 'center' }}>
-                <img src="/assets/portrait.png" alt="Retrato roto" style={{ width: '80px', height: '80px', display: 'block', margin: '0 auto 10px', borderRadius: '50%', objectFit: 'cover' }} />
-                Retrato roto
-              </button>
-              <button onClick={() => handleObject('panuelo')} style={{ border: 'none', background: 'transparent', cursor: 'pointer', textAlign: 'center' }}>
-                <img src="/assets/scarf.png" alt="Pañuelo con perfume" style={{ width: '80px', height: '80px', display: 'block', margin: '0 auto 10px', borderRadius: '50%', objectFit: 'cover' }} />
-                Pañuelo con perfume
-              </button>
-              <button onClick={() => handleObject('vela')} style={{ border: 'none', background: 'transparent', cursor: 'pointer', textAlign: 'center' }}>
-                <img src="/assets/candle.png" alt="Vela encendida" style={{ width: '80px', height: '80px', display: 'block', margin: '0 auto 10px', borderRadius: '50%', objectFit: 'cover' }} />
-                Vela encendida
-              </button>
-            </div>
-          ) : (
-            <div style={{ marginTop: '2rem', fontStyle: 'italic', fontSize: '1.2rem', color: '#555' }}>
-              {resultText}
-            </div>
-          )}
-        </div>
-      )}
-
-      {step === 'result' && (
-        <div style={{ marginTop: '3rem', borderTop: '1px solid #ddd', paddingTop: '2rem' }}>
-          <p><strong>Gracias por haber existido, Damián.</strong><br/>
-          Hoy, te dejo ir con amor.</p>
-          <p>— Elisa</p>
-        </div>
-      )}
-
     </div>
   );
 }

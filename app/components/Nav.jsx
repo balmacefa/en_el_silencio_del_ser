@@ -11,9 +11,10 @@ export default function Nav() {
 
   return (
     <nav className="fixed top-0 left-0 w-full z-50 bg-white/80 backdrop-blur-md border-b border-slate-200/50 shadow-sm transition-all">
+      <div className="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-indigo-200 to-transparent" />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
-          <Link href="/" className="text-2xl font-bold text-slate-800 tracking-tight flex-shrink-0" onClick={() => setIsOpen(false)}>
+          <Link href="/" className="text-2xl italic font-semibold text-slate-800 tracking-tight flex-shrink-0 [font-family:var(--font-playfair)]" onClick={() => setIsOpen(false)}>
             Inicio
           </Link>
           
@@ -70,6 +71,7 @@ export default function Nav() {
 
             <li><Link href="/mantras_meditacion_guiada" className="text-slate-600 font-medium hover:text-slate-900 transition-colors py-4">🎧 Mantras</Link></li>
             <li><Link href="/salud_mental" className="text-slate-600 font-medium hover:text-slate-900 transition-colors py-4">🧠 Salud Mental</Link></li>
+            <li><Link href="/luna" className="text-slate-600 font-medium hover:text-slate-900 transition-colors py-4">🌙 Luna</Link></li>
           </ul>
         </div>
       </div>
@@ -119,6 +121,7 @@ export default function Nav() {
 
           <Link href="/mantras_meditacion_guiada" onClick={() => setIsOpen(false)} className="block px-3 py-2 text-base font-medium text-slate-800 hover:bg-slate-50 rounded-lg">🎧 Mantras</Link>
           <Link href="/salud_mental" onClick={() => setIsOpen(false)} className="block px-3 py-2 text-base font-medium text-slate-800 hover:bg-slate-50 rounded-lg">🧠 Salud Mental</Link>
+          <Link href="/luna" onClick={() => setIsOpen(false)} className="block px-3 py-2 text-base font-medium text-slate-800 hover:bg-slate-50 rounded-lg">🌙 Luna</Link>
         </div>
       </div>
     </nav>

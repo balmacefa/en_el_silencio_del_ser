@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import SectionDivider from '../components/SectionDivider';
 
 export default function ReflexionesPage() {
   const reflexiones = [
@@ -35,6 +36,7 @@ export default function ReflexionesPage() {
         <p className="text-lg text-slate-500 max-w-2xl mx-auto leading-relaxed">
           Un espacio dedicado a la introspección, el pensamiento consciente y el cultivo de la paz interior a través de la palabra.
         </p>
+        <SectionDivider tone="rose" />
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
