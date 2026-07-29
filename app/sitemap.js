@@ -56,6 +56,12 @@ export default function sitemap() {
       priority: 0.8,
     },
     {
+      url: `${baseUrl}/reflexiones/estados_de_conciencia`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: 0.8,
+    },
+    {
       url: `${baseUrl}/luna`,
       lastModified: new Date(),
       changeFrequency: 'daily',

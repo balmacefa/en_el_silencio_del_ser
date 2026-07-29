@@ -25,6 +25,13 @@ export default function ReflexionesPage() {
       color: "rose"
     },
     {
+      title: "Estados de Conciencia",
+      description: "Vigilia, hipnagogia, sueño vívido, sueño lúcido y viaje astral: un recorrido extenso con referencias científicas.",
+      href: "/reflexiones/estados_de_conciencia",
+      icon: "🌌",
+      color: "rose"
+    },
+    {
       title: "Poesía del Ser (Próximamente)",
       description: "Palabras que brotan del silencio para acariciar el alma.",
       href: "#",
