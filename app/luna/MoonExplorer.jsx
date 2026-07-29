@@ -35,6 +35,33 @@ function isSameDay(a, b) {
   return a.getFullYear() === b.getFullYear() && a.getMonth() === b.getMonth() && a.getDate() === b.getDate();
 }
 
+const REFERENCES = [
+  {
+    text: 'Belleville, G., Foldes-Busque, G., Dixon, M., Marquis-Pelletier, É., Barbeau, S., Poitras, J., Chauny, J.-M., Diodati, J. G., Fleet, R., & Marchand, A. (2013). Impact of seasonal and lunar cycles on psychological symptoms in the ED: An empirical investigation of widely spread beliefs. General Hospital Psychiatry, 35(2), 192–194.',
+    url: 'https://doi.org/10.1016/j.genhosppsych.2012.10.011',
+  },
+  {
+    text: 'Bischof, R., Vallejo-Vargas, A., Semper-Pascual, A., Schowanek, S. D., Beaudrot, L., Turek, D., Jansen, P. A., Rovero, F., Johnson, S. E., Guimarães Moreira Lima, M., Santos, F., Uzabaho, E., Espinosa, S., Ahumada, J. A., Bitariho, R., Salvador, J., Mugerwa, B., Sainge, M. N., & Sheil, D. (2024). The moon’s influence on the activity of tropical forest mammals. Proceedings of the Royal Society B, 291(2033), 20240683.',
+    url: 'https://doi.org/10.1098/rspb.2024.0683',
+  },
+  {
+    text: 'Cajochen, C., Altanay-Ekici, S., Münch, M., Frey, S., Knoblauch, V., & Wirz-Justice, A. (2013). Evidence that the lunar cycle influences human sleep. Current Biology, 23(15), 1485–1488.',
+    url: 'https://doi.org/10.1016/j.cub.2013.06.029',
+  },
+  {
+    text: 'Casiraghi, L., Spiousas, I., Dunster, G. P., McGlothlen, K., Fernández-Duque, E., Valeggia, C., & de la Iglesia, H. O. (2021). Moonstruck sleep: Synchronization of human sleep with the moon cycle under field conditions. Science Advances, 7(5), eabe0465.',
+    url: 'https://doi.org/10.1126/sciadv.abe0465',
+  },
+  {
+    text: 'Mayoral, O., Solbes, J., Cantó, J., & Pina, T. (2020). What has been thought and taught on the lunar influence on plants in agriculture? Perspective from physics and biology. Agronomy, 10(7), 955.',
+    url: 'https://doi.org/10.3390/agronomy10070955',
+  },
+  {
+    text: 'Sergeyev, M., Lombardi, J. V., Tewes, M. E., Campbell, T. A., & Romanach, S. S. (2023). Ocelots in the moonlight: Influence of lunar phase on habitat selection and movement of two sympatric felids. PLOS ONE, 18(11), e0286393.',
+    url: 'https://doi.org/10.1371/journal.pone.0286393',
+  },
+];
+
 const INFLUENCE_SECTIONS = [
   {
     icon: '🐺',
@@ -267,6 +294,28 @@ export default function MoonExplorer({ initialDateISO }) {
             creencias, como su influencia sobre cultivos o la conducta humana extrema, no cuentan con respaldo científico sólido, aunque
             siguen vivas como parte importante de la cultura y la tradición.
           </p>
+
+          <div className="luna-panel rounded-2xl p-6 sm:p-8 max-w-2xl mx-auto" style={{ borderColor: theme.accentSoft }}>
+            <h3 className={`${cinzel.className} text-sm font-semibold tracking-[0.15em] uppercase mb-4`} style={{ color: theme.accent }}>
+              Referencias
+            </h3>
+            <ol className="space-y-3 text-slate-400 text-xs sm:text-sm leading-relaxed list-decimal list-inside">
+              {REFERENCES.map((ref) => (
+                <li key={ref.url}>
+                  {ref.text}{' '}
+                  <a
+                    href={ref.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="underline decoration-dotted underline-offset-2 hover:text-slate-200 transition-colors"
+                    style={{ color: theme.accent }}
+                  >
+                    {ref.url}
+                  </a>
+                </li>
+              ))}
+            </ol>
+          </div>
         </section>
       </div>
 
