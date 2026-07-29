@@ -1,288 +1,71 @@
-// Catálogo de Asanas — investigación de referencia:
-// yogajournal.com, yogabasics.com, insideyoga.org, myyogateacher.com,
-// tummee.com, Wikipedia (Garudasana) y cymbiotika.com/blogs/health-hub
-// (origen del nombre de las asanas en animales y naturaleza).
+import { ashtangaSequence } from '../yoga/ashtanga_serie_basica_1/ashtangaSequence';
+
+// Catálogo completo de asanas — usa como base la Primera Serie de Ashtanga
+// ya definida en el sitio (mismas fotografías, crédito original a Keen on
+// Yoga: https://www.keenonyoga.com/ashtanga-yoga-primary-series/).
 //
-// Fotografías: reutilizadas de public/imgs (mismo set usado en la serie de
-// Ashtanga), con crédito original al sitio Keen on Yoga. Las posturas sin
-// fotografía disponible en el proyecto muestran una ilustración geométrica
-// original en su lugar.
+// Para las posturas cuyo nombre en sánscrito remite claramente a un animal,
+// un elemento de la naturaleza o una forma geométrica, se agrega una nota
+// breve de origen (investigada en Yoga Journal, Wikipedia y Yoga Basics).
 
-export const categories = [
-  { id: 'animal', label: 'Animales', emoji: '🐾', tone: 'amber' },
-  { id: 'naturaleza', label: 'Naturaleza', emoji: '🌿', tone: 'teal' },
-  { id: 'geometria', label: 'Geometría', emoji: '📐', tone: 'indigo' },
-];
+const nameOrigins = {
+  Samasthiti: {
+    tag: '🌿 Naturaleza',
+    note: 'Sama-sthiti significa "estado de equilibrio quieto"; es la misma base que Tadasana ("tada" = montaña). El cuerpo permanece tan firme y vertical como una montaña.',
+  },
+  'Utthita Trikonasana': {
+    tag: '📐 Geometría',
+    note: 'Trikona significa literalmente "tres ángulos": piernas, torso y brazo dibujan un triángulo en el espacio.',
+  },
+  'Parivrtta Trikonasana': {
+    tag: '📐 Geometría',
+    note: 'Comparte raíz con Trikonasana ("tres ángulos"); parivrtta añade la torsión sobre esa misma base triangular.',
+  },
+  Utkatasana: {
+    tag: '📐 Geometría',
+    note: 'Utkata significa "poderosa" o "feroz"; popularmente se la llama "postura de la silla" por el ángulo recto que forman las rodillas.',
+  },
+  Navasana: {
+    tag: '📐 Geometría',
+    note: 'Nava significa "bote": el cuerpo forma una V sostenida sobre los isquiones, como una embarcación balanceándose en el agua.',
+  },
+  Kurmasana: {
+    tag: '🐾 Animal',
+    note: 'Kurma es la tortuga, uno de los avatares de Vishnú. El cuerpo se repliega hacia adentro como una tortuga que se refugia en su caparazón.',
+  },
+  'Supta Kurmasana': {
+    tag: '🐾 Animal',
+    note: 'Variante "dormida" de Kurmasana: el repliegue es aún más profundo, como una tortuga completamente retraída y en reposo.',
+  },
+  'Baddha Konasana': {
+    tag: '🐾 Animal',
+    note: 'El nombre sánscrito significa "ángulo atado", pero es popularmente conocida como "postura de la mariposa" por el aleteo de las rodillas al abrirse y cerrarse.',
+  },
+  'Urdhva Dhanurasana': {
+    tag: '📐 Geometría',
+    note: 'Dhanu significa "arco": la columna y los brazos dibujan la curva tensa de un arco listo para disparar una flecha.',
+  },
+  Halasana: {
+    tag: '🌿 Naturaleza',
+    note: 'Hala es el "arado": las piernas trazan la forma de la herramienta agrícola que remueve la tierra, símbolo de siembra y renovación.',
+  },
+  Matsyasana: {
+    tag: '🐾 Animal',
+    note: 'Matsya es el pez, otro avatar de Vishnú. El pecho y la garganta se abren como las agallas de un pez emergiendo a la superficie.',
+  },
+};
 
-export const asanas = [
-  {
-    slug: 'tadasana',
-    sanskrit: 'Tadasana',
-    popular: 'Postura de la Montaña',
-    tags: ['naturaleza', 'geometria'],
-    shape: 'Línea vertical',
-    accent: 'teal',
-    image: '/imgs/samasthiti.png',
-    symbolism:
-      'Tada significa "montaña" en sánscrito. Es la base de todas las posturas de pie: un cuerpo tan quieto, firme y erguido como una montaña, con los pies como cimiento y la coronilla apuntando al cielo.',
-    benefits: ['Mejora la postura y la conciencia corporal', 'Fortalece pies, piernas y core', 'Calma la mente antes de una secuencia'],
-    steps: {
-      entrada: 'De pie, junta los pies o sepáralos al ancho de la cadera. Reparte el peso por igual entre los cuatro puntos de cada pie y deja caer los brazos a los costados.',
-      mantenimiento: 'Activa los muslos, alarga la columna, abre el pecho y relaja los hombros lejos de las orejas. Respira 5–8 ciclos, imaginando un hilo que tira suavemente de la coronilla hacia el cielo.',
-      salida: 'Suelta la activación con una exhalación, junta las manos frente al corazón en Anjali Mudra y cierra los ojos un instante antes de continuar.',
-    },
-    figure: {
-      accent: 'teal',
-      head: [50, 13, 6],
-      lines: [[50, 19, 50, 55], [50, 22, 40, 60], [50, 22, 60, 60], [50, 55, 47, 97], [50, 55, 53, 97]],
-      joints: [[40, 60], [60, 60]],
-    },
-  },
-  {
-    slug: 'vrksasana',
-    sanskrit: 'Vrksasana',
-    popular: 'Postura del Árbol',
-    tags: ['naturaleza', 'geometria'],
-    shape: 'Línea + triángulo',
-    accent: 'teal',
-    symbolism:
-      'Vrksa significa "árbol". La postura imita el equilibrio silencioso de un árbol: raíces firmes en un solo pie mientras el resto del cuerpo crece hacia arriba y se mece con la respiración, sin perder el centro.',
-    benefits: ['Desarrolla equilibrio y concentración', 'Fortalece tobillos y piernas', 'Abre las caderas'],
-    steps: {
-      entrada: 'Desde Tadasana, lleva el peso a una pierna y apoya la planta del pie contrario en el tobillo o la pantorrilla (nunca sobre la rodilla). Fija la mirada en un punto quieto.',
-      mantenimiento: 'Presiona el pie flexionado contra la pierna de apoyo y esta contra el pie por igual. Eleva los brazos y junta las palmas sobre la cabeza, o llévalas al corazón. Mantén 5–10 respiraciones.',
-      salida: 'Exhala, baja los brazos con control y libera el pie de vuelta al suelo despacio, regresando a Tadasana antes de repetir del otro lado.',
-    },
-    figure: {
-      accent: 'teal',
-      head: [50, 12, 6],
-      lines: [[50, 19, 50, 54], [50, 22, 46, 8], [50, 22, 54, 8], [50, 54, 47, 96], [50, 54, 66, 58], [66, 58, 49, 60]],
-      joints: [[50, 8], [66, 58]],
-    },
-  },
-  {
-    slug: 'bhujangasana',
-    sanskrit: 'Bhujangasana',
-    popular: 'Postura de la Cobra',
-    tags: ['animal', 'geometria'],
-    shape: 'Arco',
-    accent: 'amber',
-    symbolism:
-      'Bhujanga significa "serpiente" o "cobra". La postura evoca a una cobra alzando la cabeza y el pecho del suelo, lista y alerta: un símbolo de renovación y energía ascendente en la columna.',
-    benefits: ['Fortalece la espalda y los brazos', 'Abre el pecho y los hombros', 'Estimula el abdomen y mejora la digestión'],
-    steps: {
-      entrada: 'Recuéstate boca abajo con las piernas extendidas y el empeine en el suelo. Desliza las manos bajo los hombros con los codos pegados a las costillas y la frente apoyada.',
-      mantenimiento: 'Inhala y presiona las manos para levantar cabeza, cuello y pecho, sin despegar el pubis del suelo. Lleva los hombros lejos de las orejas: es una elevación del pecho, no un pellizco lumbar. Sostén 3–5 respiraciones.',
-      salida: 'Exhala y baja el torso lentamente hasta apoyar la frente, vértebra por vértebra, y descansa un momento con la cabeza girada hacia un lado.',
-    },
-    figure: {
-      accent: 'amber',
-      head: [28, 58, 6],
-      lines: [[34, 64, 64, 85], [37, 76, 32, 86], [64, 85, 97, 87]],
-      joints: [[32, 86]],
-    },
-  },
-  {
-    slug: 'adho-mukha-svanasana',
-    sanskrit: 'Adho Mukha Svanasana',
-    popular: 'Perro Boca Abajo',
-    tags: ['animal', 'geometria'],
-    shape: 'Triángulo invertido',
-    accent: 'amber',
-    image: '/imgs/adho_mukha_savan_asana.png',
-    symbolism:
-      'Adho mukha svana significa literalmente "perro con el hocico hacia abajo": la postura reproduce el estiramiento instintivo que hacen los perros al despertar, alargando toda la espalda y los talones hacia el suelo.',
-    benefits: ['Estira isquiotibiales, pantorrillas y columna', 'Fortalece brazos y hombros', 'Alivia la tensión y calma el sistema nervioso'],
-    steps: {
-      entrada: 'Desde cuatro apoyos, con manos bajo hombros y rodillas bajo caderas, mete los dedos de los pies y, al exhalar, comienza a levantar las rodillas del suelo.',
-      mantenimiento: 'Extiende las piernas y empuja la pelvis hacia arriba y atrás, formando una V invertida. Presiona ambas manos contra el suelo, relaja la cabeza entre los brazos y pedalea suavemente los talones. Sostén 5–8 respiraciones.',
-      salida: 'Dobla las rodillas al exhalar y baja con control hacia la postura del niño, o da un paso adelante entre las manos para incorporarte.',
-    },
-    figure: {
-      accent: 'amber',
-      head: [66, 66, 5],
-      lines: [[60, 55, 45, 38], [60, 55, 80, 88], [45, 38, 15, 88]],
-      joints: [[45, 38]],
-    },
-  },
-  {
-    slug: 'balasana',
-    sanskrit: 'Balasana',
-    popular: 'Postura del Niño',
-    tags: ['naturaleza'],
-    shape: 'Espiral / semilla',
-    accent: 'teal',
-    symbolism:
-      'Bala significa "niño". Es una postura de repliegue: el cuerpo se enrosca sobre sí mismo como una semilla dormida bajo la tierra, un refugio para descansar antes de volver a crecer.',
-    benefits: ['Relaja la espalda baja y los hombros', 'Calma el sistema nervioso', 'Contrapostura de descanso entre asanas'],
-    steps: {
-      entrada: 'Desde cuatro apoyos, junta los dedos gordos de los pies y separa las rodillas al ancho del mat. Comienza a llevar las caderas hacia los talones.',
-      mantenimiento: 'Estira el torso hacia adelante y apoya la frente en el suelo, con los brazos extendidos frente a ti o relajados junto al cuerpo. Respira lento y profundo hacia la espalda baja durante el tiempo que necesites.',
-      salida: 'Presiona las manos en el suelo y, al inhalar, enrolla la columna vértebra por vértebra hasta sentarte sobre los talones.',
-    },
-    figure: {
-      accent: 'teal',
-      head: [70, 82, 5],
-      lines: [[60, 70, 44, 84], [60, 72, 82, 88], [44, 84, 44, 90], [44, 90, 50, 92]],
-      joints: [[70, 82]],
-    },
-  },
-  {
-    slug: 'marjaryasana-bitilasana',
-    sanskrit: 'Marjaryasana–Bitilasana',
-    popular: 'Gato–Vaca',
-    tags: ['animal', 'geometria'],
-    shape: 'Arco',
-    accent: 'amber',
-    symbolism:
-      'Marjari es "gato" y bitila es "vaca". El flujo combina el lomo redondeado y defensivo del gato con el vientre relajado y la mirada elevada de la vaca: dos gestos animales opuestos unidos por la respiración.',
-    benefits: ['Moviliza la columna vertebra por vértebra', 'Libera tensión de espalda y cuello', 'Sincroniza respiración y movimiento'],
-    steps: {
-      entrada: 'Ponte en cuatro apoyos con las manos bajo los hombros y las rodillas bajo las caderas, columna neutra y mirada al suelo.',
-      mantenimiento: 'Al exhalar (Gato), redondea la espalda, mete el mentón y el coxis. Al inhalar (Vaca), hunde el vientre, abre el pecho y eleva la mirada y el coxis. Repite el flujo 6–10 rondas siguiendo tu respiración.',
-      salida: 'Termina en columna neutra, exhala y lleva las caderas hacia los talones para descansar en Balasana.',
-    },
-    figure: {
-      accent: 'amber',
-      head: [66, 66, 5],
-      lines: [[60, 50, 48, 42], [48, 42, 36, 52], [60, 52, 62, 82], [36, 52, 36, 84], [36, 84, 42, 88]],
-      joints: [[48, 42]],
-    },
-  },
-  {
-    slug: 'trikonasana',
-    sanskrit: 'Utthita Trikonasana',
-    popular: 'Postura del Triángulo Extendido',
-    tags: ['geometria'],
-    shape: 'Triángulo',
-    accent: 'indigo',
-    image: '/imgs/uttihita_trikonasana.png',
-    symbolism:
-      'Trikona significa literalmente "tres ángulos". Es una de las asanas cuyo nombre no proviene de un ser vivo sino de la geometría pura: piernas, torso y brazo forman líneas rectas que dibujan un triángulo en el espacio.',
-    benefits: ['Estira piernas, ingles y costados del torso', 'Fortalece rodillas y tobillos', 'Mejora el equilibrio y abre el pecho'],
-    steps: {
-      entrada: 'Separa los pies un metro aproximadamente, gira el pie derecho 90° y el izquierdo ligeramente hacia adentro. Extiende los brazos en cruz, a la altura de los hombros.',
-      mantenimiento: 'Al exhalar, inclina el torso hacia el pie derecho desde la cadera, no desde la cintura. Apoya la mano derecha en la espinilla, el tobillo o el suelo, y extiende la mano izquierda hacia el techo. Mira hacia arriba y sostén 5 respiraciones.',
-      salida: 'Inhala, presiona los pies contra el suelo y usa el core para regresar el torso a vertical con los brazos aún en cruz, antes de repetir del otro lado.',
-    },
-    figure: {
-      accent: 'indigo',
-      head: [26, 55, 6],
-      lines: [[50, 58, 28, 50], [28, 50, 20, 80], [28, 50, 60, 20], [50, 58, 25, 96], [50, 58, 75, 96]],
-      joints: [[28, 50]],
-    },
-  },
-  {
-    slug: 'setu-bandhasana',
-    sanskrit: 'Setu Bandhasana',
-    popular: 'Postura del Puente',
-    tags: ['naturaleza', 'geometria'],
-    shape: 'Arco',
-    accent: 'teal',
-    image: '/imgs/setu_bandhasana.png',
-    symbolism:
-      'Setu Bandha significa "construcción de un puente". El cuerpo se eleva desde el suelo formando un arco firme, como un puente que conecta dos orillas, apoyado en los pies y sostenido por la fuerza de las piernas y los glúteos.',
-    benefits: ['Fortalece glúteos, piernas y espalda', 'Abre el pecho y los hombros', 'Contrapostura suave para la columna'],
-    steps: {
-      entrada: 'Recuéstate boca arriba, dobla las rodillas y apoya los pies en el suelo cerca de los glúteos, separados al ancho de la cadera. Brazos junto al cuerpo, palmas hacia abajo.',
-      mantenimiento: 'Al inhalar, presiona los pies y los brazos contra el suelo para elevar las caderas. Entrelaza las manos bajo la espalda si es cómodo y mantén los muslos paralelos. Sostén 5–8 respiraciones.',
-      salida: 'Exhala y baja la columna hacia el suelo lentamente, vértebra por vértebra, desde la parte alta de la espalda hasta el coxis.',
-    },
-    figure: {
-      accent: 'teal',
-      head: [16, 88, 5],
-      lines: [[22, 86, 55, 60], [22, 86, 18, 74], [55, 60, 68, 68], [68, 68, 70, 88]],
-      joints: [[55, 60]],
-    },
-  },
-  {
-    slug: 'garudasana',
-    sanskrit: 'Garudasana',
-    popular: 'Postura del Águila',
-    tags: ['animal', 'geometria'],
-    shape: 'Espiral',
-    accent: 'amber',
-    symbolism:
-      'Garuda es el ave mítica montura del dios Vishnú, considerada el rey de las aves. Brazos y piernas se envuelven entre sí como alas plegadas, exigiendo el mismo enfoque agudo y equilibrado de un águila en vuelo.',
-    benefits: ['Mejora el equilibrio y la concentración', 'Estira hombros, espalda alta y caderas', 'Fortalece tobillos y piernas'],
-    steps: {
-      entrada: 'De pie, flexiona ligeramente las rodillas, cruza el muslo izquierdo sobre el derecho y engancha el pie izquierdo detrás de la pantorrilla si llegas. Cruza los codos, izquierdo sobre derecho, frente al pecho.',
-      mantenimiento: 'Une las palmas o los dorsos de las manos, eleva los codos y baja las caderas ligeramente, como si te sentaras. Mira hacia adelante y por encima de los antebrazos, sosteniendo 3–5 respiraciones.',
-      salida: 'Desenrosca brazos y piernas con cuidado, sacude suavemente las extremidades y vuelve a Tadasana antes de repetir del otro lado.',
-    },
-    figure: {
-      accent: 'amber',
-      head: [50, 14, 6],
-      lines: [[50, 20, 50, 54], [50, 24, 58, 34], [58, 34, 50, 44], [50, 24, 42, 34], [42, 34, 50, 44], [50, 54, 47, 96], [50, 54, 58, 64], [58, 64, 48, 72]],
-      joints: [[50, 44], [58, 64]],
-    },
-  },
-  {
-    slug: 'ustrasana',
-    sanskrit: 'Ustrasana',
-    popular: 'Postura del Camello',
-    tags: ['animal', 'geometria'],
-    shape: 'Arco',
-    accent: 'amber',
-    symbolism:
-      'Ustra significa "camello". La curva profunda del pecho hacia atrás y el cuello recuerda la giba y el andar erguido del camello, capaz de sostener grandes cargas atravesando el desierto sin perder su centro.',
-    benefits: ['Abre el pecho, los hombros y los flexores de cadera', 'Fortalece la espalda', 'Contrarresta horas de estar sentado'],
-    steps: {
-      entrada: 'Arrodíllate con las caderas apiladas sobre las rodillas, separadas al ancho de la cadera. Apoya las manos en la parte baja de la espalda, dedos hacia abajo, y presiona el pubis hacia adelante.',
-      mantenimiento: 'Inhala y arquea el pecho hacia el techo, llevando las manos a los talones si es accesible, sin dejar caer el peso hacia atrás. Deja que la cabeza se relaje hacia atrás solo si el cuello está cómodo. Sostén 3–5 respiraciones.',
-      salida: 'Lleva una mano a la vez de vuelta a la espalda baja y, guiando con el pecho, incorpórate lentamente a vertical antes de descansar en postura del niño.',
-    },
-    figure: {
-      accent: 'amber',
-      head: [70, 52, 6],
-      lines: [[50, 66, 58, 42], [58, 46, 66, 72], [50, 66, 50, 88], [50, 88, 60, 90]],
-      joints: [[66, 72]],
-    },
-  },
-  {
-    slug: 'bakasana',
-    sanskrit: 'Bakasana',
-    popular: 'Postura del Cuervo',
-    tags: ['animal', 'geometria'],
-    shape: 'Triángulo compacto',
-    accent: 'amber',
-    image: '/imgs/bakasana.png',
-    symbolism:
-      'Baka significa "grulla" o "cuervo" según la tradición. El cuerpo se compacta sobre las manos como un ave posada en una rama delgada: ligera, equilibrada y enfocada en un único punto de apoyo.',
-    benefits: ['Fortalece brazos, muñecas y core', 'Desarrolla equilibrio y enfoque mental', 'Introduce a los balanceos sobre brazos'],
-    steps: {
-      entrada: 'En cuclillas, planta las manos en el suelo al ancho de los hombros, dedos bien abiertos. Lleva las rodillas hacia la parte alta de los brazos (triceps), cerca de las axilas.',
-      mantenimiento: 'Inclina el peso hacia adelante sobre las manos, redondea la espalda y despega los pies del suelo uno a la vez, apretando las rodillas contra los brazos. Mira ligeramente hacia adelante y sostén 3–5 respiraciones.',
-      salida: 'Exhala y baja los pies de vuelta al suelo con control, o retrocede hacia una zancada si prefieres una salida más suave.',
-    },
-    figure: {
-      accent: 'amber',
-      head: [66, 58, 5],
-      lines: [[60, 52, 48, 60], [60, 54, 58, 82], [48, 60, 54, 54], [54, 54, 38, 50]],
-      joints: [[54, 54]],
-    },
-  },
-  {
-    slug: 'padmasana',
-    sanskrit: 'Padmasana',
-    popular: 'Postura del Loto',
-    tags: ['naturaleza', 'geometria'],
-    shape: 'Círculo / mandala',
-    accent: 'teal',
-    image: '/imgs/padmasana.png',
-    symbolism:
-      'Padma significa "loto", la flor que crece desde el barro del fondo de un estanque y se abre inmaculada hacia la luz. La postura simboliza el florecimiento de la conciencia a pesar de las condiciones de las que surge.',
-    benefits: ['Estira caderas, rodillas y tobillos', 'Favorece una columna erguida para meditar', 'Calma la mente y estabiliza la respiración'],
-    steps: {
-      entrada: 'Siéntate con las piernas extendidas. Dobla una rodilla y lleva el pie hacia la cadera opuesta apoyándolo en la parte alta del muslo, con cuidado de rotar desde la cadera y no forzar la rodilla.',
-      mantenimiento: 'Repite con la otra pierna, cruzando el segundo pie sobre el muslo contrario. Apoya las manos sobre las rodillas en un mudra, alarga la columna desde la base y relaja los hombros. Permanece el tiempo que sea cómodo, respirando con calma.',
-      salida: 'Apoya las manos en el suelo y descruza las piernas despacio, primero una y luego la otra, extendiéndolas al frente para liberar rodillas y caderas.',
-    },
-    figure: {
-      accent: 'teal',
-      head: [50, 22, 6],
-      lines: [[50, 28, 50, 58], [50, 38, 32, 60], [50, 38, 68, 60], [50, 58, 30, 52], [50, 58, 70, 52]],
-      joints: [[30, 52], [70, 52]],
-    },
-  },
-];
+export const asanas = ashtangaSequence.map((pose, index) => ({
+  slug: pose.sanskrit
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/(^-|-$)/g, ''),
+  order: index + 1,
+  sanskrit: pose.sanskrit,
+  popular: pose.popular,
+  description: pose.description,
+  image: pose.image,
+  sides: Boolean(pose.sides),
+  origin: nameOrigins[pose.sanskrit] || null,
+  next: index + 1 < ashtangaSequence.length ? ashtangaSequence[index + 1].sanskrit : null,
+}));
