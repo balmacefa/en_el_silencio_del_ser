@@ -137,7 +137,43 @@ function phaseAt(phases, total, elapsed) {
   return { name: phases[0].name, remaining: phases[0].dur };
 }
 
-function BreathSlide({ id, rhythm, active, registerRef }) {
+const PHASE_FREQ = {
+  Inhalar: 392, // G4
+  Retener: 523.25, // C5
+  Exhalar: 293.66, // D4
+  Vacío: 220, // A3
+};
+
+let sharedAudioCtx = null;
+function getAudioContext() {
+  if (typeof window === 'undefined') return null;
+  // @ts-ignore - Safari fallback
+  const Ctx = window.AudioContext || window.webkitAudioContext;
+  if (!Ctx) return null;
+  if (!sharedAudioCtx) sharedAudioCtx = new Ctx();
+  return sharedAudioCtx;
+}
+
+function playPhaseTone(phaseName, volume) {
+  const ctx = getAudioContext();
+  if (!ctx || volume <= 0) return;
+  if (ctx.state === 'suspended') ctx.resume();
+  const freq = PHASE_FREQ[phaseName] || 330;
+  const now = ctx.currentTime;
+  const peak = 0.05 + volume * 0.25;
+  const osc = ctx.createOscillator();
+  const gain = ctx.createGain();
+  osc.type = 'sine';
+  osc.frequency.setValueAtTime(freq, now);
+  gain.gain.setValueAtTime(0, now);
+  gain.gain.linearRampToValueAtTime(peak, now + 0.15);
+  gain.gain.exponentialRampToValueAtTime(0.001, now + 1.1);
+  osc.connect(gain).connect(ctx.destination);
+  osc.start(now);
+  osc.stop(now + 1.2);
+}
+
+function BreathSlide({ id, rhythm, active, registerRef, soundOn, volume }) {
   const { total } = RHYTHM_ANIMATIONS.get(rhythm.key);
   const [phase, setPhase] = useState(rhythm.phases[0].name);
   const [secondsLeft, setSecondsLeft] = useState(Math.ceil(rhythm.phases[0].dur));
@@ -156,6 +192,11 @@ function BreathSlide({ id, rhythm, active, registerRef }) {
     rafRef.current = requestAnimationFrame(tick);
     return () => cancelAnimationFrame(rafRef.current);
   }, [active, rhythm, total]);
+
+  useEffect(() => {
+    if (!active || !soundOn) return;
+    playPhaseTone(phase, volume);
+  }, [phase, active, soundOn, volume]);
 
   const animationStyle = {
     animationName: `breathe-${rhythm.key}`,
@@ -206,6 +247,34 @@ export default function RespiraSinFin() {
 
   const [items, setItems] = useState(() => RHYTHMS.map((_, i) => ({ id: i, patternIndex: i })));
   const [activeId, setActiveId] = useState(0);
+  const [soundOn, setSoundOn] = useState(true);
+  const [volume, setVolume] = useState(0.5);
+
+  useEffect(() => {
+    const savedOn = window.localStorage.getItem('respira-sin-fin-sound-on');
+    const savedVolume = window.localStorage.getItem('respira-sin-fin-volume');
+    if (savedOn !== null) setSoundOn(savedOn === 'true');
+    if (savedVolume !== null) setVolume(Number(savedVolume));
+  }, []);
+
+  useEffect(() => {
+    window.localStorage.setItem('respira-sin-fin-sound-on', String(soundOn));
+  }, [soundOn]);
+
+  useEffect(() => {
+    window.localStorage.setItem('respira-sin-fin-volume', String(volume));
+  }, [volume]);
+
+  const toggleSound = useCallback(() => {
+    setSoundOn((prev) => {
+      const next = !prev;
+      if (next) {
+        const ctx = getAudioContext();
+        if (ctx && ctx.state === 'suspended') ctx.resume();
+      }
+      return next;
+    });
+  }, []);
 
   const registerSlide = useCallback((id, el) => {
     if (el) slideRefs.current.set(id, el);
@@ -278,6 +347,29 @@ export default function RespiraSinFin() {
         <p className="text-lg text-slate-500 max-w-xl mx-auto leading-relaxed">
           Un feed infinito de ritmos de respiración. Desliza entre tarjetas que respiran a su propio compás — quédate en la que resuene contigo.
         </p>
+
+        <div className="flex items-center justify-center gap-3 pt-1">
+          <button
+            type="button"
+            onClick={toggleSound}
+            aria-pressed={soundOn}
+            aria-label={soundOn ? 'Desactivar sonido' : 'Activar sonido'}
+            className="w-10 h-10 shrink-0 rounded-full flex items-center justify-center bg-slate-900 text-white shadow-md hover:bg-slate-700 transition-colors"
+          >
+            <span aria-hidden="true">{soundOn ? '🔊' : '🔇'}</span>
+          </button>
+          <input
+            type="range"
+            min="0"
+            max="1"
+            step="0.05"
+            value={volume}
+            onChange={(e) => setVolume(Number(e.target.value))}
+            disabled={!soundOn}
+            aria-label="Volumen del sonido"
+            className="w-32 accent-indigo-500 disabled:opacity-40"
+          />
+        </div>
       </div>
 
       <div
@@ -293,6 +385,8 @@ export default function RespiraSinFin() {
             rhythm={RHYTHMS[item.patternIndex]}
             active={activeId === item.id}
             registerRef={registerSlide}
+            soundOn={soundOn}
+            volume={volume}
           />
         ))}
         <div ref={sentinelRef} className="h-1 w-full" />
