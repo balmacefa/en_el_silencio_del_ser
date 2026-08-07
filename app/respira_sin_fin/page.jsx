@@ -173,7 +173,17 @@ function playPhaseTone(phaseName, volume) {
   osc.stop(now + 1.2);
 }
 
-function BreathSlide({ id, rhythm, active, registerRef, soundOn, volume }) {
+function playPhaseVoice(phaseName, volume) {
+  if (typeof window === 'undefined' || !window.speechSynthesis) return;
+  if (volume <= 0) return;
+  window.speechSynthesis.cancel();
+  const utter = new SpeechSynthesisUtterance(phaseName);
+  utter.lang = 'es-ES';
+  utter.volume = Math.min(1, Math.max(0, volume));
+  window.speechSynthesis.speak(utter);
+}
+
+function BreathSlide({ id, rhythm, active, registerRef, soundOn, volume, voiceOn, voiceVolume }) {
   const { total } = RHYTHM_ANIMATIONS.get(rhythm.key);
   const [phase, setPhase] = useState(rhythm.phases[0].name);
   const [secondsLeft, setSecondsLeft] = useState(Math.ceil(rhythm.phases[0].dur));
@@ -197,6 +207,11 @@ function BreathSlide({ id, rhythm, active, registerRef, soundOn, volume }) {
     if (!active || !soundOn) return;
     playPhaseTone(phase, volume);
   }, [phase, active, soundOn, volume]);
+
+  useEffect(() => {
+    if (!active || !voiceOn) return;
+    playPhaseVoice(phase, voiceVolume);
+  }, [phase, active, voiceOn, voiceVolume]);
 
   const animationStyle = {
     animationName: `breathe-${rhythm.key}`,
@@ -249,12 +264,19 @@ export default function RespiraSinFin() {
   const [activeId, setActiveId] = useState(0);
   const [soundOn, setSoundOn] = useState(true);
   const [volume, setVolume] = useState(0.5);
+  const [voiceOn, setVoiceOn] = useState(false);
+  const [voiceVolume, setVoiceVolume] = useState(0.5);
+  const [isMaximized, setIsMaximized] = useState(false);
 
   useEffect(() => {
     const savedOn = window.localStorage.getItem('respira-sin-fin-sound-on');
     const savedVolume = window.localStorage.getItem('respira-sin-fin-volume');
+    const savedVoiceOn = window.localStorage.getItem('respira-sin-fin-voice-on');
+    const savedVoiceVolume = window.localStorage.getItem('respira-sin-fin-voice-volume');
     if (savedOn !== null) setSoundOn(savedOn === 'true');
     if (savedVolume !== null) setVolume(Number(savedVolume));
+    if (savedVoiceOn !== null) setVoiceOn(savedVoiceOn === 'true');
+    if (savedVoiceVolume !== null) setVoiceVolume(Number(savedVoiceVolume));
   }, []);
 
   useEffect(() => {
@@ -265,6 +287,23 @@ export default function RespiraSinFin() {
     window.localStorage.setItem('respira-sin-fin-volume', String(volume));
   }, [volume]);
 
+  useEffect(() => {
+    window.localStorage.setItem('respira-sin-fin-voice-on', String(voiceOn));
+  }, [voiceOn]);
+
+  useEffect(() => {
+    window.localStorage.setItem('respira-sin-fin-voice-volume', String(voiceVolume));
+  }, [voiceVolume]);
+
+  useEffect(() => {
+    if (!isMaximized) return undefined;
+    const prevOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    return () => {
+      document.body.style.overflow = prevOverflow;
+    };
+  }, [isMaximized]);
+
   const toggleSound = useCallback(() => {
     setSoundOn((prev) => {
       const next = !prev;
@@ -274,6 +313,14 @@ export default function RespiraSinFin() {
       }
       return next;
     });
+  }, []);
+
+  const toggleVoice = useCallback(() => {
+    setVoiceOn((prev) => !prev);
+  }, []);
+
+  const toggleMaximize = useCallback(() => {
+    setIsMaximized((prev) => !prev);
   }, []);
 
   const registerSlide = useCallback((id, el) => {
@@ -322,6 +369,11 @@ export default function RespiraSinFin() {
   }, [items.length]);
 
   const handleKeyDown = useCallback((e) => {
+    if (e.key === 'Escape' && isMaximized) {
+      e.preventDefault();
+      setIsMaximized(false);
+      return;
+    }
     const root = containerRef.current;
     if (!root) return;
     if (e.key === 'ArrowDown') {
@@ -331,7 +383,7 @@ export default function RespiraSinFin() {
       e.preventDefault();
       root.scrollBy({ top: -root.clientHeight, behavior: 'smooth' });
     }
-  }, []);
+  }, [isMaximized]);
 
   const renderedItems = useMemo(() => items, [items]);
 
@@ -348,48 +400,102 @@ export default function RespiraSinFin() {
           Un feed infinito de ritmos de respiración. Desliza entre tarjetas que respiran a su propio compás — quédate en la que resuene contigo.
         </p>
 
-        <div className="flex items-center justify-center gap-3 pt-1">
-          <button
-            type="button"
-            onClick={toggleSound}
-            aria-pressed={soundOn}
-            aria-label={soundOn ? 'Desactivar sonido' : 'Activar sonido'}
-            className="w-10 h-10 shrink-0 rounded-full flex items-center justify-center bg-slate-900 text-white shadow-md hover:bg-slate-700 transition-colors"
-          >
-            <span aria-hidden="true">{soundOn ? '🔊' : '🔇'}</span>
-          </button>
-          <input
-            type="range"
-            min="0"
-            max="1"
-            step="0.05"
-            value={volume}
-            onChange={(e) => setVolume(Number(e.target.value))}
-            disabled={!soundOn}
-            aria-label="Volumen del sonido"
-            className="w-32 accent-indigo-500 disabled:opacity-40"
-          />
+        <div className="flex flex-col items-center gap-3 pt-1">
+          <div className="flex items-center justify-center gap-3">
+            <button
+              type="button"
+              onClick={toggleSound}
+              aria-pressed={soundOn}
+              aria-label={soundOn ? 'Desactivar sonido' : 'Activar sonido'}
+              title="Tono"
+              className="w-10 h-10 shrink-0 rounded-full flex items-center justify-center bg-slate-900 text-white shadow-md hover:bg-slate-700 transition-colors"
+            >
+              <span aria-hidden="true">{soundOn ? '🔊' : '🔇'}</span>
+            </button>
+            <input
+              type="range"
+              min="0"
+              max="1"
+              step="0.05"
+              value={volume}
+              onChange={(e) => setVolume(Number(e.target.value))}
+              disabled={!soundOn}
+              aria-label="Volumen del sonido"
+              className="w-32 accent-indigo-500 disabled:opacity-40"
+            />
+          </div>
+
+          <div className="flex items-center justify-center gap-3">
+            <button
+              type="button"
+              onClick={toggleVoice}
+              aria-pressed={voiceOn}
+              aria-label={voiceOn ? 'Desactivar voces' : 'Activar voces'}
+              title="Voces"
+              className="w-10 h-10 shrink-0 rounded-full flex items-center justify-center bg-slate-900 text-white shadow-md hover:bg-slate-700 transition-colors"
+            >
+              <span aria-hidden="true">{voiceOn ? '🗣️' : '🤐'}</span>
+            </button>
+            <input
+              type="range"
+              min="0"
+              max="1"
+              step="0.05"
+              value={voiceVolume}
+              onChange={(e) => setVoiceVolume(Number(e.target.value))}
+              disabled={!voiceOn}
+              aria-label="Volumen de las voces"
+              className="w-32 accent-indigo-500 disabled:opacity-40"
+            />
+          </div>
         </div>
       </div>
 
-      <div
-        ref={containerRef}
-        tabIndex={0}
-        onKeyDown={handleKeyDown}
-        className="relative mx-auto w-full max-w-[420px] h-[75vh] max-h-[760px] overflow-y-scroll snap-y snap-mandatory rounded-[2rem] border-8 border-slate-900/90 shadow-[0_20px_60px_rgba(0,0,0,0.35)] outline-none [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
-      >
-        {renderedItems.map((item) => (
-          <BreathSlide
-            key={item.id}
-            id={item.id}
-            rhythm={RHYTHMS[item.patternIndex]}
-            active={activeId === item.id}
-            registerRef={registerSlide}
-            soundOn={soundOn}
-            volume={volume}
-          />
-        ))}
-        <div ref={sentinelRef} className="h-1 w-full" />
+      <div className="relative">
+        <button
+          type="button"
+          onClick={toggleMaximize}
+          aria-pressed={isMaximized}
+          aria-label={isMaximized ? 'Minimizar' : 'Maximizar'}
+          title={isMaximized ? 'Minimizar' : 'Maximizar'}
+          className={`${isMaximized ? 'fixed top-4 right-4' : 'absolute top-3 right-3'} z-[60] w-9 h-9 rounded-full flex items-center justify-center bg-black/40 text-white backdrop-blur hover:bg-black/60 transition-colors`}
+        >
+          {isMaximized ? (
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 3v6H3M15 3v6h6M9 21v-6H3M15 21v-6h6" />
+            </svg>
+          ) : (
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 3H3v6M15 3h6v6M9 21H3v-6M15 21h6v-6" />
+            </svg>
+          )}
+        </button>
+
+        <div
+          ref={containerRef}
+          tabIndex={0}
+          onKeyDown={handleKeyDown}
+          className={
+            isMaximized
+              ? 'fixed inset-0 z-50 w-screen h-screen overflow-y-scroll snap-y snap-mandatory outline-none [scrollbar-width:none] [&::-webkit-scrollbar]:hidden'
+              : 'relative mx-auto w-full max-w-[420px] h-[75vh] max-h-[760px] overflow-y-scroll snap-y snap-mandatory rounded-[2rem] border-8 border-slate-900/90 shadow-[0_20px_60px_rgba(0,0,0,0.35)] outline-none [scrollbar-width:none] [&::-webkit-scrollbar]:hidden'
+          }
+        >
+          {renderedItems.map((item) => (
+            <BreathSlide
+              key={item.id}
+              id={item.id}
+              rhythm={RHYTHMS[item.patternIndex]}
+              active={activeId === item.id}
+              registerRef={registerSlide}
+              soundOn={soundOn}
+              volume={volume}
+              voiceOn={voiceOn}
+              voiceVolume={voiceVolume}
+            />
+          ))}
+          <div ref={sentinelRef} className="h-1 w-full" />
+        </div>
       </div>
     </div>
   );
