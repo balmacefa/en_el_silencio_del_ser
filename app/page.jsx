@@ -71,7 +71,7 @@ export default function Home() {
             <p className="mt-2 text-slate-500 text-lg">Regula tu sistema nervioso a través del poder de tu respiración.</p>
           </div>
           
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             <Link href="/respiracion_conciente" className="group rounded-2xl bg-white/70 backdrop-blur-sm p-8 shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-slate-100 transition-all duration-300 hover:shadow-[0_10px_30px_rgba(0,0,0,0.08)] hover:-translate-y-2 hover:border-teal-200 flex flex-col h-full">
               <div className="bg-teal-50 text-teal-600 w-14 h-14 rounded-2xl flex items-center justify-center text-2xl mb-6 group-hover:scale-110 group-hover:bg-teal-100 transition-all duration-300">🍃</div>
               <h3 className="text-xl font-bold text-slate-800 mb-3 group-hover:text-teal-600 transition-colors">Próposito y Teoría</h3>
@@ -82,6 +82,12 @@ export default function Home() {
               <div className="bg-teal-50 text-teal-600 w-14 h-14 rounded-2xl flex items-center justify-center text-2xl mb-6 group-hover:scale-110 group-hover:bg-teal-100 transition-all duration-300">🎧</div>
               <h3 className="text-xl font-bold text-slate-800 mb-3 group-hover:text-teal-600 transition-colors">Prácticas Auto Guiadas</h3>
               <p className="text-slate-500 text-sm leading-relaxed flex-grow">Herramientas interactivas para guiar tu regulación del prana vital de manera diaria.</p>
+            </Link>
+
+            <Link href="/respira_sin_fin" className="group rounded-2xl bg-white/70 backdrop-blur-sm p-8 shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-slate-100 transition-all duration-300 hover:shadow-[0_10px_30px_rgba(0,0,0,0.08)] hover:-translate-y-2 hover:border-teal-200 flex flex-col h-full">
+              <div className="bg-teal-50 text-teal-600 w-14 h-14 rounded-2xl flex items-center justify-center text-2xl mb-6 group-hover:scale-110 group-hover:bg-teal-100 transition-all duration-300">🌀</div>
+              <h3 className="text-xl font-bold text-slate-800 mb-3 group-hover:text-teal-600 transition-colors">Respira sin Fin</h3>
+              <p className="text-slate-500 text-sm leading-relaxed flex-grow">Un feed infinito de ritmos de respiración: desliza entre distintos compases y quédate en el que resuene contigo.</p>
             </Link>
           </div>
         </section>

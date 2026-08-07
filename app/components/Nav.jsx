@@ -56,6 +56,7 @@ export default function Nav() {
               <ul className="absolute top-full left-0 hidden group-hover:flex flex-col bg-white rounded-xl shadow-xl shadow-slate-200/50 border border-slate-100 min-w-[240px] p-2 opacity-0 group-hover:opacity-100 transition-opacity">
                 <li><Link href="/respiracion_conciente" className="block px-4 py-2.5 text-slate-600 hover:bg-slate-50 hover:text-indigo-600 rounded-lg transition-colors">Respiración Consciente</Link></li>
                 <li><Link href="/respiracion_conciente_auto_guiadas" className="block px-4 py-2.5 text-slate-600 hover:bg-slate-50 hover:text-indigo-600 rounded-lg transition-colors">Prácticas Auto Guiadas</Link></li>
+                <li><Link href="/respira_sin_fin" className="block px-4 py-2.5 text-slate-600 hover:bg-slate-50 hover:text-indigo-600 rounded-lg transition-colors">🌀 Respira sin Fin</Link></li>
               </ul>
             </li>
 
@@ -107,6 +108,7 @@ export default function Nav() {
               <div className="pl-6 pt-1 space-y-1">
                 <Link href="/respiracion_conciente" onClick={() => setIsOpen(false)} className="block px-3 py-2 text-sm text-slate-600 hover:text-indigo-600 hover:bg-slate-50 rounded-lg">Respiración Consciente</Link>
                 <Link href="/respiracion_conciente_auto_guiadas" onClick={() => setIsOpen(false)} className="block px-3 py-2 text-sm text-slate-600 hover:text-indigo-600 hover:bg-slate-50 rounded-lg">Prácticas Auto Guiadas</Link>
+                <Link href="/respira_sin_fin" onClick={() => setIsOpen(false)} className="block px-3 py-2 text-sm text-slate-600 hover:text-indigo-600 hover:bg-slate-50 rounded-lg">🌀 Respira sin Fin</Link>
               </div>
             )}
           </div>
