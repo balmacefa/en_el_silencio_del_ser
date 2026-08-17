@@ -143,6 +143,12 @@ export default function Home() {
               <h3 className="text-lg font-bold text-slate-800 mb-2 group-hover:text-rose-600 transition-colors">Estado de la Luna</h3>
               <p className="text-slate-500 text-xs leading-relaxed flex-grow">Consulta la fase lunar actual y su iluminación para acompañar tu práctica.</p>
             </Link>
+
+            <Link href="/calendarios" className="group rounded-2xl bg-white/70 backdrop-blur-sm p-6 shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-slate-100 transition-all duration-300 hover:shadow-[0_10px_30px_rgba(0,0,0,0.08)] hover:-translate-y-2 hover:border-rose-200 flex flex-col h-full">
+              <div className="bg-rose-50 text-rose-600 w-12 h-12 rounded-xl flex items-center justify-center text-xl mb-4 group-hover:scale-110 group-hover:bg-rose-100 transition-all duration-300">📅</div>
+              <h3 className="text-lg font-bold text-slate-800 mb-2 group-hover:text-rose-600 transition-colors">Calendarios del Mundo</h3>
+              <p className="text-slate-500 text-xs leading-relaxed flex-grow">Compara hoy —o cualquier fecha pasada o futura— en calendarios solar, lunar, maya, gregoriano y más.</p>
+            </Link>
           </div>
         </section>
       </div>
