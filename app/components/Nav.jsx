@@ -77,6 +77,7 @@ export default function Nav() {
             <li><Link href="/mantras_meditacion_guiada" className="text-slate-600 font-medium hover:text-slate-900 transition-colors py-4">🎧 Mantras</Link></li>
             <li><Link href="/salud_mental" className="text-slate-600 font-medium hover:text-slate-900 transition-colors py-4">🧠 Salud Mental</Link></li>
             <li><Link href="/luna" className="text-slate-600 font-medium hover:text-slate-900 transition-colors py-4">🌙 Luna</Link></li>
+            <li><Link href="/calendarios" className="text-slate-600 font-medium hover:text-slate-900 transition-colors py-4">📅 Calendarios</Link></li>
           </ul>
         </div>
       </div>
@@ -132,6 +133,7 @@ export default function Nav() {
           <Link href="/mantras_meditacion_guiada" onClick={() => setIsOpen(false)} className="block px-3 py-2 text-base font-medium text-slate-800 hover:bg-slate-50 rounded-lg">🎧 Mantras</Link>
           <Link href="/salud_mental" onClick={() => setIsOpen(false)} className="block px-3 py-2 text-base font-medium text-slate-800 hover:bg-slate-50 rounded-lg">🧠 Salud Mental</Link>
           <Link href="/luna" onClick={() => setIsOpen(false)} className="block px-3 py-2 text-base font-medium text-slate-800 hover:bg-slate-50 rounded-lg">🌙 Luna</Link>
+          <Link href="/calendarios" onClick={() => setIsOpen(false)} className="block px-3 py-2 text-base font-medium text-slate-800 hover:bg-slate-50 rounded-lg">📅 Calendarios</Link>
         </div>
       </div>
     </nav>
