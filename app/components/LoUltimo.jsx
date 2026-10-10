@@ -15,11 +15,9 @@ export default function LoUltimo({ count = 4 }) {
 
   return (
     <section aria-labelledby="lo-ultimo" className="w-full space-y-6">
-      <div className="flex items-end justify-between border-b border-slate-100 pb-4">
-        <div>
-          <h2 id="lo-ultimo" className="text-3xl font-bold text-slate-800">Lo último</h2>
-          <p className="mt-1 text-slate-500">Lo más reciente que se ha sumado al sitio.</p>
-        </div>
+      <div>
+        <h2 id="lo-ultimo" className="text-4xl sm:text-5xl font-bold tracking-tight text-slate-900">Lo último.</h2>
+        <p className="mt-2 text-lg text-slate-600">Lo más reciente que se ha sumado al sitio.</p>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">

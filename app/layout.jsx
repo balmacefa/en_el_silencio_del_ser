@@ -53,7 +53,7 @@ export default function RootLayout({ children }) {
       <body className="site-bg font-['Quicksand'] min-h-screen text-slate-800 pt-[70px] overflow-x-hidden">
         <Nav />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
-          <header className="text-center mb-8 md:mb-12 mt-6">
+          <header className="site-header text-center mb-8 md:mb-12 mt-6">
             <h1 className="text-4xl md:text-5xl font-bold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-slate-800 via-indigo-800 to-slate-800 drop-shadow-sm">En el silencio del ser</h1>
             <SectionDivider className="mt-5" />
           </header>
