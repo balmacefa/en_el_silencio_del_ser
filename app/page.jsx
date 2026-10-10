@@ -1,5 +1,10 @@
 import Link from 'next/link';
 import SectionDivider from './components/SectionDivider';
+import HoyStrip from './components/HoyStrip';
+import LoUltimo from './components/LoUltimo';
+
+// Dinámica para que la insignia "Nuevo" de "Lo último" caduque sin necesidad de rebuild.
+export const dynamic = 'force-dynamic';
 
 export default function Home() {
   return (
@@ -17,6 +22,7 @@ export default function Home() {
           Explora prácticas de yoga, meditaciones guiadas y herramientas de respiración consciente diseñadas para transformar tu bienestar físico y mental.
         </p>
         <SectionDivider />
+        <HoyStrip />
         <div className="pt-4">
           <a href="#explorar" className="inline-flex items-center justify-center px-8 py-3 text-base font-medium text-white bg-indigo-600 rounded-xl shadow-lg shadow-indigo-200 hover:bg-indigo-700 hover:shadow-indigo-300 transition-all duration-300 hover:-translate-y-1">
             Explorar Prácticas
@@ -24,6 +30,8 @@ export default function Home() {
           </a>
         </div>
       </section>
+
+      <LoUltimo count={4} />
 
       <div id="explorar" className="w-full space-y-20">
         {/* Yoga Section */}
