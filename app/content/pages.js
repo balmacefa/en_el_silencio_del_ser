@@ -4,6 +4,7 @@
 // tarjeta de sección de la portada y en sitemap.js. Solo Nav.jsx sigue siendo manual.
 
 export const PAGES = [
+  { href: '/sanscrito/nivel_practico_1', title: 'Sánscrito: nivel práctico 1', desc: 'Aprende a leer los nombres de las asanas: prefijos y raíces del sánscrito.', icon: '📜', tone: 'indigo', section: 'yoga', added: '2026-10-10' },
   { href: '/yoga/historia_del_yoga', title: 'Historia del Yoga', desc: 'Un recorrido por milenios de yoga, de los Vedas a la práctica moderna.', icon: '📜', tone: 'indigo', section: 'yoga', added: '2026-10-09' },
   { href: '/calendarios', title: 'Calendarios del Mundo', desc: 'Compara hoy en calendarios solar, lunar, maya, gregoriano y más.', icon: '📅', tone: 'rose', section: 'bienestar', added: '2026-08-17' },
   { href: '/respira_sin_fin', title: 'Respira sin Fin', desc: 'Un feed infinito de ritmos de respiración: desliza y quédate con el que resuene contigo.', icon: '🌀', tone: 'teal', section: 'respiracion', added: '2026-08-06' },
