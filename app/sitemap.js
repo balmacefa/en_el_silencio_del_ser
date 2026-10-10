@@ -26,6 +26,12 @@ export default function sitemap() {
       priority: 0.8,
     },
     {
+      url: `${baseUrl}/yoga/historia_del_yoga`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: 0.8,
+    },
+    {
       url: `${baseUrl}/yoga/ocho_ramas_del_yoga`,
       lastModified: new Date(),
       changeFrequency: 'monthly',

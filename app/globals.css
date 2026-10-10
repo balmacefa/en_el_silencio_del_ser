@@ -25,3 +25,136 @@ h1, h2, h3 {
   mix-blend-mode: multiply;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
+
+/* ---------- Historia del Yoga: profundidad espacial (Z) ---------- */
+/* Evita el salto de ancho cuando la ficha bloquea el scroll. */
+html { scrollbar-gutter: stable; }
+.spatial-grid { perspective: 1100px; }
+
+.spatial-card {
+  --tz: 0px;
+  position: relative;
+  transform-style: preserve-3d;
+  transform: rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)) translateZ(var(--tz));
+  transition: transform 0.45s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.45s ease;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.05), 0 4px 12px -4px rgba(15, 23, 42, 0.06);
+}
+.spatial-card:active { --tz: 6px; }
+/* El levantamiento por hover solo en dispositivos con puntero real (en táctil quedaría "pegado"). */
+@media (hover: hover) {
+  .spatial-card:hover {
+    --tz: 16px;
+    box-shadow: 0 2px 4px rgba(15, 23, 42, 0.05), 0 18px 36px -12px rgba(15, 23, 42, 0.22);
+  }
+  .spatial-card:hover::after { opacity: 0.9; }
+}
+.spatial-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  background: radial-gradient(220px circle at var(--mx, 50%) var(--my, 0%), rgba(255, 255, 255, 0.85), transparent 65%);
+}
+/* Capas internas que se separan del plano de la tarjeta. */
+.spatial-layer { display: flex; transform: translateZ(34px); }
+.spatial-layer-soft { transform: translateZ(18px); }
+
+/* La capa de contenido retrocede cuando la ficha avanza. */
+.spatial-stage { transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.5s ease, filter 0.5s ease; transform-origin: 50% 30%; }
+.spatial-stage.is-receded { transform: scale(0.975); opacity: 0.55; filter: blur(2px); }
+
+/* Vidrio "regular" solo en la capa funcional (la ficha). */
+.glass-sheet {
+  background: rgba(255, 255, 255, 0.74);
+  -webkit-backdrop-filter: blur(30px) saturate(1.7);
+  backdrop-filter: blur(30px) saturate(1.7);
+  border: 1px solid rgba(255, 255, 255, 0.75);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.95), 0 40px 90px -24px rgba(15, 23, 42, 0.4), 0 10px 30px -10px rgba(15, 23, 42, 0.18);
+}
+.glass-btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 44px; height: 44px; border-radius: 9999px;
+  color: #0f172a; background: rgba(15, 23, 42, 0.07);
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+.glass-btn:hover { background: rgba(15, 23, 42, 0.13); }
+.glass-btn:active { transform: scale(0.94); }
+.glass-btn:focus-visible { outline: 2px solid #4f46e5; outline-offset: 2px; }
+
+/* Curva "expo out": arranque vivo y aterrizaje suave. */
+@keyframes sheet-in { from { opacity: 0; transform: translateY(100%); } to { opacity: 1; transform: none; } }
+@keyframes sheet-out { from { opacity: 1; transform: none; } to { opacity: 0; transform: translateY(100%); } }
+@keyframes sheet-zoom-in { from { opacity: 0; transform: scale(0.55); } 55% { opacity: 1; } to { opacity: 1; transform: none; } }
+@keyframes sheet-zoom-out { from { opacity: 1; transform: none; } to { opacity: 0; transform: scale(0.55); } }
+@keyframes scrim-in { from { opacity: 0; } to { opacity: 1; } }
+@keyframes scrim-out { from { opacity: 1; } to { opacity: 0; } }
+@keyframes swap-in { from { opacity: 0; } to { opacity: 1; } }
+@keyframes swap-next { from { opacity: 0; transform: translateX(28px); } to { opacity: 1; transform: none; } }
+@keyframes swap-prev { from { opacity: 0; transform: translateX(-28px); } to { opacity: 1; transform: none; } }
+@keyframes rise { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+
+.sheet-in { animation: sheet-in 0.55s cubic-bezier(0.16, 1, 0.3, 1) backwards; }
+.sheet-out { animation: sheet-out 0.28s cubic-bezier(0.5, 0, 0.75, 0) forwards; }
+.sheet-scrim { animation: scrim-in 0.45s ease backwards; }
+.sheet-scrim-out { animation: scrim-out 0.28s ease forwards; }
+.sheet-content { animation: swap-in 0.3s ease both; }
+.sheet-content-next { animation: swap-next 0.38s cubic-bezier(0.16, 1, 0.3, 1) both; }
+.sheet-content-prev { animation: swap-prev 0.38s cubic-bezier(0.16, 1, 0.3, 1) both; }
+/* Entrada escalonada solo la primera vez que se abre la ficha. */
+.stagger-on .stagger { animation: rise 0.5s cubic-bezier(0.16, 1, 0.3, 1) both; animation-delay: calc(var(--i, 0) * 50ms + 140ms); }
+/* En pantallas anchas la ficha crece desde la tarjeta (transform-origin se fija desde JS). */
+@media (min-width: 640px) {
+  .sheet-in { animation-name: sheet-zoom-in; animation-duration: 0.6s; }
+  .sheet-out { animation-name: sheet-zoom-out; }
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  .glass-sheet { background: #ffffff; -webkit-backdrop-filter: none; backdrop-filter: none; }
+  .spatial-stage.is-receded { filter: none; }
+}
+@media (prefers-contrast: more) {
+  .glass-sheet { background: #ffffff; border-color: #475569; }
+  .glass-btn { background: rgba(15, 23, 42, 0.14); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .spatial-card, .spatial-card:active { transform: none; transition: box-shadow 0.2s ease; }
+  .spatial-layer, .spatial-layer-soft { transform: none; }
+  .spatial-stage, .spatial-stage.is-receded { transform: none; filter: none; transition: opacity 0.2s ease; }
+  .sheet-in, .sheet-content, .sheet-content-next, .sheet-content-prev { animation: swap-in 0.2s ease both; }
+  .sheet-out { animation: scrim-out 0.2s ease forwards; }
+  .stagger-on .stagger { animation: none; }
+}
+
+/* ---------- Etapas colapsables con profundidad en Z ---------- */
+.era-list { perspective: 1200px; perspective-origin: 50% 35%; }
+.era-item {
+  transform-style: preserve-3d;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.5s ease;
+}
+/* La etapa abierta avanza hacia ti; las demás retroceden. */
+.era-item.is-open { transform: translateZ(48px); z-index: 1; }
+.era-item.is-behind { transform: translateZ(-36px) scale(0.985); opacity: 0.72; }
+@media (hover: hover) {
+  .era-item:not(.is-open):hover { transform: translateZ(14px); }
+  .era-item.is-behind:hover { opacity: 1; transform: translateZ(-6px); }
+}
+.era-card {
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.05), 0 4px 12px -4px rgba(15, 23, 42, 0.06);
+  transition: box-shadow 0.6s ease;
+}
+.era-item.is-open .era-card {
+  box-shadow: 0 2px 4px rgba(15, 23, 42, 0.05), 0 34px 64px -22px rgba(15, 23, 42, 0.3);
+}
+/* Despliegue sin medir alturas: la fila de la cuadrícula pasa de 0fr a 1fr. */
+.era-panel { display: grid; grid-template-rows: 0fr; transition: grid-template-rows 0.55s cubic-bezier(0.16, 1, 0.3, 1); }
+.era-panel.is-open { grid-template-rows: 1fr; }
+.era-panel > div { overflow: hidden; min-height: 0; }
+
+@media (prefers-reduced-motion: reduce) {
+  .era-item, .era-item.is-open, .era-item.is-behind, .era-item:not(.is-open):hover, .era-item.is-behind:hover { transform: none; transition: none; }
+  .era-item.is-behind { opacity: 1; }
+  .era-panel { transition: none; }
+}
