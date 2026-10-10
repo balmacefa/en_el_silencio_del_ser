@@ -8,6 +8,7 @@ export default function Nav() {
   const [yogaOpen, setYogaOpen] = useState(false);
   const [respOpen, setRespOpen] = useState(false);
   const [reflexOpen, setReflexOpen] = useState(false);
+  const [sanscritoOpen, setSanscritoOpen] = useState(false);
 
   return (
     <nav className="fixed top-0 left-0 w-full z-50 bg-white/80 backdrop-blur-md border-b border-slate-200/50 shadow-sm transition-all">
@@ -46,6 +47,16 @@ export default function Nav() {
                 <li><Link href="/yoga/ashtanga_serie_basica_1" className="block px-4 py-2.5 text-slate-600 hover:bg-slate-50 hover:text-indigo-600 rounded-lg transition-colors">Ashtanga: Serie Básica</Link></li>
                 <li><Link href="/asanas" className="block px-4 py-2.5 text-slate-600 hover:bg-slate-50 hover:text-indigo-600 rounded-lg transition-colors">Catálogo de Asanas</Link></li>
                 <li><Link href="/yoga/youtube" className="block px-4 py-2.5 text-slate-600 hover:bg-slate-50 hover:text-indigo-600 rounded-lg transition-colors">Recomendaciones Youtube</Link></li>
+              </ul>
+            </li>
+
+            <li className="relative group">
+              <button className="flex items-center gap-1 text-slate-600 font-medium hover:text-slate-900 py-4 transition-colors">
+                📜 Sánscrito
+                <svg className="w-4 h-4 opacity-70 group-hover:rotate-180 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>
+              </button>
+              <ul className="absolute top-full left-0 hidden group-hover:flex flex-col bg-white rounded-xl shadow-xl shadow-slate-200/50 border border-slate-100 min-w-[240px] p-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                <li><Link href="/sanscrito/nivel_practico_1" className="block px-4 py-2.5 text-slate-600 hover:bg-slate-50 hover:text-indigo-600 rounded-lg transition-colors">Nivel práctico 1</Link></li>
               </ul>
             </li>
 
@@ -98,6 +109,18 @@ export default function Nav() {
                 <Link href="/yoga/ashtanga_serie_basica_1" onClick={() => setIsOpen(false)} className="block px-3 py-2 text-sm text-slate-600 hover:text-indigo-600 hover:bg-slate-50 rounded-lg">Ashtanga: Serie Básica</Link>
                 <Link href="/asanas" onClick={() => setIsOpen(false)} className="block px-3 py-2 text-sm text-slate-600 hover:text-indigo-600 hover:bg-slate-50 rounded-lg">Catálogo de Asanas</Link>
                 <Link href="/yoga/youtube" onClick={() => setIsOpen(false)} className="block px-3 py-2 text-sm text-slate-600 hover:text-indigo-600 hover:bg-slate-50 rounded-lg">Recomendaciones Youtube</Link>
+              </div>
+            )}
+          </div>
+
+          <div className="mb-2">
+            <button onClick={() => setSanscritoOpen(!sanscritoOpen)} className="w-full flex justify-between items-center px-3 py-2 text-base font-medium text-slate-800 hover:bg-slate-50 rounded-lg">
+              <span>📜 Sánscrito</span>
+              <svg className={`w-4 h-4 transition-transform ${sanscritoOpen ? 'rotate-180' : ''}`} fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>
+            </button>
+            {sanscritoOpen && (
+              <div className="pl-6 pt-1 space-y-1">
+                <Link href="/sanscrito/nivel_practico_1" onClick={() => setIsOpen(false)} className="block px-3 py-2 text-sm text-slate-600 hover:text-indigo-600 hover:bg-slate-50 rounded-lg">Nivel práctico 1</Link>
               </div>
             )}
           </div>
